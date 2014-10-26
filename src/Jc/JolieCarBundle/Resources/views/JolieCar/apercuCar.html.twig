@@ -1,0 +1,17 @@
+{# src/Jc/JolieCarBundle/resources/views/JolieCar/apercuCar.html.twig #}
+<div class="apercuCar center-block">
+    <a href="{{path('joliecar_detail', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}" class="thumbnail apercuCar">
+            {%for image in car.images if image.enVedette%}
+                <img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="img-rounded apercuCarImage"/> 
+            {%else%}
+                <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
+            {%endfor%}
+        
+            <div class="apercuCarInfo">
+                   <div><h5 class="glyphicon glyphicon-wrench"> {{car.modele.marque.nom}}-{{car.modele.nom}}</h5></div>
+                   <div><span class="glyphicon glyphicon-shopping-cart"> {{car.prix|number_format(0,',','.')}} GNF</span></div>
+            </div>
+     </a>                   
+</div>    
+    
+    

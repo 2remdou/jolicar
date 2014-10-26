@@ -1,0 +1,5 @@
+jolie_car_jolie_car:
+    resource: "@JcJolieCarBundle/Resources/config/routing.yml"
+    prefix:   /joliecar
+
+

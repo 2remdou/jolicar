@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {%block stylesheets%}
+            {% stylesheets filter='cssrewrite' 
+                    'jquery-ui/jquery-ui.min.css'
+                    'css/bootstrap/css/*'
+                    'css/detail.css'
+                    'css/header.css'
+                    'css/index.css'
+                    'css/myStyle.css'
+                    'css/search.css'
+                    'js/select2/select2.css'
+                    'js/select2/select2-bootstrap.css'
+                    'js/Elastislide/css/elastislide.css'
+                    output='css/compiled/main.css'
+                     %}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />            
+            {%endstylesheets%}
+        {%endblock stylesheets%}
+        {% javascripts
+                        'css/bootstrap/js/jquery-min.js'
+                        'js/Elastislide/js/modernizr.custom.17475.js'            
+                        output='js/compiled/main.js'%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {%endjavascripts%}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+        <header>
+                {%block header%}
+
+                {% endblock header%}
+        </header>
+        <div class="container" id="global">   
+            <div>
+                 {% block main%}
+                
+                {% endblock main%}                
+            </div>
+           
+            <footer>
+                {%block footer%}
+                
+                {%endblock footer%}
+            </footer>    
+        </div>        
+        
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+        {% block javascripts%}
+            {% javascripts             
+                            'jquery-ui/jquery-ui.min.js' 
+                            'css/bootstrap/js/bootstrap.min.js'
+                            'js/select2/select2.min.js'
+                            'js/Elastislide/js/*'
+                            'js/*'
+                            output='js/compiled/main.js'%}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {%endjavascripts%}
+                <script type="text/javascript">
+                    $('#tabAccesRapide').elastislide();
+                </script>
+        {% endblock javascripts%}
+        {%block otherScript%}
+        
+        {%endblock%}
+       {# <script src="{{asset('jquery-1.11.1.min.js')}}"></script>
+        {% block javascripts %}
+            <script type="text/javascript" src="{{asset('css/bootstrap/js/bootstrap.min.js')}}"></script>
+        {% endblock %}#}
+        {% endblock %}
+    </body>
+</html>

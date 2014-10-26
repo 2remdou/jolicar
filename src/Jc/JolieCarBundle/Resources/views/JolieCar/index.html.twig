@@ -1,0 +1,19 @@
+{# src/Jc/JolieCarBundle/resources/views/index.html.twig #}
+
+{% extends "JcJolieCarBundle::layout.html.twig"%}
+
+
+
+{%block tabAccessRapide%}
+    {{parent()}}
+{% endblock%}
+ 
+{%block search%}
+    {{render(controller('JcJolieCarBundle:Search:shortSearch'))}}
+{%endblock%}
+
+{%block zoneLibre%}    
+    {%for car in listeCar%}
+        {%include 'JcJolieCarBundle:JolieCar:apercuCar.html.twig' with {'car': car}%}
+    {%endfor%}
+{%endblock%}

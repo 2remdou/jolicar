@@ -1,0 +1,19 @@
+parameters:
+#    jolie_car_jolie_car.example.class: JolieCar\JolieCarBundle\Example
+
+services:
+    jc_joliecarbundle_modele.form.type.modele:
+        class: Jc\JolieCarBundle\Form\ModeleType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: modele }
+    jc_joliecarbundle.form.modele_type_extension:
+        class: Jc\JolieCarBundle\Form\Extension\ModeleTypeExtension
+        tags:
+            - { name: form.type_extension, alias: choice}
+#    jolie_car_jolie_car.example:
+#        class: %jolie_car_jolie_car.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    
+

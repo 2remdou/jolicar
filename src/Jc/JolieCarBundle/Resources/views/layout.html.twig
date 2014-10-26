@@ -1,0 +1,25 @@
+{# src/Jc/JolieCarBundle/resources/views/layout.html.twig #}
+{% extends "::base.html.twig" %}
+{% block header %}
+    {% include 'JcJolieCarBundle::header.html.twig'%}
+{% endblock%}
+{% block main%}
+    {%block tabAccesRapide%}
+        {{render(controller('JcJolieCarBundle:AccesRapide:tabAcces'))}}
+    {% endblock tabAccesRapide%}
+    {%block contenu%}
+        <div id='contenu' class="row">
+            <section class="row">
+                {% block search%}
+                    
+               {% endblock search%}
+            </section>
+            <section id="zoneLibre" class="row center-block">
+                {% block zoneLibre%}
+            
+               {% endblock zoneLibre%}
+            </section>  
+               
+        </div>
+    {%endblock contenu%}
+{%endblock%}

@@ -1,0 +1,9 @@
+joliecar_accueil:
+    path:     /
+    defaults: { _controller: JcJolieCarBundle:JolieCar:index }
+
+joliecar_detail:
+    path: /detail/{marque}-{modele}-{id}
+    defaults: { _controller: JcJolieCarBundle:JolieCar:detail }
+    requirements:
+        id: \d+

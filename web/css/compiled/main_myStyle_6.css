@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 sept. 2014, 14:08:50
+    Author     : Toure
+*/
+body
+{
+   /* background-color: #00bbec;*/
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.box
+{
+    margin-top: 10px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid rgba(2,2,2,0.18);
+    box-shadow: 0 3px 3px 3px rgba(1,1,1,0.17);
+    -webkit-box-shadow: 0 3px 3px 3px rgba(1,1,1,0.17);
+    height: 280px;
+}
+
+
+/*.apercuCar > strong, .apercuCar > img
+{
+    display: block;
+}*/
