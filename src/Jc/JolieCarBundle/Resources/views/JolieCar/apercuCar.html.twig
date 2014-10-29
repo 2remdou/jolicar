@@ -9,7 +9,7 @@
         
             <div class="apercuCarInfo">
                    <div><h5 class="glyphicon glyphicon-wrench"> {{car.modele.marque.nom}}-{{car.modele.nom}}</h5></div>
-                   <div><span class="glyphicon glyphicon-shopping-cart"> {{car.prix|number_format(0,',','.')}} GNF</span></div>
+                   <div><span class="glyphicon glyphicon-shopping-cart"> {{car.prix|formaterPrix}}</span></div>
             </div>
      </a>                   
 </div>    

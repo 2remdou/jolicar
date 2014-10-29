@@ -1,0 +1,44 @@
+{# src/Jc/JolieCarBundle/resources/views/JolieCar/addCar.html.twig #}
+
+{%extends "JcJolieCarBundle::layout.html.twig"%}
+{%form_theme form 'JcJolieCarBundle:Form:addCar.html.twig'%}
+{%block contenu%}
+    {% set col="col-lg-11 col-md-11 col-sm-11 col-xs-11"%}
+    {% set colSpan="col-lg-1 col-md-1 col-sm-1 col-xs-1"%}
+    {{form_start(form)}}   
+        <div class='row' id="nomMarque">
+            <div class='{{col}}'>{{form_row(form.modele.marque)}}</div>
+            <div id="ajoutMarque" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div> 
+        </div>
+        <div class='row' id="nomModele">
+            <div class='{{col}}'>{{form_row(form.modele.nom)}}</div>
+            <div id="ajoutModele" data-url="{{path('add_modele')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
+        </div>
+        <div class="row">
+            <div class="{{col}}">
+               {{form_row(form.boitier)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="{{col}}">
+               {{form_row(form.carburant)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="{{col}}">
+               {{form_row(form.prix)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="{{col}}">
+               {{form_row(form.kmParcouru)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="{{col}}">
+               <p class='bg-info'>La date d'acquisition</p>
+               {{form_row(form.dateAcquisition)}}
+            </div>
+        </div>
+    {{form_end(form)}}
+{%endblock contenu%}

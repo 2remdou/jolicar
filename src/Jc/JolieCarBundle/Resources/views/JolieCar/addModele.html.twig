@@ -1,0 +1,8 @@
+{# src/Jc/JolieCarBundle/resources/views/JolieCar/addCar.html.twig #}
+{{form_start(form,{'attr':{'class':'form-inline'}})}}
+    <div class="row">
+         <div class="col-lg-4">{{form_row(form.marque)}}</div>
+         <div class="col-lg-4">{{form_row(form.nom)}}</div>
+         <div class="col-lg-4"><input type="submit" /></div>
+    </div>
+{{form_end(form)}}

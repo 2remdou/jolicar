@@ -1,5 +1,12 @@
-jolie_car_jolie_car:
-    resource: "@JcJolieCarBundle/Resources/config/routing.yml"
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#jc_user:
+#    resource: "@JcUserBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+jolieCar:
+    resource: "@JcJolieCarBundle/Controller/"
     prefix:   /joliecar
+    type: annotation
 
 

@@ -59,4 +59,25 @@
     {%- endif -%}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }} class="btn btn-primary">{{ label|trans({}, translation_domain) }}</button>
 {%- endblock button_widget %}
-           
+
+{% block date_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- date_pattern|replace({
+                '{{ year }}':  form_widget(form.day,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+                '{{ month }}': form_widget(form.month,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+                '{{ day }}':   form_widget(form.year,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+            })|raw -}}
+        </div>
+    {%- endif %}
+{%- endblock date_widget %}
+
+{% block form_row -%}
+    <div>
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row %}

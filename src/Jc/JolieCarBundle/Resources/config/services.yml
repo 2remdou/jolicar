@@ -11,6 +11,11 @@ services:
         class: Jc\JolieCarBundle\Form\Extension\ModeleTypeExtension
         tags:
             - { name: form.type_extension, alias: choice}
+            
+    jc_joliecarbundle.joliecar_extension:
+        class: Jc\JolieCarBundle\Twig\JolieCarExtension
+        tags:
+            - { name: twig.extension }
 #    jolie_car_jolie_car.example:
 #        class: %jolie_car_jolie_car.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]

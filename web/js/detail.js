@@ -5,6 +5,8 @@
  */
 
 $(function(){
+    $('#accordion').accordion();
+    $('#caroussel').elastislide();
     //*********ajuster imageTop au contenu**************$*
     $(".imageTop>img").width($(".imageTop").parent().width());
     $(".miniatures").width($(".imageTop").parent().width());

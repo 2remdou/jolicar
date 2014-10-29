@@ -4,18 +4,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 24 sept. 2014, 13:20:24
+    Created on : 27 oct. 2014, 14:11:31
     Author     : Toure
 */
-#imagesCar,#infoGenerales,#leVendeur
+form .row
 {
-    margin-top: 10px;
+    margin: 5px;
 }
-
-.miniature
+.glyphicon-plus
 {
     cursor: pointer;
 }
-
-
-

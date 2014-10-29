@@ -4,8 +4,9 @@ namespace Jc\JolieCarBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SearchVoitureType extends AbstractType
+class VoitureType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -14,12 +15,68 @@ class SearchVoitureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('modele')
-            ->add('boitier')
-            ->add('parc')
-            ->add('carburant')
+            ->add('modele','modele',array(
+                'label' => false,
+            ))
+            ->add('boitier','entity',array(
+                'class' => 'JcJolieCarBundle:Boitier',
+                'property' => 'nom',
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Boite à vitesse',
+                ),
+            ))
+            ->add('carburant','entity',array(
+                'class' => 'JcJolieCarBundle:Carburant',
+                'property' => 'nom',
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Carburant',
+                ),
+            ))
+            ->add('prix','number',array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Veuillez fournir le prix'
+                )
+            ))
+            ->add('kmParcouru','number',array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Veuillez fournir le nombre de Km parcourus',
+                ))
+                )
+            ->add('dateAcquisition','birthday',array(
+                'required' => false,
+                'label' => false,
+                'format' => 'yyyyMMdd',
+                'years' => range(date('Y'), date('Y')-50),
+                'months' => range(1, 12),
+                'empty_value' => array(
+                    'year' => 'Année',
+                    'month' => 'Mois',
+                    'day' => 'Jour'
+                ),
+                'attr' => array(
+                    'placeholder' => "Veuillez fournir la date d'acquisition",
+                ))
+                    )
+//            ->add('nombreRoueMotrice')
+//            ->add('nombrePorte')
+//            ->add('nombreSiege')
+////            ->add('top')
+////            ->add('newCar')
+//            ->add('modele')
+//            ->add('boitier')
+//            ->add('parc')
+//            ->add('carburant')
         ;
     }
+    
     /**
      * @param OptionsResolverInterface $resolver
      */

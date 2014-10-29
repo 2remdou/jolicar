@@ -1,35 +1,13 @@
 {# src/Jc/JolieCarBundle/resources/views/JolieCar/detail.html.twig #}
 {%extends "JcJolieCarBundle::layout.html.twig"%}
 
-{##}
-{#{% block stylesheets%}
-    {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/detail.css')}}" />
-{% endblock%}#}
 {%block tabAccesRapide%}
-    {#{{parent()}}#}    
+    {{parent()}}
 {%endblock%}
 
 {%block contenu%}
-    <div class="panel panel-default col-md-4 col-lg-4 col-sm-4" id="infoGenerales">
-        <div class="panel-heading text-center">Informations Générales</div>
-        <div class="panel-body">
-            <table class="table">
-                <tr><td>Marque</td><td>{{car.modele.marque.nom}}</td></tr>
-                <tr><td>Modele</td><td>{{car.modele.nom}}</td></tr>
-                <tr><td>Prix</td><td>{{car.prix|number_format(0,',','.')}}</td></tr>
-                <tr><td>Boite de vitesse</td><td>{{car.boitier.nom}}</td></tr>
-                <tr><td>Kilometre parcouru</td><td>{{car.kmParcouru|number_format(0,',','.')}}</td></tr>
-                <tr><td>Carburant</td><td>{{car.carburant.nom}}</td></tr>
-                <tr><td>Nombre de portes</td><td>{{car.nombrePorte}}</td></tr>
-                <tr><td>Nombre de sieges</td><td>{{car.nombreSiege}}</td></tr>                           
-            </table>            
-        </div>
-        <div>
-            
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-4" id="imagesCar">
+    
+    <div class="col-lg-6 col-sm-6" id="imagesCar">
         <div class="imageTop">
             {%for image in car.images if image.enVedette%}
             <img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="img-thumbnail" />
@@ -37,21 +15,30 @@
             <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
             {%endfor%}
         </div>
-    {##}<div class="miniatures">
-                {%set nbreImages=car.images|length %}
-                {%set espaceAOccuper = 12/nbreImages%}
+        <ul class="miniatures elastislide-list" id="caroussel">
                 {%for image in car.images %}
-                    <a class="thumbnail col-lg-{{espaceAOccuper}} col-sm-{{espaceAOccuper}} col-xs-{{espaceAOccuper}} col-md-{{espaceAOccuper}}">
-                        <img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="miniature"/>
-                    </a>
+                        <li><a href="#"><img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="miniature"/></a></li>
                 {%else%}
                     <h3>Aucun aperçu disponible pour cette voiture</h3>
                 {% endfor%}
-        </div>
+        </ul>
     </div>
-    <div class="panel panel-default col-md-4 col-lg-4 col-sm-4 hidden-xs" id="leVendeur">
-        <div class="panel-heading text-center">Le Vendeur</div>
-        <div class="panel-body">
+    <div id="accordion" class="col-lg-4 col-sm-6">
+        <h3>Informations générales</h3>
+        <div>
+            <table class="table">
+                <tr><td>Marque</td><td>{{car.modele.marque.nom}}</td></tr>
+                <tr><td>Modele</td><td>{{car.modele.nom}}</td></tr>
+                <tr><td>Prix</td><td>{{car.prix|formaterPrix}}</td></tr>
+                <tr><td>Boite de vitesse</td><td>{{car.boitier.nom}}</td></tr>
+                <tr><td>Kilometre parcouru</td><td>{{car.kmParcouru|number_format(0,',','.')}}</td></tr>
+                <tr><td>Carburant</td><td>{{car.carburant.nom}}</td></tr>
+                <tr><td>Nombre de portes</td><td>{{car.nombrePorte}}</td></tr>
+                <tr><td>Nombre de sieges</td><td>{{car.nombreSiege}}</td></tr>                           
+            </table>       
+        </div>
+        <h3>Le vendeur</h3>
+        <div>
             <table class="table">
                 <tr><td>Nom</td><td>{{car.parc.nom}}</td></tr>
                 <tr><td>Telephone</td><td>{{car.parc.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
@@ -60,11 +47,7 @@
                 <tr><td>Ville</td><td>{{car.parc.adresse.ville}}</td></tr>
                 <tr><td>Quartier</td><td>{{car.parc.adresse.quartier}}</td></tr>
                 <tr><td>Indication</td><td>{{car.parc.adresse.indicationLieu}}</td></tr>                           
-            </table>         
-            
-        </div>
-        <div>
-            
+            </table> 
         </div>
     </div>
 {%endblock%}

@@ -6,6 +6,14 @@
 
 var marqueWithModele = {};
 $(document).ready(function(){
+    $("#jc_joliecarbundle_searchvoiture_modele_marque").select2({
+         //placeholder: 'Selectionner une marque', 
+         allowClear: true
+         }); 
+     $("#jc_joliecarbundle_searchvoiture_modele_nom").select2({
+         //placeholder: 'Selectionner un modele', 
+         allowClear: true
+         }); 
     //stockage des marque et des modele qui lui liés
     $('#jc_joliecarbundle_searchvoiture_modele_marque>option').each(function(){
         
