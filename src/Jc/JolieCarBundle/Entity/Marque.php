@@ -4,6 +4,7 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Exclude;
 /**
  * Marque
  *
@@ -31,6 +32,7 @@ class Marque
     /**
      *@ORM\OneToMany(targetEntity="Modele", mappedBy="marque", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=true)
+     * @Exclude()
      */
     private $modeles;
     

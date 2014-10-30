@@ -4,14 +4,19 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 27 oct. 2014, 14:11:31
+    Created on : 19 oct. 2014, 00:56:11
     Author     : Toure
 */
-form .row
+
+header
 {
-    margin: 5px;
+    background-color:#00bbec;
 }
-#ajoutMarque,#ajoutModele
+#headerSearch
 {
-    cursor: pointer;
+    margin-right: 20px;
+}
+#headerSearch div
+{
+    display: inline-block;
 }

@@ -6,6 +6,7 @@ namespace Jc\JolieCarBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Jc\JolieCarBundle\Form\VoitureType;
 use Jc\JolieCarBundle\Form\MarqueType;
 use Jc\JolieCarBundle\Form\AjoutModeleType;
@@ -69,12 +70,39 @@ class JolieCarController extends Controller
             'form' => $form->createView(),
         ));
     }
+    /**
+     * @Route("/listMarque", name="list_marque")
+     */
+    public function listMarque(){
+        return;
+    }
+    /**
+     * @Route("/ajoutMarque", name="add_marque")
+     */
     public function addMarque()
     {
+        $em = $this->getDoctrine()->getManager();
         $marque = new Marque();
-        $form = $this->createForm(new MarqueType(), $marque);
-        return $this->render();
+        $request = $this->get('request');    
+            if($request->isXmlHttpRequest())
+            {
+                $marque->setNom($request->request->get('nom'));
+                //*** la validation*****
+                
+                
+                //**********************
+                $em->persist($marque);
+                $em->flush();
+                $serializer = $this->container->get('jms_serializer');
+                $listeMarque = $this->get('jc_joliecarbundle.modele.marque')->listMarque();
+                $monJson = array(
+                    'message' => 'La nouvelle marque à été ajouté avec succes',
+                    'listMarque' => $serializer->serialize($listeMarque,'json'),
+                );
+                return new Response($serializer->serialize($monJson,'json'));
+            }
     }
+    
     /**
      * @Route("/ajoutModele",name="add_modele")
      */
@@ -83,12 +111,24 @@ class JolieCarController extends Controller
         $modele = new Modele();
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
-        $form = $this->createForm(new AjoutModeleType(), $modele);
         if($request->isXmlHttpRequest())
         {
-            return $this->render("JcJolieCarBundle:JolieCar:addModele.html.twig", array(
-            'form' => $form->createView(),
-            ));
+            $post = $request->request;
+            $marque = $em->getRepository('JcJolieCarBundle:Marque')->find($post->get('marque'));
+            if($marque != null){
+                $modele->setMarque($marque);
+                $modele->setNom($post->get('nom'));
+                //*** la validation*****
+                
+                
+                //**********************
+                $em->persist($modele);
+                $em->flush();
+                return new Response('Le nouveau modele à été ajouté avec succes');
+            }
+            else {
+               return new Response("La marque selectionnée n'existe pas");
+           }
         }
         
     }

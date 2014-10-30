@@ -3,78 +3,94 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/div_layout.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/parameters.yml.dist</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/VoitureType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/UserBundle/Entity/User.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadVoitureData.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Boitier.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadParcData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/JolieCarController.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/detail.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/stylesheet_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadImageData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/config_dev.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/SymfonyRequirements.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/index.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/addModele.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/myStyle.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/search.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/BoitierType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/UserBundle/Resources/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/config/services.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadBoitierData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/div_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/Form/_jc_joliecarbundle_searchvoiture_modele_nom_choice_widget_options.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/AjoutModeleType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/parameters.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/SearchController.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/schema/genemuform-1.0.xsd</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_table_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/index.css</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/web/js/Elastislide/js/jquerypp.custom.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/marqueModele.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/autoload.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/composer.json</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/search.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/detail.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/detail.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Marque.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadParcData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/Form/fields.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Voiture.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/entity.xml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Form/Core/Type/PlainType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/parameters.yml.dist</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/twig.xml</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/app/AppKernel.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/MarqueRepository.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/header.css</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Modele.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/index.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/VoitureRepository.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/index.css</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/headerSearch.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/BoitierType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/Elastislide/css/elastislide.css</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_table_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/SearchVoitureType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/ParcRepository.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/security.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Twig/JolieCarExtension.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/ModeleType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/addCar.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/BoitierRepository.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadAdresseData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/app_dev.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Parc.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Twig/Extension/FormExtension.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/detail.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/jquery_layout.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/schema/genemuform-1.0.xsd</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/tabAccesRapide.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Image.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/layout.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/config/services.yml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/ModeleType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/SearchVoitureType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/marqueModele.js</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/config_dev.yml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/index.js</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/header.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/jquery-ui/jquery-ui.js</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/entity.xml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Adresse.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/SymfonyRequirements.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/detail.js</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/form.xml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/Form/fields.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Form/Core/Type/PlainType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/ModeleRepository.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/Form/addCar.html.twig</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/CarburantRepository.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadCarburantData.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/stylesheet_layout.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/twig.xml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/AccesRapideController.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/Form/_jc_joliecarbundle_searchvoiture_modele_nom_choice_widget_options.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/HeaderSearchType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadImageData.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Voiture.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/VoitureRepository.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/apercuCar.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/search.css</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Marque.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/parameters.yml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/search.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/BoitierRepository.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/ParcRepository.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/config.yml</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/myStyle.css</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/VoitureType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/MarqueType.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/app/Resources/views/base.html.twig</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/Elastislide/js/jquery.elastislide.js</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/web/app_dev.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/addCar.js</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadMarqueData.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadAdresseData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/config.yml</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Carburant.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/SearchController.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/JolieCarController.php</file>
-            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadBoitierData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/config/form.xml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Image.php</file>
             <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/Extension/ModeleTypeExtension.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/Elastislide/css/elastislide.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/Resources/views/Form/jquery_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/AccesRapideController.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/headerSearch.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Modele.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/MarqueType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/Elastislide/js/jquery.elastislide.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/UserBundle/Resources/config/services.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/ModeleRepository.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Adresse.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Entity/Boitier.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/header.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/js/index.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/app/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/addCar.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/layout.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Form/HeaderSearchType.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/JolieCar/addMarque.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/DataFixtures/ORM/LoadCarburantData.php</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/jquery-ui/jquery-ui.js</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/web/css/header.css</file>
+            <file>file:/Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Resources/views/tabAccesRapide.html.twig</file>
         </group>
     </open-files>
 </project-private>

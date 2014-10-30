@@ -8,7 +8,7 @@
     {{form_start(form)}}   
         <div class='row' id="nomMarque">
             <div class='{{col}}'>{{form_row(form.modele.marque)}}</div>
-            <div id="ajoutMarque" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div> 
+            <div id="ajoutMarque" data-url="{{path('add_marque')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div> 
         </div>
         <div class='row' id="nomModele">
             <div class='{{col}}'>{{form_row(form.modele.nom)}}</div>

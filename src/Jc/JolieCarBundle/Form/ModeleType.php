@@ -6,12 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Jc\JolieCarBundle\Entity\ModeleRepository;
+use Doctrine\ORM\EntityManager;
 
 class ModeleType extends AbstractType
 {
     
     private $em;
-    public function __construct($em) {
+    public function __construct(EntityManager $em) {
         $this->em=$em ;
         }
         /**
