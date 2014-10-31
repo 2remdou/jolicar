@@ -14,7 +14,8 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
-class JolieCarController extends Controller
+class
+JolieCarController extends Controller
 {
     /**
      * 
@@ -37,6 +38,7 @@ class JolieCarController extends Controller
             'formHeader' => $formHeader->createView(),            
         ));
     }
+
     /**
      * 
      * @param type $marque
