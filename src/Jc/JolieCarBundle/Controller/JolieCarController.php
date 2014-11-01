@@ -95,13 +95,13 @@ JolieCarController extends Controller
                 //**********************
                 $em->persist($marque);
                 $em->flush();
-                $serializer = $this->container->get('jms_serializer');
-                $listeMarque = $this->get('jc_joliecarbundle.modele.marque')->listMarque();
-                $monJson = array(
+                $serializer = $this->get('jms_serializer');
+                $monJson = $serializer->serialize(array(
                     'message' => 'La nouvelle marque à été ajouté avec succes',
-                    'listMarque' => $serializer->serialize($listeMarque,'json'),
-                );
-                return new Response($serializer->serialize($monJson,'json'));
+                    'marque' => $serializer->serialize($marque,'json'),
+                ),
+                    'json');
+                return new Response($monJson);
             }
     }
     
@@ -113,6 +113,7 @@ JolieCarController extends Controller
         $modele = new Modele();
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
+        $serializer = $this->get('jms_serializer');
         if($request->isXmlHttpRequest())
         {
             $post = $request->request;
@@ -126,10 +127,21 @@ JolieCarController extends Controller
                 //**********************
                 $em->persist($modele);
                 $em->flush();
-                return new Response('Le nouveau modele à été ajouté avec succes');
+
+
+                $monJson = $serializer->serialize(array(
+                    'message' => 'Le nouveau modele à été ajouté avec succes',
+                    'newModele' => $serializer->serialize($modele,'json'),
+                ),
+                    'json');
+                return new Response($monJson);
             }
             else {
-               return new Response("La marque selectionnée n'existe pas");
+                $monJson = $serializer->serialize(array(
+                       'message' =>  "La marque selectionnée n'existe pas",
+                    ),
+                    'json');
+               return new Response($monJson);
            }
         }
         

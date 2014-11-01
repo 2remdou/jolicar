@@ -1249,6 +1249,9 @@ function hideAjoutMarque(){
             $('#newMarque').fadeOut('slow');
         }
 
+function addModeleInMarque(marque,valueModele,modele){
+    marqueWithModele[marque].push(valueModele+';'+modele);
+}
 function liaisonMarqueModele(){
         $('#jc_joliecarbundle_voiture_modele_marque>option').each(function(){
         
@@ -1261,7 +1264,7 @@ function liaisonMarqueModele(){
                 
                 if($(this).data('marque')===nomMarque)
                 {
-                    marqueWithModele[nomMarque].push($(this).attr('value')+';'+nomModele);
+                    addModeleInMarque(nomMarque,$(this).attr('value'),nomModele)
                     $(this).remove();
                 }
             });
@@ -1269,6 +1272,19 @@ function liaisonMarqueModele(){
         }
 
     });
+}
+
+function loadMarque(listMarque){
+    $('#jc_joliecarbundle_voiture_modele_marque>option:gt(0)').remove();
+    for(var i=0;i<listMarque.length;i++){
+
+            $('#jc_joliecarbundle_voiture_modele_marque').append('<option value="'+listMarque[i].id+'">'+listMarque[i].nom+'</option>');
+
+    }
+}
+function addMarque(element,value,nom){
+    $(element).append('<option value="'+value+'">'+nom+'</option>');
+    $(element).select2("val",value);
 }
 
 function loadModeleForMarque(marqueSelectionne){
@@ -1343,7 +1359,10 @@ $(document).ready(function(){
         })
                 .done(function(data,jqXHR){               
                     displayMessage($('#message'),data.message,'success');
-                    hideAjoutMarque();
+                marqueWithModele[newNomMarque] = [];
+                var marque = $.parseJSON(data.marque);
+                addMarque($('#jc_joliecarbundle_voiture_modele_marque'),marque['id'],marque['nom']);
+                hideAjoutMarque();
                 })
                 .fail(function(jqXHR){
                     displayMessage($('#message'),jqXHR.responseText,'danger');        
@@ -1373,14 +1392,19 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             type: "POST",
+            dataType: 'json',
             data: {marque:idMarque,nom:newNomModele}
         })
                 .done(function(data){               
-                    displayMessage($('#message'),data,'success');
+                    displayMessage($('#message'),data.message,'success');
+                    var newModele = $.parseJSON(data.newModele);
+                    addModeleInMarque(newModele['marque'].nom,newModele['id'],newModele['nom']);
+                    loadModeleForMarque(newModele['marque'].nom);
+                    $('#s2id_jc_joliecarbundle_voiture_modele_nom').select2("val",newModele['id']);
                     hideAjoutModele();
                 })
-                .fail(function(jqXHR){
-                    displayMessage($('#message'),jqXHR.responseText,'danger');        
+                .fail(function(jqXHR,data){
+                    displayMessage($('#message'),data.message,'danger');
                 })
         ;//fin ajax
         

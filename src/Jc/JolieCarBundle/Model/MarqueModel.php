@@ -17,6 +17,11 @@ class MarqueModel implements MarqueInterface
         
         return $list;
     }
+    public function getMarque($nom){
+        $marque = $this->em->getRepository("JcJolieCarBundle:Marque")->findOneBy(array('nom'=>$nom));
+
+        return $marque;
+    }
 
 }
 

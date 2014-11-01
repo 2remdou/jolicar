@@ -6,5 +6,6 @@ namespace Jc\JolieCarBundle\Model;
 interface MarqueInterface
 {
     public function listMarque();
+    public function getMarque($nom);
 }
 

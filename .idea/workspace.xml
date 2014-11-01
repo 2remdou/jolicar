@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdbfa819-b732-4f1d-a1f4-912749921a5f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/commandlinetools/Tool_based_on_Symfony_Console_31_10_14_12_13_console.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.3.xsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+    <list default="true" id="fdbfa819-b732-4f1d-a1f4-912749921a5f" name="Default" comment="chargement des marques après ajout d'une nouvelle marque">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php" afterPath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueInterface.php" afterPath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueInterface.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueModel.php" afterPath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Entity/Modele.php" afterPath="$PROJECT_DIR$/src/Jc/JolieCarBundle/Entity/Modele.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/addCar.js" afterPath="$PROJECT_DIR$/web/js/addCar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/compiled/main.js" afterPath="$PROJECT_DIR$/web/js/compiled/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/compiled/main_part_5_addCar_1.js" afterPath="$PROJECT_DIR$/web/js/compiled/main_part_5_addCar_1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jolicar.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,94 +52,73 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="addCar.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addCar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/addCar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.032608695" vertical-offset="120" max-vertical-offset="1170">
-              <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="735">
+              <caret line="205" column="52" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="n#!!block;n#configSelect2#0" expanded="false" />
                 <element signature="n#!!block;n#displayMessage#0" expanded="false" />
                 <element signature="n#!!block;n#showAjoutModele#0" expanded="false" />
                 <element signature="n#!!block;n#hideAjoutModele#0" expanded="false" />
                 <element signature="n#!!block;n#showAjoutMarque#0" expanded="false" />
                 <element signature="n#!!block;n#hideAjoutMarque#0" expanded="false" />
                 <element signature="n#!!block;n#liaisonMarqueModele#0" expanded="false" />
+                <element signature="n#!!block;n#loadMarque#0" expanded="false" />
+                <element signature="n#!!block;n#addMarque#0" expanded="false" />
                 <element signature="n#!!block;n#loadModeleForMarque#0" expanded="false" />
-                <element signature="e#5532#5842#0" expanded="false" />
-                <element signature="e#5930#6245#0" expanded="false" />
-                <element signature="e#6306#7116#0" expanded="false" />
-                <element signature="e#7176#8301#0" expanded="false" />
-                <marker date="1414699314000" expanded="false" signature="2150:2166" placeholder="..." />
-                <marker date="1414699314000" expanded="false" signature="3189:3205" placeholder="..." />
+                <element signature="e#5835#5986#0" expanded="false" />
+                <element signature="e#6081#6391#0" expanded="false" />
+                <element signature="e#6479#6794#0" expanded="false" />
+                <element signature="e#6855#7870#0" expanded="false" />
+                <element signature="e#7930#9412#0" expanded="false" />
+                <marker date="1414800034000" expanded="false" signature="2150:2166" placeholder="..." />
+                <marker date="1414800034000" expanded="false" signature="3189:3205" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.php.cache" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/bootstrap.php.cache">
-          <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="Modele.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Entity/Modele.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1172.0" vertical-offset="35160" max-vertical-offset="46560">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-10.0" vertical-offset="375" max-vertical-offset="2190">
+              <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+              <folding>
+                <element signature="e#44#76#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6" vertical-offset="0" max-vertical-offset="255">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppCache.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppCache.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="225">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JolieCarController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JolieCarController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.75" vertical-offset="0" max-vertical-offset="2010">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.73202616" vertical-offset="1686" max-vertical-offset="2190">
+              <caret line="100" column="70" selection-start-line="100" selection-start-column="70" selection-end-line="100" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <file leaf-file-name="MarqueInterface.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueInterface.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#7#47#0#PHP" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="255">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autoload.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/autoload.php">
+      <file leaf-file-name="MarqueModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#7#58#0#PHP" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="495">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,6 +133,7 @@
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
       <command text="console cache:clear" />
+      <command text="console doctrine:fixtures:load" />
     </commandsHistory>
   </component>
   <component name="Git.Settings">
@@ -166,7 +146,12 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/AppCache.php" />
+        <option value="$PROJECT_DIR$/src/Jc/JolieCarBundle/Entity/Modele.php" />
+        <option value="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueModel.php" />
+        <option value="$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueInterface.php" />
         <option value="$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php" />
+        <option value="$PROJECT_DIR$/web/js/addCar.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -288,7 +273,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -300,11 +285,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../mysql-connector-java-5.1.33/mysql-connector-java-5.1.33-bin.jar" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
+    <property name="options.lastSelected" value="settings.github" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="SearchEverywhereHistoryKey" value="JMS&#9;null&#9;null&#10;joli&#9;null&#9;null&#10;setting&#9;ACTION&#9;Database.Settings" />
+    <property name="SearchEverywhereHistoryKey" value="git&#9;FILE&#9;file:///Applications/MAMP/htdocs/jolicar/.gitignore&#10;interface&#9;FILE&#9;file:///Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Model/MarqueInterface.php&#10;marquemo&#9;null&#9;null&#10;modele&#9;null&#9;null&#10;contro&#9;FILE&#9;file:///Applications/MAMP/htdocs/jolicar/src/Jc/JolieCarBundle/Controller/JolieCarController.php&#10;JMS&#9;null&#9;null&#10;joli&#9;null&#9;null&#10;setting&#9;ACTION&#9;Database.Settings" />
     <property name="FullScreen" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="dynamic.classpath" value="false" />
@@ -381,7 +366,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18055555" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18055555" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939634" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -391,8 +376,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2426982" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24930556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32939634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939634" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32939634" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -438,10 +423,12 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="chargement des marques après ajout d'une nouvelle marque" />
+    <option name="LAST_COMMIT_MESSAGE" value="chargement des marques après ajout d'une nouvelle marque" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -452,19 +439,23 @@
           <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#configSelect2#0" expanded="false" />
             <element signature="n#!!block;n#displayMessage#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#liaisonMarqueModele#0" expanded="false" />
+            <element signature="n#!!block;n#loadMarque#0" expanded="false" />
+            <element signature="n#!!block;n#addMarque#0" expanded="false" />
             <element signature="n#!!block;n#loadModeleForMarque#0" expanded="false" />
-            <element signature="e#5532#5842#0" expanded="false" />
-            <element signature="e#5930#6245#0" expanded="false" />
-            <element signature="e#6306#7116#0" expanded="false" />
-            <element signature="e#7176#8301#0" expanded="false" />
-            <marker date="1414699314000" expanded="false" signature="2150:2166" placeholder="..." />
-            <marker date="1414699314000" expanded="false" signature="3189:3205" placeholder="..." />
+            <element signature="e#5835#5986#0" expanded="false" />
+            <element signature="e#6081#6391#0" expanded="false" />
+            <element signature="e#6479#6794#0" expanded="false" />
+            <element signature="e#6855#7870#0" expanded="false" />
+            <element signature="e#7930#9412#0" expanded="false" />
+            <marker date="1414800034000" expanded="false" signature="2150:2166" placeholder="..." />
+            <marker date="1414800034000" expanded="false" signature="3189:3205" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -511,19 +502,23 @@
           <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#configSelect2#0" expanded="false" />
             <element signature="n#!!block;n#displayMessage#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#liaisonMarqueModele#0" expanded="false" />
+            <element signature="n#!!block;n#loadMarque#0" expanded="false" />
+            <element signature="n#!!block;n#addMarque#0" expanded="false" />
             <element signature="n#!!block;n#loadModeleForMarque#0" expanded="false" />
-            <element signature="e#5532#5842#0" expanded="false" />
-            <element signature="e#5930#6245#0" expanded="false" />
-            <element signature="e#6306#7116#0" expanded="false" />
-            <element signature="e#7176#8301#0" expanded="false" />
-            <marker date="1414699314000" expanded="false" signature="2150:2166" placeholder="..." />
-            <marker date="1414699314000" expanded="false" signature="3189:3205" placeholder="..." />
+            <element signature="e#5835#5986#0" expanded="false" />
+            <element signature="e#6081#6391#0" expanded="false" />
+            <element signature="e#6479#6794#0" expanded="false" />
+            <element signature="e#6855#7870#0" expanded="false" />
+            <element signature="e#7930#9412#0" expanded="false" />
+            <marker date="1414800034000" expanded="false" signature="2150:2166" placeholder="..." />
+            <marker date="1414800034000" expanded="false" signature="3189:3205" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -570,19 +565,23 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#configSelect2#0" expanded="false" />
             <element signature="n#!!block;n#displayMessage#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#liaisonMarqueModele#0" expanded="false" />
+            <element signature="n#!!block;n#loadMarque#0" expanded="false" />
+            <element signature="n#!!block;n#addMarque#0" expanded="false" />
             <element signature="n#!!block;n#loadModeleForMarque#0" expanded="false" />
-            <element signature="e#5532#5842#0" expanded="false" />
-            <element signature="e#5930#6245#0" expanded="false" />
-            <element signature="e#6306#7116#0" expanded="false" />
-            <element signature="e#7176#8301#0" expanded="false" />
-            <marker date="1414699314000" expanded="false" signature="2150:2166" placeholder="..." />
-            <marker date="1414699314000" expanded="false" signature="3189:3205" placeholder="..." />
+            <element signature="e#5835#5986#0" expanded="false" />
+            <element signature="e#6081#6391#0" expanded="false" />
+            <element signature="e#6479#6794#0" expanded="false" />
+            <element signature="e#6855#7870#0" expanded="false" />
+            <element signature="e#7930#9412#0" expanded="false" />
+            <marker date="1414800034000" expanded="false" signature="2150:2166" placeholder="..." />
+            <marker date="1414800034000" expanded="false" signature="3189:3205" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -631,53 +630,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.75" vertical-offset="0" max-vertical-offset="2010">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/bootstrap.php.cache">
       <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1172.0" vertical-offset="35160" max-vertical-offset="46560">
+        <state vertical-scroll-proportion="-51.629955" vertical-offset="35160" max-vertical-offset="46560">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Entity/Modele.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6" vertical-offset="0" max-vertical-offset="255">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        <state vertical-scroll-proportion="-10.0" vertical-offset="375" max-vertical-offset="2190">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+          <folding>
+            <element signature="e#44#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Model/MarqueModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="495">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/addCar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032608695" vertical-offset="120" max-vertical-offset="1170">
-          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="735">
+          <caret line="205" column="52" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="52" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#configSelect2#0" expanded="false" />
             <element signature="n#!!block;n#displayMessage#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutModele#0" expanded="false" />
             <element signature="n#!!block;n#showAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#hideAjoutMarque#0" expanded="false" />
             <element signature="n#!!block;n#liaisonMarqueModele#0" expanded="false" />
+            <element signature="n#!!block;n#loadMarque#0" expanded="false" />
+            <element signature="n#!!block;n#addMarque#0" expanded="false" />
             <element signature="n#!!block;n#loadModeleForMarque#0" expanded="false" />
-            <element signature="e#5532#5842#0" expanded="false" />
-            <element signature="e#5930#6245#0" expanded="false" />
-            <element signature="e#6306#7116#0" expanded="false" />
-            <element signature="e#7176#8301#0" expanded="false" />
-            <marker date="1414699314000" expanded="false" signature="2150:2166" placeholder="..." />
-            <marker date="1414699314000" expanded="false" signature="3189:3205" placeholder="..." />
+            <element signature="e#5835#5986#0" expanded="false" />
+            <element signature="e#6081#6391#0" expanded="false" />
+            <element signature="e#6479#6794#0" expanded="false" />
+            <element signature="e#6855#7870#0" expanded="false" />
+            <element signature="e#7930#9412#0" expanded="false" />
+            <marker date="1414800034000" expanded="false" signature="2150:2166" placeholder="..." />
+            <marker date="1414800034000" expanded="false" signature="3189:3205" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4037267" vertical-offset="0" max-vertical-offset="483">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Jc/JolieCarBundle/Controller/JolieCarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.73202616" vertical-offset="1686" max-vertical-offset="2190">
+          <caret line="100" column="70" selection-start-line="100" selection-start-column="70" selection-end-line="100" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
