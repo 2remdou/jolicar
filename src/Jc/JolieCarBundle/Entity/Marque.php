@@ -5,11 +5,14 @@ namespace Jc\JolieCarBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\Exclude;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Marque
  *
  * @ORM\Table(name="marque")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\MarqueRepository")
+ * @UniqueEntity("nom",message="Cette marque existe déja")
+ *
  */
 class Marque
 {

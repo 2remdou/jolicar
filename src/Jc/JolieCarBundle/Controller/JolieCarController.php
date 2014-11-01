@@ -89,19 +89,33 @@ JolieCarController extends Controller
             if($request->isXmlHttpRequest())
             {
                 $marque->setNom($request->request->get('nom'));
-                //*** la validation*****
-                
-                
-                //**********************
-                $em->persist($marque);
-                $em->flush();
                 $serializer = $this->get('jms_serializer');
-                $monJson = $serializer->serialize(array(
-                    'message' => 'La nouvelle marque à été ajouté avec succes',
-                    'marque' => $serializer->serialize($marque,'json'),
-                ),
-                    'json');
-                return new Response($monJson);
+                //*** la validation*****
+                $validator = $this->get('validator');
+                $errors = $validator->validate($marque);
+                if(count($errors)<=0){
+                    $em->persist($marque);
+                    $em->flush();
+
+                    $monJson = $serializer->serialize(array(
+                            'message' => 'La nouvelle marque à été ajouté avec succes',
+                            'marque' => $serializer->serialize($marque,'json'),
+                            'typeMessage'=>'success',
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
+                else
+                {
+                    $monJson = $serializer->serialize(array(
+                            'message' => $serializer->serialize($errors,'json'),
+                            'typeMessage' => 'danger'
+                        ),
+                         'json');
+                    return new Response($monJson);
+                }
+
+
             }
     }
     
@@ -117,24 +131,36 @@ JolieCarController extends Controller
         if($request->isXmlHttpRequest())
         {
             $post = $request->request;
+            $validator = $this->get('validator');
             $marque = $em->getRepository('JcJolieCarBundle:Marque')->find($post->get('marque'));
             if($marque != null){
                 $modele->setMarque($marque);
                 $modele->setNom($post->get('nom'));
-                //*** la validation*****
-                
-                
-                //**********************
-                $em->persist($modele);
-                $em->flush();
+                //******* la validation*****
+                $errors = $validator->validate($modele);
+                if(count($errors)<=0){
+                    $em->persist($modele);
+                    $em->flush();
+                    $monJson = $serializer->serialize(array(
+                            'message' => 'Le nouveau modele à été ajouté avec succes',
+                            'newModele' => $serializer->serialize($modele,'json'),
+                            'typeMessage' => 'success'
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
+                else
+                {
+                    $monJson = $serializer->serialize(array(
+                            'message' => $serializer->serialize($errors,'json'),
+                            'typeMessage' => 'danger'
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
 
 
-                $monJson = $serializer->serialize(array(
-                    'message' => 'Le nouveau modele à été ajouté avec succes',
-                    'newModele' => $serializer->serialize($modele,'json'),
-                ),
-                    'json');
-                return new Response($monJson);
+
             }
             else {
                 $monJson = $serializer->serialize(array(
