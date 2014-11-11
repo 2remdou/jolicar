@@ -173,7 +173,7 @@ $(document).ready(function(){
             data: {nom:newNomMarque}
         })
                 .done(function(data,jqXHR){               
-                    displayMessage($('#message'),data.message,'success');
+                    displayMessage($('#message'),data.message,'success')
                     hideAjoutMarque();
                 })
                 .fail(function(jqXHR){
