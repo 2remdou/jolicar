@@ -4,11 +4,13 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ImageRepository")
+ * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields={"voiture","enVedette"}, message="La voiture ne peut avoir qu'une seule photo en vedette")
  */
 class Image
@@ -37,10 +39,66 @@ class Image
      * @ORM\Column(name="enVedette", type="boolean")
      */
     private $enVedette;
-    
-    
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private  $path;
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    protected  function getAbsolutePath(){
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public   function getWebPath(){
+        return null === $this->path ? null : $this->getUploadDir();
+    }
+
+    protected function getUploadDir(){
+        return 'images/cars';
+    }
+    protected  function getUploadRootDir(){
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
     public function __construct() {
         $this->enVedette = false;
+    }
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public  function preUpload()
+    {
+        if(null !== $this->file){
+            $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guesExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload(){
+        if(null === $this->file){
+            return;
+        }
+
+        $this->file->move($this->getUploadRootDir(),$this->path);
+
+        unset($this->file);
+
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload(){
+        if($file = $this->getAbsolutePath()){
+            unlink($file);
+        }
     }
 
     /**
@@ -120,5 +178,28 @@ class Image
     public function getEnVedette()
     {
         return $this->enVedette;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Image
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

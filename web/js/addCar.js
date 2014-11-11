@@ -140,7 +140,7 @@ function existInSelect(select,value){
     return b;
 }
 $(document).ready(function(){
-    
+    $('#accordion').accordion({ active:2});
       configSelect2();
       liaisonMarqueModele();
     //stockage des marque et des modele qui lui liés
@@ -279,4 +279,15 @@ $(document).ready(function(){
         
         
     })
+
+    var inputFile = $("#jc_joliecarbundle_voiture_images").data('prototype');
+    $(inputFile).appendTo("#jc_joliecarbundle_voiture_images");
+    $('#dupliquer').click(function(e){
+        e.preventDefault();
+        //alert("valider");
+        var clone = $(".uploadMiniature").clone();
+        $(clone).appendTo(".uploadMiniature");
+    });
+
+
 });

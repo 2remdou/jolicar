@@ -1,4 +1,7 @@
 /web/bundles/
+/web/css/compiled/
+/web/js/compiled/
+.idea/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -9,6 +12,4 @@
 /vendor/
 /bin/
 /composer.phar
-/.idea/
-/web/js/compiled/
-/web/css/compiled/
+
