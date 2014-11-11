@@ -1,4 +1,7 @@
 /web/bundles/
+/web/css/compiled/
+/web/js/compiled/
+/nbproject/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -10,3 +13,4 @@
 /bin/
 /composer.phar
 /.idea
+
