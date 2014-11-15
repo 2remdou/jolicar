@@ -29,7 +29,7 @@ class Modele
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Veuillez fournir le nom du modele")
      */
     private $nom;
     /**
@@ -79,7 +79,7 @@ class Modele
     /**
      * Set marque
      *
-     * @param \Jc\JolieCar\Entity\Marque $marque
+     * @param \Jc\JolieCarBundle\Entity\Marque $marque
      * @return Modele
      */
     public function setMarque(Marque $marque)
@@ -92,7 +92,7 @@ class Modele
     /**
      * Get marque
      *
-     * @return \Jc\JolieCar\Entity\Marque 
+     * @return \Jc\JolieCarBundle\Entity\Marque
      */
     public function getMarque()
     {

@@ -5,7 +5,21 @@
  */
 
 var marqueWithModele = {};
+var nombreImage = 0;
+function loadImage(parent,file,img,numero){
+    var file = file.files[0];
+    var reader = new FileReader();
 
+    reader.onload = function(event){
+        $(img).attr('src',event.target.result);
+        $("<span id='removeImage_'"+nombreImage+"' class='glyphicon glyphicon-remove'></span>").prependTo($(parent));
+    };
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+        $(img).attr('src',"/jolicar/web/images/specimenCar.png");
+    }
+}
 function configSelect2(){
     $("#jc_joliecarbundle_voiture_modele_marque").select2({
          //placeholder: 'Selectionner une marque', 
@@ -132,7 +146,6 @@ function existInSelect(select,value){
     var b=false;
     $(select).children('option').each(function(){
         if(value.toLowerCase() == $(this).text().toLowerCase()){
-            console.log(" a l'interieur");
             b=true;
             return;
         }
@@ -140,7 +153,7 @@ function existInSelect(select,value){
     return b;
 }
 $(document).ready(function(){
-    
+    $('#accordion').accordion({collapsible: true});
       configSelect2();
       liaisonMarqueModele();
     //stockage des marque et des modele qui lui liés
@@ -192,7 +205,6 @@ $(document).ready(function(){
             return;
         }
         var test = existInSelect($('#jc_joliecarbundle_voiture_modele_marque'),newNomMarque);
-        console.log(test);
         if(test){
             displayMessage($('#message'),'Une marque de même nom existe déja','danger');
             return;
@@ -279,4 +291,55 @@ $(document).ready(function(){
         
         
     })
+
+    function addUploadMiniature(parent,numeroClick){
+        var prototype = $(parent).data('prototype');
+        //var nombreImage = parent.children('[id*="uploadMiniature"]').length;
+        var libelleImage;
+        var contenu = "";
+        if(nombreImage==0){
+            libelleImage="Image Principale";
+        }
+        else{
+            libelleImage="Image "+(nombreImage+1);
+        }
+        contenu =  "<div id='uploadMiniature_"+nombreImage+"' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'> " +
+        "<div class='libelleImage text-center'>"+libelleImage+"</div>" +
+        "<img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar' class='img-responsive'/> " +
+        "<div class='fileinput-button text-center'> <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div> " +
+        prototype.replace(/__name__/g,nombreImage)+
+        "</div> " +
+        "</div>";
+       var uploadMiniature= $(contenu);
+        console.log("nombreImage= "+nombreImage+" et numeroClick= "+numeroClick);
+        if((nombreImage <= numeroClick+1) || (nombreImage==0)){
+            uploadMiniature.appendTo($(parent));
+            nombreImage++;
+
+        }
+
+    }
+
+    function removeUploadMiniature(element){
+        $(element).remove();
+    }
+    addUploadMiniature($('#jc_joliecarbundle_voiture_images'));
+    $('#jc_joliecarbundle_voiture_images').on('change','input[type="file"]', function (){
+       var parent = $(this).parent().parent().parent();
+       var numeroClick = $(parent).attr('id').substr(16);//(uploadMiniature_)=16 caracteres
+       var file = document.querySelector('#uploadMiniature_'+numeroClick+' input[type="file"]');
+       var img = $('#uploadMiniature_'+numeroClick+' img');
+       loadImage(parent,file,img,numeroClick);
+
+        //nouvelle image,si c'est pas une modification d'une zone existante
+            addUploadMiniature($('#jc_joliecarbundle_voiture_images'),parseInt(numeroClick));
+
+    });
+    $('#jc_joliecarbundle_voiture_images').on('click','[id*="remove"]',function(){
+        var numero = $(this).attr('id').substr(6);    //(remove_)= 6 caracteres
+        var element = $(this).parent();
+        removeUploadMiniature(element);
+    })
+
+
 });

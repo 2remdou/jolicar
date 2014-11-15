@@ -49,18 +49,19 @@
 {%- endblock form_row %}
 
 {% block _jc_joliecarbundle_voiture_images_row -%}
-    {% set col = "col-lg-2 col-md-3 col-sm-3 col-xs-4" %}
-    <div class="{{ col }} thumbnail uploadMiniature">
-        <div id="numeroImage" class="text-center">Image Principale</div>
-        <img src="{{asset('images/specimenCar.png')}}" alt="specimen_joliecar" class="img-responsive"/>
-        <div class="fileinput-button text-center">
-            <div class="btn-success">
-                <i class="glyphicon glyphicon-upload"></i>
-                Ajoutez image
-            </div>
+    <div class="row" id="imagesUpload">
             {{- form_widget(form) -}}
-        </div>
-
     </div>
 
 {%- endblock _jc_joliecarbundle_voiture_images_row %}
+
+
+
+{% block collection_widget -%}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge({'data-prototype':form_row(prototype)}) -%}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock collection_widget %}
+
+

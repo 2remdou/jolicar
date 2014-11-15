@@ -3,6 +3,8 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Jc\JolieCarBundle\Validator\Constraints as AssertJc;
 
 /**
  * Voiture
@@ -25,6 +27,8 @@ class Voiture
      * @var integer
      *
      * @ORM\Column(name="prix", type="bigint")
+     * @Assert\NotBlank(message="Veuillez fournir un prix de vente")
+     * @Assert\GreaterThan(value=0,message="Veuillez fournir un prix Valide")
      */
     private $prix;
 
@@ -32,6 +36,8 @@ class Voiture
      * @var integer
      *
      * @ORM\Column(name="kmParcouru", type="integer")
+     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de Kilometre valide")
+     * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de Kilometre valide")
      */
     private $kmParcouru;
 
@@ -39,6 +45,8 @@ class Voiture
      * @var \DateTime
      *
      * @ORM\Column(name="dateAcquisition", type="date")
+     * @Assert\Date(message="Veuillez fournir une date valide")
+     * @AssertJc\ConstraintDate()
      */
     private $dateAcquisition;
 
@@ -46,6 +54,8 @@ class Voiture
      * @var integer
      *
      * @ORM\Column(name="nombreRoueMotrice", type="smallint")
+     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de roues valide")
+     * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de roues valide")
      */
     private $nombreRoueMotrice;
 
@@ -53,6 +63,8 @@ class Voiture
      * @var integer
      *
      * @ORM\Column(name="nombrePorte", type="smallint")
+     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de portes valide")
+     * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de portes valide")
      */
     private $nombrePorte;
 
@@ -60,31 +72,38 @@ class Voiture
      * @var integer
      *
      * @ORM\Column(name="nombreSiege", type="smallint")
+     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de sieges valide")
+     * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de sieges valide")
      */
     private $nombreSiege;
     
     /**
      * @ORM\ManyToOne(targetEntity="Modele", inversedBy="voitures")
+     * @Assert\Valid()
      */
     private $modele;
     
     /**
      * @ORM\ManyToOne(targetEntity="Boitier", inversedBy="voitures")
+     * @Assert\Valid()
      */
     private  $boitier;
     
     /**
      * @ORM\ManyToOne(targetEntity="Parc", inversedBy="voitures")
+     * @Assert\Valid()
      */
     private $parc;
     
     /**
      * @ORM\ManyToOne(targetEntity="Carburant", inversedBy="voitures")
+     * @Assert\Valid()
      */
     private $carburant;
     
     /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture")
+     * @Assert\Valid()
      */
     private $images;
     /**
@@ -95,11 +114,6 @@ class Voiture
      * @ORM\Column(name="newCar", type="boolean")
      */
     private $newCar;
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
     public function getId()
     {
         return $this->id;
@@ -379,6 +393,8 @@ class Voiture
     {
         return $this->modele;
     }
+
+
 
     /**
      * Set top

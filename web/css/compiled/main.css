@@ -28,7 +28,7 @@ form .row
     cursor: pointer;
 }
 
-.uploadMiniature{
+[id*=uploadMiniature]{
     margin: 5px;
     padding: 5px;
     border-radius: 10px 10px 10px 10px;
@@ -36,7 +36,13 @@ form .row
     box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
     -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
 }
+[id*=removeImage]{
+    cursor: pointer;
+}
 
+[id*=removeImage]:hover{
+    background-color: red;
+}
 
 .fileinput-button {
     position: relative;

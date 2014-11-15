@@ -10,7 +10,10 @@ namespace Jc\JolieCarBundle\Twig;
 class JolieCarExtension extends \Twig_Extension
 {
     public function getFilters() {
-        return array(new \Twig_SimpleFilter('formaterPrix', array($this,'formaterPrix')));
+        return array(
+            new \Twig_SimpleFilter('formaterPrix', array($this,'formaterPrix')),
+            new \Twig_SimpleFilter('typeAlert', array($this,'typeAlert')),
+        );
     }
     
     public function formaterPrix($value=null,$devise=null)
@@ -28,6 +31,15 @@ class JolieCarExtension extends \Twig_Extension
         $prix = number_format($value, 0, '.','.');
         
         return $prix.' '.$devise;
+    }
+    public function typeAlert($value){
+        if(preg_match("/echec|erreur/i",$value)){
+            return 'danger';
+        }
+        else
+        {
+            return 'success';
+        }
     }
 
     public function getName() {

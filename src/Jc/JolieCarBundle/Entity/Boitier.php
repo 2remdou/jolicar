@@ -3,12 +3,15 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Boitier
  *
  * @ORM\Table(name="boitier")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\BoitierRepository")
+ * @UniqueEntity(fields="nom",message="Un boitier de même nom existe déja")
  */
 class Boitier
 {
@@ -25,6 +28,7 @@ class Boitier
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez fournir le nom du boitier")
      */
     private $nom;
     

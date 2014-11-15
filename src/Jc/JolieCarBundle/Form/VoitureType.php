@@ -68,10 +68,31 @@ class VoitureType extends AbstractType
             ->add('images','collection',array(
                    'type' => new ImageType(),
                     'allow_add' => true,
-                ));
-//            ->add('nombreRoueMotrice')
-//            ->add('nombrePorte')
-//            ->add('nombreSiege')
+                ))
+            ->add('nombreRoueMotrice','number',array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Veuillez fournir le nombre de roues motrices',
+            ))
+            )
+            ->add('nombrePorte','number',array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Veuillez fournir le nombre de portes',
+                ))
+            )
+            ->add('nombreSiege','number',array(
+                    'required' => false,
+                    'label' => false,
+                    'attr' => array(
+                        'placeholder' => 'Veuillez fournir le nombre de sieges',
+                    ))
+                )
+            ->add('btnSave','submit',array(
+                    'label' => 'Enregistrer',
+                ))
 ////            ->add('top')
 ////            ->add('newCar')
 //            ->add('modele')
