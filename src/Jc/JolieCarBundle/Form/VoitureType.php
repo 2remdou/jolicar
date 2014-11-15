@@ -65,6 +65,10 @@ class VoitureType extends AbstractType
                     'placeholder' => "Veuillez fournir la date d'acquisition",
                 ))
                     )
+            ->add('images','collection',array(
+                   'type' => new ImageType(),
+                    'allow_add' => true,
+                ));
 //            ->add('nombreRoueMotrice')
 //            ->add('nombrePorte')
 //            ->add('nombreSiege')

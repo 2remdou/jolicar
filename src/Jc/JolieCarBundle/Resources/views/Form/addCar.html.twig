@@ -46,4 +46,21 @@
             
 {% block form_row -%}
         {{- form_widget(form) -}}
-{%- endblock form_row %}    
+{%- endblock form_row %}
+
+{% block _jc_joliecarbundle_voiture_images_row -%}
+    {% set col = "col-lg-2 col-md-3 col-sm-3 col-xs-4" %}
+    <div class="{{ col }} thumbnail uploadMiniature">
+        <div id="numeroImage" class="text-center">Image Principale</div>
+        <img src="{{asset('images/specimenCar.png')}}" alt="logo_joliecar" class="img-responsive"/>
+        <div class="fileinput-button text-center">
+            <div class="btn-success">
+                <i class="glyphicon glyphicon-upload"></i>
+                Ajoutez image
+            </div>
+            {{- form_widget(form) -}}
+        </div>
+
+    </div>
+
+{%- endblock _jc_joliecarbundle_voiture_images_row %}

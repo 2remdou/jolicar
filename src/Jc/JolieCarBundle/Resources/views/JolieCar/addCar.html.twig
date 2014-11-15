@@ -5,39 +5,54 @@
 {%block contenu%}
     {% set col="col-lg-11 col-md-11 col-sm-11 col-xs-11"%}
     {% set colSpan="col-lg-1 col-md-1 col-sm-1 col-xs-1"%}
-    {{form_start(form)}}   
-        <div class='row' id="nomMarque">
-            <div class='{{col}}'>{{form_row(form.modele.marque)}}</div>
-            <div id="ajoutMarque" data-url="{{path('add_marque')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div> 
-        </div>
-        <div class='row' id="nomModele">
-            <div class='{{col}}'>{{form_row(form.modele.nom)}}</div>
-            <div id="ajoutModele" data-url="{{path('add_modele')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
-        </div>
-        <div class="row">
-            <div class="{{col}}">
-               {{form_row(form.boitier)}}
+    {{form_start(form)}}
+        <div id="accordion">
+            <h3>Informations générales</h3>
+            <div>
+                <div class='row' id="nomMarque">
+                    <div class='{{col}}'>{{form_row(form.modele.marque)}}</div>
+                    <div id="ajoutMarque" data-url="{{path('add_marque')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
+                </div>
+                <div class='row' id="nomModele">
+                    <div class='{{col}}'>{{form_row(form.modele.nom)}}</div>
+                    <div id="ajoutModele" data-url="{{path('add_modele')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.boitier)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.carburant)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.prix)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.kmParcouru)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        <p class='bg-info'>La date d'acquisition</p>
+                        {{form_row(form.dateAcquisition)}}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="{{col}}">
-               {{form_row(form.carburant)}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="{{col}}">
-               {{form_row(form.prix)}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="{{col}}">
-               {{form_row(form.kmParcouru)}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="{{col}}">
-               <p class='bg-info'>La date d'acquisition</p>
-               {{form_row(form.dateAcquisition)}}
+
+            <h3>Les images</h3>
+            <div>
+                <div>
+
+                    {{ form_row(form.images) }}
+
+                    <button id="dupliquer">dupliquer</button>
+                </div>
             </div>
         </div>
     {{form_end(form)}}

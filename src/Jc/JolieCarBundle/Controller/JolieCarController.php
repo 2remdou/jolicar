@@ -14,7 +14,8 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
-class JolieCarController extends Controller
+class
+JolieCarController extends Controller
 {
     /**
      * 
@@ -37,6 +38,7 @@ class JolieCarController extends Controller
             'formHeader' => $formHeader->createView(),            
         ));
     }
+
     /**
      * 
      * @param type $marque
@@ -87,19 +89,33 @@ class JolieCarController extends Controller
             if($request->isXmlHttpRequest())
             {
                 $marque->setNom($request->request->get('nom'));
+                $serializer = $this->get('jms_serializer');
                 //*** la validation*****
-                
-                
-                //**********************
-                $em->persist($marque);
-                $em->flush();
-                $serializer = $this->container->get('jms_serializer');
-                $listeMarque = $this->get('jc_joliecarbundle.modele.marque')->listMarque();
-                $monJson = array(
-                    'message' => 'La nouvelle marque à été ajouté avec succes',
-                    'listMarque' => $serializer->serialize($listeMarque,'json'),
-                );
-                return new Response($serializer->serialize($monJson,'json'));
+                $validator = $this->get('validator');
+                $errors = $validator->validate($marque);
+                if(count($errors)<=0){
+                    $em->persist($marque);
+                    $em->flush();
+
+                    $monJson = $serializer->serialize(array(
+                            'message' => 'La nouvelle marque à été ajouté avec succes',
+                            'marque' => $serializer->serialize($marque,'json'),
+                            'typeMessage'=>'success',
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
+                else
+                {
+                    $monJson = $serializer->serialize(array(
+                            'message' => $serializer->serialize($errors,'json'),
+                            'typeMessage' => 'danger'
+                        ),
+                         'json');
+                    return new Response($monJson);
+                }
+
+
             }
     }
     
@@ -111,23 +127,47 @@ class JolieCarController extends Controller
         $modele = new Modele();
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
+        $serializer = $this->get('jms_serializer');
         if($request->isXmlHttpRequest())
         {
             $post = $request->request;
+            $validator = $this->get('validator');
             $marque = $em->getRepository('JcJolieCarBundle:Marque')->find($post->get('marque'));
             if($marque != null){
                 $modele->setMarque($marque);
                 $modele->setNom($post->get('nom'));
-                //*** la validation*****
-                
-                
-                //**********************
-                $em->persist($modele);
-                $em->flush();
-                return new Response('Le nouveau modele à été ajouté avec succes');
+                //******* la validation*****
+                $errors = $validator->validate($modele);
+                if(count($errors)<=0){
+                    $em->persist($modele);
+                    $em->flush();
+                    $monJson = $serializer->serialize(array(
+                            'message' => 'Le nouveau modele à été ajouté avec succes',
+                            'newModele' => $serializer->serialize($modele,'json'),
+                            'typeMessage' => 'success'
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
+                else
+                {
+                    $monJson = $serializer->serialize(array(
+                            'message' => $serializer->serialize($errors,'json'),
+                            'typeMessage' => 'danger'
+                        ),
+                        'json');
+                    return new Response($monJson);
+                }
+
+
+
             }
             else {
-               return new Response("La marque selectionnée n'existe pas");
+                $monJson = $serializer->serialize(array(
+                       'message' =>  "La marque selectionnée n'existe pas",
+                    ),
+                    'json');
+               return new Response($monJson);
            }
         }
         

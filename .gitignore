@@ -1,8 +1,8 @@
 /web/bundles/
 /web/css/compiled/
 /web/js/compiled/
-/nbproject/
 .idea/
+/nbproject/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
