@@ -28,6 +28,35 @@ form .row
     cursor: pointer;
 }
 
+.uploadMiniature{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid rgba(2,2,2,0.18);
+    box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+    -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+}
+
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid rgba(2,2,2,0.18);
+    box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+    -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
