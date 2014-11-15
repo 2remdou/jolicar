@@ -3,6 +3,7 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Parc
@@ -25,6 +26,7 @@ class Parc
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez fournir le nom du parc")
      */
     private $nom;
     
@@ -35,6 +37,7 @@ class Parc
     
     /**
      * @ORM\OneToOne(targetEntity="Adresse")
+     * @Assert\Valid()
      */
     private $adresse;
 
@@ -81,7 +84,7 @@ class Parc
     /**
      * Add voiture
      *
-     * @param \Jc\JolieCar\Entity\Voiture $voiture
+     * @param \Jc\JolieCarBundle\Entity\Voiture $voiture
      * @return Parc
      */
     public function addVoiture(Voiture $voiture)
@@ -94,7 +97,7 @@ class Parc
     /**
      * Remove voiture
      *
-     * @param \Jc\JolieCar\Entity\Voiture $voiture
+     * @param \Jc\JolieCarBundle\Entity\Voiture $voiture
      */
     public function removeVoiture(Voiture $voiture)
     {
@@ -114,7 +117,7 @@ class Parc
     /**
      * Set adresse
      *
-     * @param \Jc\JolieCar\Entity\Adresse $adresse
+     * @param \Jc\JolieCarBundle\Entity\Adresse $adresse
      * @return Parc
      */
     public function setAdresse(Adresse $adresse = null)
@@ -127,7 +130,7 @@ class Parc
     /**
      * Get adresse
      *
-     * @return \Jc\JolieCar\Entity\Adresse 
+     * @return \Jc\JolieCarBundle\Entity\Adresse
      */
     public function getAdresse()
     {

@@ -24,12 +24,6 @@ class Image
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255)
-     */
-    private $nom;
 
     /**
      * @ORM\ManyToOne(targetEntity="Voiture", inversedBy="images")
@@ -45,7 +39,7 @@ class Image
      */
     private  $path;
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\Image(maxSize="6000000")
      */
     private $file;
 
@@ -58,7 +52,7 @@ class Image
     }
 
     protected function getUploadDir(){
-        return 'images/cars';
+        return 'images/cars/';
     }
     protected  function getUploadRootDir(){
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
@@ -73,7 +67,7 @@ class Image
     public  function preUpload()
     {
         if(null !== $this->file){
-            $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guesExtension();
+            $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guessExtension();
         }
     }
 
@@ -111,28 +105,6 @@ class Image
         return $this->id;
     }
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return Image
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
 
     /**
      * Set voiture

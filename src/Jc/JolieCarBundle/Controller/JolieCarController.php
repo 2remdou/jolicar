@@ -68,6 +68,15 @@ JolieCarController extends Controller
     {
         $car = new Voiture();
         $form = $this->createForm(new VoitureType(),$car);
+        $request = $this->get('request');
+        $session = $this->get('session');
+        $form->handleRequest($request);
+        if($form->isValid()){
+
+            $session->getFlashBag()->add('message','Votre annonce à bien été enregistré');
+
+            return $this->redirect($this->generateUrl('joliecar_accueil'));
+        }
         return $this->render("JcJolieCarBundle:JolieCar:addCar.html.twig",array(
             'form' => $form->createView(),
         ));

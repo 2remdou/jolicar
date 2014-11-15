@@ -3,6 +3,7 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Boitier
@@ -25,6 +26,7 @@ class Boitier
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez fournir le nom du boitier")
      */
     private $nom;
     

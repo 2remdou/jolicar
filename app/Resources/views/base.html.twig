@@ -32,7 +32,17 @@
                 {% endblock header%}
         </header>
         <div class="container" id="global">   
-            <div id="message" class="row"></div>
+            <div id="message" class="row">
+                 {% for message in app.session.flashbag.get('message') %}
+                     <div class="alert alert-{{ message|typeAlert }}" role="alert">
+                         <button type='button' class='close' data-dismiss='alert'>
+                             <span aria-hidden='true'>&times;</span>
+                             <span class='sr-only'></span>
+                         </button>
+                         <strong>{{ message }}</strong>
+                     </div>
+                 {% endfor %}
+            </div>
             <div>
                  {% block main%}
                 

@@ -29,7 +29,7 @@ class Marque
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Veuillez fournir le nom de la marque")
      */
     private $nom;
     /**

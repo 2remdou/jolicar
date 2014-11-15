@@ -34,11 +34,6 @@
                 </div>
                 <div class="row">
                     <div class="{{col}}">
-                        {{form_row(form.kmParcouru)}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="{{col}}">
                         <p class='bg-info'>La date d'acquisition</p>
                         {{form_row(form.dateAcquisition)}}
                     </div>
@@ -48,12 +43,37 @@
             <h3>Les images</h3>
             <div>
                 <div>
-
                     {{ form_row(form.images) }}
-
-                    <button id="dupliquer">dupliquer</button>
+                </div>
+            </div>
+            <h3>Informations detaillées(facultatives)</h3>
+            <div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.kmParcouru)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.nombreRoueMotrice)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.nombrePorte)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="{{col}}">
+                        {{form_row(form.nombreSiege)}}
+                    </div>
                 </div>
             </div>
         </div>
+    <div class="row">
+        <div class="pull-right">
+            {{form_row(form.btnSave)}}
+        </div>
+    </div>
     {{form_end(form)}}
 {%endblock contenu%}

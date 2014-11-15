@@ -2,7 +2,7 @@
 <div class="apercuCar center-block">
     <a href="{{path('joliecar_detail', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}" class="thumbnail apercuCar">
             {%for image in car.images if image.enVedette%}
-                <img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="img-rounded apercuCarImage"/> 
+                <img src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="img-rounded apercuCarImage"/>
             {%else%}
                 <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
             {%endfor%}
