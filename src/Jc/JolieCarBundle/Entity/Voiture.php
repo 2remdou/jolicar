@@ -28,7 +28,6 @@ class Voiture
      *
      * @ORM\Column(name="prix", type="bigint")
      * @Assert\NotBlank(message="Veuillez fournir un prix de vente")
-     * @Assert\Type(type="integer",message="Veuillez fournir un prix valide")
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un prix Valide")
      */
     private $prix;

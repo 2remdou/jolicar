@@ -4,12 +4,14 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Carburant
  *
  * @ORM\Table(name="carburant")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\CarburantRepository")
+ * @UniqueEntity(fields="nom",message="Ce type de carburant existe déja")
  */
 class Carburant
 {
