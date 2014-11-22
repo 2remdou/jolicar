@@ -35,8 +35,7 @@ class Voiture
     /**
      * @var integer
      *
-     * @ORM\Column(name="kmParcouru", type="integer")
-     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de Kilometre valide")
+     * @ORM\Column(name="kmParcouru", type="integer",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de Kilometre valide")
      */
     private $kmParcouru;
@@ -44,7 +43,7 @@ class Voiture
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateAcquisition", type="date")
+     * @ORM\Column(name="dateAcquisition", type="date",nullable=true)
      * @Assert\Date(message="Veuillez fournir une date valide")
      * @AssertJc\ConstraintDate()
      */
@@ -53,8 +52,7 @@ class Voiture
     /**
      * @var integer
      *
-     * @ORM\Column(name="nombreRoueMotrice", type="smallint")
-     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de roues valide")
+     * @ORM\Column(name="nombreRoueMotrice", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de roues valide")
      */
     private $nombreRoueMotrice;
@@ -62,8 +60,7 @@ class Voiture
     /**
      * @var integer
      *
-     * @ORM\Column(name="nombrePorte", type="smallint")
-     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de portes valide")
+     * @ORM\Column(name="nombrePorte", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de portes valide")
      */
     private $nombrePorte;
@@ -71,14 +68,14 @@ class Voiture
     /**
      * @var integer
      *
-     * @ORM\Column(name="nombreSiege", type="smallint")
-     * @Assert\Type(type="integer",message="Veuillez fournir un nombre de sieges valide")
+     * @ORM\Column(name="nombreSiege", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de sieges valide")
      */
     private $nombreSiege;
     
     /**
      * @ORM\ManyToOne(targetEntity="Modele", inversedBy="voitures")
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
      * @Assert\Valid()
      */
     private $modele;
@@ -102,8 +99,9 @@ class Voiture
     private $carburant;
     
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist"})
      * @Assert\Valid()
+     * @ORM\JoinColumn(nullable=false)
      */
     private $images;
     /**
@@ -261,7 +259,7 @@ class Voiture
     /**
      * Set boitier
      *
-     * @param \Jc\JolieCar\Entity\Boitier $boitier
+     * @param \Jc\JolieCarBundle\Entity\Boitier $boitier
      * @return Voiture
      */
     public function setBoitier(Boitier $boitier = null)
@@ -274,7 +272,7 @@ class Voiture
     /**
      * Get boitier
      *
-     * @return \Jc\JolieCar\Entity\Boitier 
+     * @return \Jc\JolieCarBundle\Entity\Boitier
      */
     public function getBoitier()
     {
@@ -284,7 +282,7 @@ class Voiture
     /**
      * Set parc
      *
-     * @param \Jc\JolieCar\Entity\Parc $parc
+     * @param \Jc\JolieCarBundle\Entity\Parc $parc
      * @return Voiture
      */
     public function setParc(Parc $parc = null)
@@ -297,7 +295,7 @@ class Voiture
     /**
      * Get parc
      *
-     * @return \Jc\JolieCar\Entity\Parc 
+     * @return \Jc\JolieCarBundle\Entity\Parc
      */
     public function getParc()
     {
@@ -307,7 +305,7 @@ class Voiture
     /**
      * Set carburant
      *
-     * @param \Jc\JolieCar\Entity\Carburant $carburant
+     * @param \Jc\JolieCarBundle\Entity\Carburant $carburant
      * @return Voiture
      */
     public function setCarburant(Carburant $carburant = null)
@@ -320,7 +318,7 @@ class Voiture
     /**
      * Get carburant
      *
-     * @return \Jc\JolieCar\Entity\Carburant 
+     * @return \Jc\JolieCarBundle\Entity\Carburant
      */
     public function getCarburant()
     {
@@ -346,6 +344,10 @@ class Voiture
      */
     public function addImage(Image $images)
     {
+        if($images->getFile() === null){
+            return $this;
+        }
+        $images->setVoiture($this);
         $this->images[] = $images;
 
         return $this;

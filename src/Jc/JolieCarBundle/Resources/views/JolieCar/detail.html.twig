@@ -10,14 +10,14 @@
     <div class="col-lg-6 col-sm-6" id="imagesCar">
         <div class="imageTop">
             {%for image in car.images if image.enVedette%}
-            <img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="img-thumbnail" />
+            <img src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="img-thumbnail" />
             {%else%}
             <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
             {%endfor%}
         </div>
         <ul class="miniatures elastislide-list" id="caroussel">
                 {%for image in car.images %}
-                        <li><a href="#"><img src="{{asset('images/cars/'~image.nom)}}" alt="{{image.nom}}" class="miniature"/></a></li>
+                        <li><a href="#"><img src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="miniature"/></a></li>
                 {%else%}
                     <h3>Aucun aperçu disponible pour cette voiture</h3>
                 {% endfor%}
@@ -30,9 +30,9 @@
                 <tr><td>Marque</td><td>{{car.modele.marque.nom}}</td></tr>
                 <tr><td>Modele</td><td>{{car.modele.nom}}</td></tr>
                 <tr><td>Prix</td><td>{{car.prix|formaterPrix}}</td></tr>
-                <tr><td>Boite de vitesse</td><td>{{car.boitier.nom}}</td></tr>
+                <tr><td>Boite de vitesse</td><td>{% if car.boitier %}{{car.boitier.nom}}{% endif %}</td></tr>
                 <tr><td>Kilometre parcouru</td><td>{{car.kmParcouru|number_format(0,',','.')}}</td></tr>
-                <tr><td>Carburant</td><td>{{car.carburant.nom}}</td></tr>
+                <tr><td>Carburant</td><td>{% if car.carburant %}{{car.carburant.nom}}{% endif %}</td></tr>
                 <tr><td>Nombre de portes</td><td>{{car.nombrePorte}}</td></tr>
                 <tr><td>Nombre de sieges</td><td>{{car.nombreSiege}}</td></tr>                           
             </table>       
@@ -40,13 +40,15 @@
         <h3>Le vendeur</h3>
         <div>
             <table class="table">
-                <tr><td>Nom</td><td>{{car.parc.nom}}</td></tr>
-                <tr><td>Telephone</td><td>{{car.parc.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
-                <tr><td>Email</td><td>{{car.parc.adresse.email}}</td></tr>
-                <tr><td>Site web</td><td>{{car.parc.adresse.site}}</td></tr>
-                <tr><td>Ville</td><td>{{car.parc.adresse.ville}}</td></tr>
-                <tr><td>Quartier</td><td>{{car.parc.adresse.quartier}}</td></tr>
-                <tr><td>Indication</td><td>{{car.parc.adresse.indicationLieu}}</td></tr>                           
+                {% if car.parc %}
+                    <tr><td>Nom</td><td>{{car.parc.nom}}</td></tr>
+                    <tr><td>Telephone</td><td>{{car.parc.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
+                    <tr><td>Email</td><td>{{car.parc.adresse.email}}</td></tr>
+                    <tr><td>Site web</td><td>{{car.parc.adresse.site}}</td></tr>
+                    <tr><td>Ville</td><td>{{car.parc.adresse.ville}}</td></tr>
+                    <tr><td>Quartier</td><td>{{car.parc.adresse.quartier}}</td></tr>
+                    <tr><td>Indication</td><td>{{car.parc.adresse.indicationLieu}}</td></tr>
+                {% endif %}
             </table> 
         </div>
     </div>

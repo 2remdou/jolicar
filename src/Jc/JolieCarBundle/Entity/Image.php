@@ -4,6 +4,7 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,6 +28,7 @@ class Image
 
     /**
      * @ORM\ManyToOne(targetEntity="Voiture", inversedBy="images")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $voiture;
     /**
@@ -35,7 +37,12 @@ class Image
     private $enVedette;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
      */
     private  $path;
     /**
@@ -68,6 +75,7 @@ class Image
     {
         if(null !== $this->file){
             $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guessExtension();
+            $this->nom = $this->file->getClientOriginalName();
         }
     }
 
@@ -173,5 +181,34 @@ class Image
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Image
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    public  function getFile(){
+        return $this->file;
+    }
+    public function setFile(UploadedFile $file){
+        $this->file = $file;
     }
 }

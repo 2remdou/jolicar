@@ -1190,7 +1190,7 @@ function loadImage(parent,file,img,numero){
     }
 }
 function configSelect2(){
-    $("#jc_joliecarbundle_voiture_modele_marque").select2({
+     $("#jc_joliecarbundle_voiture_modele_marque").select2({
          //placeholder: 'Selectionner une marque', 
          allowClear: true
          }); 
@@ -1198,7 +1198,7 @@ function configSelect2(){
          //placeholder: 'Selectionner un modele', 
          allowClear: true
          }); 
-         
+
      $("#jc_joliecarbundle_voiture_boitier").select2({
         // placeholder: 'Selectionner le type de la boite à vitesse', 
          allowClear: true
@@ -1326,13 +1326,13 @@ $(document).ready(function(){
       configSelect2();
       liaisonMarqueModele();
     //stockage des marque et des modele qui lui liés
-    
+
     $('#jc_joliecarbundle_voiture_modele_marque').change(function(){
        marqueSelectionne = $('#jc_joliecarbundle_voiture_modele_marque>option:selected').text();
        loadModeleForMarque(marqueSelectionne);
     });
-    
-    //****************ajout Marque*************/
+
+    //****************ajout Marque*************/s
     $('#ajoutMarque').click(function(){
         
         
@@ -1480,7 +1480,6 @@ $(document).ready(function(){
         "</div> " +
         "</div>";
        var uploadMiniature= $(contenu);
-        console.log("nombreImage= "+nombreImage+" et numeroClick= "+numeroClick);
         if((nombreImage <= numeroClick+1) || (nombreImage==0)){
             uploadMiniature.appendTo($(parent));
             nombreImage++;
@@ -1620,6 +1619,3 @@ $(document).ready(function(){
         }
     });
 });
-/**
- * Created by Toure on 12/11/14.
- */

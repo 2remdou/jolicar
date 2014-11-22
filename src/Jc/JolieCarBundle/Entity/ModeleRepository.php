@@ -20,4 +20,10 @@ class ModeleRepository extends EntityRepository
                    ->getQuery();
         return $q->getArrayResult();
     }
+    public function getAllModeleArray(){
+        $q = $this->createQueryBuilder('m')
+            ->getQuery();
+
+        return $q->getArrayResult();
+    }
 }

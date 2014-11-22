@@ -20,4 +20,10 @@ class MarqueRepository extends EntityRepository
                 ->getQuery();
         return $q->getArrayResult();
     }
+    public function getAllMarqueArray(){
+        $q = $this->createQueryBuilder("m")
+            ->getQuery();
+
+        return $q->getArrayResult();
+    }
 }

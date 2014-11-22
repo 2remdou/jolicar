@@ -33,8 +33,8 @@ class Modele
      */
     private $nom;
     /**
-     *@ORM\ManyToOne(targetEntity="Marque", inversedBy="modeles")
-     *@ORM\JoinColumn(nullable=false)
+     *@ORM\ManyToOne(targetEntity="Marque", inversedBy="modeles",cascade={"persist"})
+     *@ORM\JoinColumn(referencedColumnName="id")
      *@Assert\Valid()
      */
     private $marque;
@@ -52,6 +52,7 @@ class Modele
     {
         return $this->id;
     }
+
 
     /**
      * Set nom
@@ -138,4 +139,5 @@ class Modele
     {
         return $this->voitures;
     }
+
 }

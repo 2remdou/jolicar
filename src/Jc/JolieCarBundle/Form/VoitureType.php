@@ -5,6 +5,7 @@ namespace Jc\JolieCarBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Jc\JolieCarBundle\Form\ModeleType;
 
 class VoitureType extends AbstractType
 {
@@ -68,6 +69,8 @@ class VoitureType extends AbstractType
             ->add('images','collection',array(
                    'type' => new ImageType(),
                     'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
                 ))
             ->add('nombreRoueMotrice','number',array(
                 'required' => false,

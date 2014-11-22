@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Jc\JolieCarBundle\Entity\ModeleRepository;
 use Doctrine\ORM\EntityManager;
+use Jc\JolieCarBundle\Form\Extension\ListeModele;
 
 class ModeleType extends AbstractType
 {
@@ -34,10 +35,11 @@ class ModeleType extends AbstractType
                 
                 )
             )
-           ->add('nom','entity',array(
-                'class' => 'JcJolieCarBundle:Modele',
+/*           ->add('nom','entity',array(
+                'class' => 'Jc\JolieCarBundle\Entity\Modele',
                 'property' => 'nom',
                 'label' => false,
+                'mapped' => false,
                 'attr' => array(
                     'placeholder' => 'Modele'
                 ),
@@ -46,7 +48,19 @@ class ModeleType extends AbstractType
                 'query_builder' => function(ModeleRepository $rep){
                 return $rep->createQueryBuilder('m');
                 },
-                ));
+                ));*/
+                ->add('nom','choice',array(
+                        'choice_list' => new ListeModele($this->em),
+                        'label' => false,
+                        'attr' => array(
+                            'placeholder' => 'Modele'
+                        ),
+                        'liste_marque' => $listeMarque,
+                        'required' => false,
+
+                    ));
+
+
     }
 
 

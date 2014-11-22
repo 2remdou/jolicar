@@ -69,17 +69,26 @@ JolieCarController extends Controller
         $car = new Voiture();
         $form = $this->createForm(new VoitureType(),$car);
         $request = $this->get('request');
-        $session = $this->get('session');
+        $session = $this->get("session");
         $form->handleRequest($request);
         if($request->isMethod("POST")) {
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
                 $em = $this->getDoctrine()->getManager();
+                $idModele = $car->getModele()->getNom();
+                $modele = $em->getRepository("JcJolieCarBundle:Modele")->find($idModele);
+                $car->setModele($modele);
+/*                $images = $car->getImages();
+                foreach($images as $image){
+                    if($image===null){
+
+                    }
+                }*/
                 $em->persist($car);
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce à bien été enregistré');
 
-                return $this->redirect($this->generateUrl('joliecar_accueil'));
+               // return $this->redirect($this->generateUrl('add_car'));
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){
@@ -88,7 +97,7 @@ JolieCarController extends Controller
                 $mesMessage = "<h5>".implode("<br>",$mesErreur)."</h5>";
                 $session->getFlashBag()->add('message', "Erreur lors de l'enregistrement <br>".$mesMessage);
 
-                return $this->redirect($this->generateUrl('add_car'));
+                //return $this->redirect($this->generateUrl('add_car'));
             }
         }
 

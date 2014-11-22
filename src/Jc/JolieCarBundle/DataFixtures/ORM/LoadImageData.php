@@ -25,6 +25,7 @@ class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
                 $voiture = $this->getReference('voiture'.($i-1));
                 $j==1 ? $images[$j]->setEnVedette(true): $images[$j]->setEnVedette(false) ;
                 $images[$j]->setPath($i.'_'.$j.'.jpg');
+                $images[$j]->setNom($i.'_'.$j.'.jpg');
                 $images[$j]->setVoiture($voiture);
                 $manager->persist($images[$j]);
             }

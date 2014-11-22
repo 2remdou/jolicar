@@ -15,6 +15,11 @@ class JolieCarExtension extends \Twig_Extension
             new \Twig_SimpleFilter('typeAlert', array($this,'typeAlert')),
         );
     }
+    public function getFunctions(){
+        return array(
+          new \Twig_SimpleFunction('controlNull', array($this,'controlNull')),
+        );
+    }
     
     public function formaterPrix($value=null,$devise=null)
     {
@@ -40,6 +45,12 @@ class JolieCarExtension extends \Twig_Extension
         {
             return 'success';
         }
+    }
+    public function controlNull($value){
+        if($value == null){
+        return "";
+        }
+        return $value;
     }
 
     public function getName() {
