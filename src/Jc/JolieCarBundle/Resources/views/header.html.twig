@@ -6,7 +6,11 @@
              <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" class="img-responsive"/>
         </a> 
      </div>
-     <a href="{{path('add_car')}}">Ajouter une annonce</a>
+     <a href="{{path('add_car')}}">Ajouter une annonce</a><br/>
+    {% if car is defined %}
+        <a href="{{path('joliecar_detail', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
+    {% endif %}
+
      <div id="headerSearch" class="pull-right">
          {{render(controller('JcJolieCarBundle:JolieCar:headerSearch'))}}
      </div>

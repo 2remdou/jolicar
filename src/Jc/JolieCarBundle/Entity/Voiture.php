@@ -105,6 +105,12 @@ class Voiture
      */
     private $images;
     /**
+     * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     * @Assert\Valid()
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $mainImage;
+    /**
      * @ORM\Column(name="top", type="boolean")
      */
     private $top;
@@ -442,5 +448,31 @@ class Voiture
     public function getNewCar()
     {
         return $this->newCar;
+    }
+
+    /**
+     * Set mainImage
+     *
+     * @param \Jc\JolieCarBundle\Entity\Image $mainImage
+     * @return Voiture
+     */
+    public function setMainImage(\Jc\JolieCarBundle\Entity\Image $mainImage)
+    {
+        if($mainImage->getFile() != null){
+            $this->mainImage = $mainImage;
+            $this->mainImage->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get mainImage
+     *
+     * @return \Jc\JolieCarBundle\Entity\Image 
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
     }
 }

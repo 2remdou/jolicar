@@ -3,6 +3,7 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Adresse
@@ -32,6 +33,7 @@ class Adresse
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(message="Veuillez fournir une adresse electronique valide")
      */
     private $email;
 
@@ -39,6 +41,7 @@ class Adresse
      * @var string
      *
      * @ORM\Column(name="site", type="string", length=255)
+     * @Assert\Url(message="Veuillez fournir un site valide")
      */
     private $site;
 

@@ -37,6 +37,9 @@ class VoitureType extends AbstractType
                     'placeholder' => 'Carburant',
                 ),
             ))
+            ->add('mainImage','imageCar',array(
+                    'by_reference' => false,
+                ))
             ->add('prix','number',array(
                 'required' => false,
                 'label' => false,
@@ -66,6 +69,7 @@ class VoitureType extends AbstractType
                     'placeholder' => "Veuillez fournir la date d'acquisition",
                 ))
                     )
+
             ->add('images','collection',array(
                    'type' => new ImageType(),
                     'allow_add' => true,

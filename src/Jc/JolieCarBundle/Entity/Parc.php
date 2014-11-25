@@ -136,4 +136,14 @@ class Parc
     {
         return $this->adresse;
     }
+
+    /**
+     * Get voitures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVoitures()
+    {
+        return $this->voitures;
+    }
 }

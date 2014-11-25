@@ -26,6 +26,8 @@ class VoitureRepository extends EntityRepository
                 ->addSelect('carburant')
                 ->leftJoin('v.parc', 'parc')
                 ->addSelect('parc')
+                ->leftJoin('v.mainImage','mainImage')
+                ->addSelect('mainImage')
                 ->leftJoin('v.images', 'image')
                 ->addSelect('image');
         return $qb;        
@@ -37,8 +39,8 @@ class VoitureRepository extends EntityRepository
                 ->addSelect('modele')
                 ->leftJoin('modele.marque', 'marque')
                 ->addSelect('marque')
-                ->leftJoin('v.images', 'image')
-                ->addSelect('image');
+                ->leftJoin('v.mainImage', 'mainImage')
+                ->addSelect('mainImage');
         return $qb;        
     }
     public function getAll()
@@ -64,8 +66,6 @@ class VoitureRepository extends EntityRepository
         
         $q = $qb->where('v.top = :top')
                 ->setParameter('top', true)
-                ->andWhere('image.enVedette = :enVedette')
-                ->setParameter("enVedette", true)
                 ->getQuery();
         
         return $q->getResult();

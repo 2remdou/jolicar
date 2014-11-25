@@ -12,6 +12,11 @@ services:
         tags:
             - { name: form.type, alias: modele }
 
+    jc_joliecarbundle_modele.form.type.image:
+        class: Jc\JolieCarBundle\Form\ImageType
+        tags:
+            - { name: form.type, alias: imageCar }
+
     jc_joliecarbundle.form.modele_type_extension:
         class: Jc\JolieCarBundle\Form\Extension\ModeleTypeExtension
         tags:

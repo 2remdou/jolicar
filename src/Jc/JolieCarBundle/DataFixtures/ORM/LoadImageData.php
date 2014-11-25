@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Jc\JolieCarBundle\Entity\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
     public function getOrder() {
@@ -14,8 +15,7 @@ class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
     }
 
     public function load(ObjectManager $manager) {
-        $nbreVoiture=count($manager->getRepository("JcJolieCarBundle:Boitier")->findAll());
-        
+
         for($i=1;$i<=8;$i++)
         {
             for($j=1;$j<=3;$j++)
@@ -23,10 +23,13 @@ class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
                 $images[$j] = new Image();
                 
                 $voiture = $this->getReference('voiture'.($i-1));
-                $j==1 ? $images[$j]->setEnVedette(true): $images[$j]->setEnVedette(false) ;
                 $images[$j]->setPath($i.'_'.$j.'.jpg');
                 $images[$j]->setNom($i.'_'.$j.'.jpg');
+                //$images[$j]->setFile(new UploadedFile(__DIR__.'/../../../../../web/images/cars/4_1.jpg',"2_2.jpg"));
                 $images[$j]->setVoiture($voiture);
+                if($j==1){
+                    $voiture->setMainImage($images[$j]);
+                }
                 $manager->persist($images[$j]);
             }
         }

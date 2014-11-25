@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ImageRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields={"voiture","enVedette"}, message="La voiture ne peut avoir qu'une seule photo en vedette")
  */
 class Image
 {
@@ -31,10 +30,6 @@ class Image
      * @ORM\JoinColumn(nullable=false)
      */
     private $voiture;
-    /**
-     * @ORM\Column(name="enVedette", type="boolean")
-     */
-    private $enVedette;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -137,28 +132,7 @@ class Image
         return $this->voiture;
     }
 
-    /**
-     * Set enVedette
-     *
-     * @param boolean $enVedette
-     * @return Image
-     */
-    public function setEnVedette($enVedette)
-    {
-        $this->enVedette = $enVedette;
 
-        return $this;
-    }
-
-    /**
-     * Get enVedette
-     *
-     * @return boolean 
-     */
-    public function getEnVedette()
-    {
-        return $this->enVedette;
-    }
 
     /**
      * Set path

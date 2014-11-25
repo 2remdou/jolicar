@@ -40,14 +40,14 @@ form .row
     box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
     -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
 }
-.fileinput-button input {
+.fileinput-button input[type=file] {
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    opacity: 0;
-    -ms-filter: 'alpha(opacity=0)';
-    font-size: 200px;
-    direction: ltr;
-    cursor: pointer;
+     top: 0;
+     right: 0;
+     margin: 0;
+     opacity: 0;
+     -ms-filter: 'alpha(opacity=0)';
+     font-size: 200px;
+     direction: ltr;
+     cursor: pointer;
 }

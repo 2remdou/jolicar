@@ -36,6 +36,6 @@ class ImageType extends AbstractType
      */
     public function getName()
     {
-        return 'jc_joliecarbundle_image';
+        return 'imageCar';
     }
 }

@@ -62,6 +62,28 @@ JolieCarController extends Controller
         ));
     }
     /**
+     *
+     * @param type $marque
+     * @param type $modele
+     * @param type $id
+     * @return type
+     * @Route("/update/{marque}-{modele}-{id}",name="update_car",requirements={"id" = "\d+"})
+     */
+    public function updateCar($marque, $modele, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //$car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
+        $car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
+        if($car === null)
+        {
+            return  $this->createNotFoundException("Aucune voiture à cette adresse");
+        }
+        return $this->render("JcJolieCarBundle:JolieCar:updateCar.html.twig",array(
+                'car' => $car,
+            ));
+    }
+    /**
      *@Route("/ajout", name="add_car")
      */
     public function addCar()
@@ -92,7 +114,7 @@ JolieCarController extends Controller
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){
-                    $mesErreur[] = $error->getMessage();
+                    $mesErreur[] = $error->getCause().":".$error->getMessage();
                 }
                 $mesMessage = "<h5>".implode("<br>",$mesErreur)."</h5>";
                 $session->getFlashBag()->add('message', "Erreur lors de l'enregistrement <br>".$mesMessage);

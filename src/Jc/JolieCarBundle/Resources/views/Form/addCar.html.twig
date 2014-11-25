@@ -56,12 +56,25 @@
 {%- endblock _jc_joliecarbundle_voiture_images_row %}
 
 
-
 {% block collection_widget -%}
     {% if prototype is defined %}
-        {%- set attr = attr|merge({'data-prototype':form_row(prototype)}) -%}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
     {% endif %}
     {{- block('form_widget') -}}
+
 {%- endblock collection_widget %}
+
+{% block _jc_joliecarbundle_voiture_mainImage_row -%}
+<div id='uploadMiniature_mainImage' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
+    <div class='text-center'>Image Principale</div>
+    <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar' class='img-responsive'/>
+    <div class='fileinput-button text-center'>
+        {{- form_widget(form) -}}
+        <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+    </div>
+</div>
+
+
+{%- endblock _jc_joliecarbundle_voiture_mainImage_row %}
 
 
