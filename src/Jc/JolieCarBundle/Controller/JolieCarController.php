@@ -75,12 +75,13 @@ JolieCarController extends Controller
 
         //$car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
         $car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
+        $form = $this->createForm(new VoitureType(),$car);
         if($car === null)
         {
             return  $this->createNotFoundException("Aucune voiture à cette adresse");
         }
         return $this->render("JcJolieCarBundle:JolieCar:updateCar.html.twig",array(
-                'car' => $car,
+                'form' => $form->createView(),
             ));
     }
     /**
