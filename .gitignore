@@ -3,7 +3,7 @@
 /web/js/compiled/
 .idea/
 /nbproject/
-/app/bootstrap.php.cache
+!/app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
 /app/logs/*
