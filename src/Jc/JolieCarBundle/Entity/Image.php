@@ -45,6 +45,11 @@ class Image
      */
     private $file;
 
+    /**
+     * @ORM\Column(type="boolean",options={"default"=false})
+     */
+    private $mainImage;
+
     protected  function getAbsolutePath(){
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
@@ -61,6 +66,7 @@ class Image
     }
     public function __construct() {
         $this->enVedette = false;
+        $this->mainImage = false;
     }
     /**
      * @ORM\PrePersist()
@@ -184,5 +190,28 @@ class Image
     }
     public function setFile(UploadedFile $file){
         $this->file = $file;
+    }
+
+    /**
+     * Set mainImage
+     *
+     * @param boolean $mainImage
+     * @return Image
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    /**
+     * Get mainImage
+     *
+     * @return boolean 
+     */
+    public function isMainImage()
+    {
+        return $this->mainImage;
     }
 }

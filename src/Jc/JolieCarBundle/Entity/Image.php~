@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ImageRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields={"voiture","enVedette"}, message="La voiture ne peut avoir qu'une seule photo en vedette")
  */
 class Image
 {
@@ -45,6 +44,11 @@ class Image
      * @Assert\Image(maxSize="6000000")
      */
     private $file;
+
+    /**
+     * @ORM\Column(type="boolean",options={"default"=0})
+     */
+    private $mainImage;
 
     protected  function getAbsolutePath(){
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;

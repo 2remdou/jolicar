@@ -48,55 +48,36 @@
         {{- form_widget(form) -}}
 {%- endblock form_row %}
 
-{#
+
 {% block _jc_joliecarbundle_voiture_images_row -%}
-    {% set cars = form.vars.value.voiture %}
     <div class="row" id="imagesUpload">
+        <button id="ajoutImage" class="btn btn-info pull-right">Ajouter une image</button>
             {{- form_widget(form) -}}
     </div>
 
-{%- endblock _jc_joliecarbundle_voiture_images_row %}#}
+{%- endblock _jc_joliecarbundle_voiture_images_row %}
 
-
-{% block _jc_joliecarbundle_voiture_imagess_row -%}
-    {% set images = form.vars.value %}
-    <div id='uploadMiniature" class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-        <div class='libelleImage text-center'></div>
-        <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar' class='img-responsive'/>
-        <div class='fileinput-button text-center'>
-            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
-        {{- form_widget(form) -}}
-       {#contenu = contenu + prototype.replace(/__name__/g,nombreImage) +#}
-        </div>
-    </div>
-    {#{% for image in images %}
-        <div id='uploadMiniature_mainImage' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-            <div class='text-center'>Image  {{ loop.index }}</div>
-            <img src='{{asset(image.webPath~image.path)}}' alt='logo_joliecar' class='img-responsive'/>
-            <div class='fileinput-button text-center'>
-                {{- form_widget(form) -}}
-                <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
-            </div>
-        </div>
-    {% endfor %}#}
-{%- endblock _jc_joliecarbundle_voiture_imagess_row -%}
 
 
 {% block collection_widget -%}
     {% if prototype is defined %}
         {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
     {% endif %}
-    {% for element in form %}
-        {% set image = element.vars.value %}
-        <div id="uploadMiniature" class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-        <div class='libelleImage text-center'>Image {{ loop.index }}</div>
-        <img src='{{asset(image.webPath~image.path)}}' alt='logo_joliecar' class='img-responsive'/>
-        <div class='fileinput-button text-center'>
-            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
-            {{- form_widget(element) -}}
-        </div>
-        </div>
-    {% endfor %}
+    <div {{ block('widget_attributes') }}>
+        {% for element in form %}
+            {% set image = element.vars.value %}
+            {% if image.mainImage==false %}
+                <div id="uploadMiniature_{{ loop.index-1 }}" class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
+                <div class='libelleImage text-center'>Image {{ loop.index }}</div>
+                <img src='{{asset(image.webPath~image.path)}}' alt='logo_joliecar' class='img-responsive'/>
+                <div class='fileinput-button text-center'>
+                    <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
+                    {{- form_widget(element) -}}
+                </div>
+                </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 {%- endblock collection_widget %}
 
 
@@ -108,7 +89,7 @@
         <img src='{{asset(mainImage.webPath~mainImage.path)}}' alt='logo_joliecar' class='img-responsive'/>
         <div class='fileinput-button text-center'>
             {{- form_widget(form) -}}
-            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
         </div>
     </div>
 {% endblock _jc_joliecarbundle_voiture_mainImage_row -%}

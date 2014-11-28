@@ -18,6 +18,7 @@ class VoitureType extends AbstractType
         $builder
             ->add('modele','modele',array(
                 'label' => false,
+                'required' => false,
             ))
             ->add('boitier','entity',array(
                 'class' => 'JcJolieCarBundle:Boitier',

@@ -99,13 +99,13 @@ class Voiture
     private $carburant;
     
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist","remove"})
      * @Assert\Valid()
      * @ORM\JoinColumn(nullable=false)
      */
     private $images;
     /**
-     * @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Image",cascade={"persist","remove"})
      * @Assert\Valid()
      * @ORM\JoinColumn(nullable=true)
      */
@@ -461,6 +461,7 @@ class Voiture
         if($mainImage->getFile() != null){
             $this->mainImage = $mainImage;
             $this->mainImage->setVoiture($this);
+            $this->mainImage->setMainImage(true);
         }
 
         return $this;

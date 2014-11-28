@@ -35,20 +35,7 @@ class ModeleType extends AbstractType
                 
                 )
             )
-/*           ->add('nom','entity',array(
-                'class' => 'Jc\JolieCarBundle\Entity\Modele',
-                'property' => 'nom',
-                'label' => false,
-                'mapped' => false,
-                'attr' => array(
-                    'placeholder' => 'Modele'
-                ),
-                'liste_marque' => $listeMarque,
-                'required' => false,
-                'query_builder' => function(ModeleRepository $rep){
-                return $rep->createQueryBuilder('m');
-                },
-                ));*/
+
                 ->add('nom','choice',array(
                         'choice_list' => new ListeModele($this->em),
                         'label' => false,

@@ -28,7 +28,9 @@ class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
                 //$images[$j]->setFile(new UploadedFile(__DIR__.'/../../../../../web/images/cars/4_1.jpg',"2_2.jpg"));
                 $images[$j]->setVoiture($voiture);
                 if($j==1){
+                    $images[$j]->setMainImage(true);
                     $voiture->setMainImage($images[$j]);
+
                 }
                 $manager->persist($images[$j]);
             }
