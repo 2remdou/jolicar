@@ -36,7 +36,7 @@ class ModeleType extends AbstractType
                 )
             )
 
-                ->add('nom','choice',array(
+                ->add('id','choice',array(
                         'choice_list' => new ListeModele($this->em),
                         'label' => false,
                         'attr' => array(

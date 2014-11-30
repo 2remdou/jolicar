@@ -17,6 +17,5 @@ $(document).ready(function(){
     });
     console.log(marqueWithModele);
     $('#jc_joliecarbundle_voiture_modele_marque').click(function(){
-        alert("bonjour")
     });
 });

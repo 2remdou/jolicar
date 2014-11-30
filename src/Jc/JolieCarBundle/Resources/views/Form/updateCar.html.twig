@@ -29,11 +29,11 @@
                 {{- block('_jc_joliecarbundle_voiture_modele_nom_choice_widget_options') -}}
             </optgroup>
         {%- else -%}
-            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
+            <option data-test="{{ value }}" value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
                         {%if liste_marque is defined %}
-                            {%for value in liste_marque%}
-                                {%if choice.value in value%}
-                                    data-marque="{{value.marque.nom}}"
+                            {%for val in liste_marque%}
+                                {%if choice.value in val%}
+                                    data-marque="{{val.marque.nom}}"
                                 {%endif%}
                             {%endfor%}
                         {%endif%}

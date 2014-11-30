@@ -9,13 +9,13 @@
 namespace Jc\JolieCarBundle\Form\Extension;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Doctrine\ORM\EntityManager;
 
 class ListeModele extends  LazyChoiceList {
 
     protected $listeModele;
-    protected $listeMarque;
     public function __construct(EntityManager $em){
         $this->listeModele = $em->getRepository("JcJolieCarBundle:Modele")->findAll();
     }
@@ -25,6 +25,6 @@ class ListeModele extends  LazyChoiceList {
         foreach($this->listeModele as $modele){
             $listeNom[$modele->getId()] = $modele->getNom();
         }
-        return new SimpleChoiceList($listeNom);
+       return new SimpleChoiceList($listeNom);
     }
 }
