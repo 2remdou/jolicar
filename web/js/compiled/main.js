@@ -1353,7 +1353,7 @@ function addUploadMiniature(parent,numeroClick){
         "</div> " +
         "</div>";
     var uploadMiniature= $(contenu);
-    if((nombreMaxImage <= numeroClick) || (nombreMaxImage==0)){
+    if((nombreMaxImage <= numeroClick + 1) || (nombreMaxImage==0)){
         uploadMiniature.appendTo($(parent));
       //  uploadMiniature.find('input[type="radio"]').attr('name','jc_joliecarbundle_voiture_images_enVedette');
         nombreMaxImage++;
@@ -1670,7 +1670,7 @@ $(document).ready(function(){
 
     });
     console.log(marqueWithModele);
-    $('#jc_joliecarbundle_voiture_modele_marque').click(function(){
+/*    $('#jc_joliecarbundle_voiture_modele_marque').click(function(){
         alert("bonjour")
-    });
+    });*/
 });
