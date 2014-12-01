@@ -14,9 +14,7 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $marque = $em->getRepository("JcJolieCarBundle:Marque")->getModele();
-//        $request = $this->get('request');
-//        $request->request->set('modele',  json_encode($marqueModele));
-      //  var_dump($marque);
+
         return $this->render("JcJolieCarBundle:JolieCar:search.html.twig",array(
             'form' => $form->createView(),
             'marque' => json_encode($marque),

@@ -1,6 +1,7 @@
 /web/bundles/
 /web/css/compiled/
 /web/js/compiled/
+/web/images/cars/
 .idea/
 /nbproject/
 !/app/bootstrap.php.cache

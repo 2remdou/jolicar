@@ -86,7 +86,12 @@
     <div id='uploadMiniature_mainImage' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
         <div class='text-center'>Image Principale</div>
         {% set mainImage = form.vars.value %}
-        <img src='{{asset(mainImage.webPath~mainImage.path)}}' alt='logo_joliecar' class='img-responsive'/>
+        {% if mainImage %}
+            <img src='{{asset(mainImage.webPath~mainImage.path)}}' alt='{{ mainImage.nom }}' class='img-responsive'/>
+            {% else %}
+                <img src='{{asset('images/specimenCar.png')}}' alt='logo_joliecar' class='img-responsive'/>
+        {% endif %}
+
         <div class='fileinput-button text-center'>
             {{- form_widget(form) -}}
             <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>

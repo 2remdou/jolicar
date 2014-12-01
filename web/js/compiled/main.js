@@ -1272,6 +1272,7 @@ function addModeleInMarque(marque,valueModele,modele){
     marqueWithModele[marque].push(valueModele+';'+modele);
 }
 function liaisonMarqueModele(){
+    marqueSelectionne = $('#jc_joliecarbundle_voiture_modele_marque>option:selected').text();
         $('#jc_joliecarbundle_voiture_modele_marque>option').each(function(){
         
         var nomMarque=$(this).text();
@@ -1285,7 +1286,10 @@ function liaisonMarqueModele(){
                 {
                     addModeleInMarque(nomMarque,$(this).attr('value'),nomModele)
 
+                    if($(this).data('marque') !== marqueSelectionne){
                         $(this).remove();
+                    }
+
 
                 }
             });
@@ -1669,7 +1673,5 @@ $(document).ready(function(){
         $(this).remove();
 
     });
-    console.log(marqueWithModele);
-    $('#jc_joliecarbundle_voiture_modele_marque').click(function(){
-    });
+
 });

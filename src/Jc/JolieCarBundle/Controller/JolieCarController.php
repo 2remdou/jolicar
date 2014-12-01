@@ -72,13 +72,38 @@ JolieCarController extends Controller
     public function updateCar($marque, $modele, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
-        //$car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
+        $request = $this->get('request');
+        $session = $this->get('session');
         $car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
-        $form = $this->createForm(new VoitureType(),$car);
+        $form = $this->createForm(new VoitureType($em),$car);
+
         if($car === null)
         {
             return  $this->createNotFoundException("Aucune voiture à cette adresse");
+        }
+
+        if($request->isMethod("POST")) {
+            $form->handleRequest($request);
+            $errors = $form->getErrors(true);
+            if (count($errors)<=0) {
+                $em->flush();
+                $session->getFlashBag()->add('message', 'Votre annonce a bien été modifié');
+
+                return $this->redirect($this->generateUrl('joliecar_detail',array(
+                            'marque' => $car->getModele()->getMarque()->getNom(),
+                            'modele' => $car->getModele()->getNom(),
+                            'id' => $car->getId(),
+
+                        )));
+            } else {
+                $mesErreur = array();
+                foreach($errors as $error){
+                    $mesErreur[] = $error->getMessage();
+                }
+                $mesMessage = "<h5>".implode("<br>",$mesErreur)."</h5>";
+                $session->getFlashBag()->add('message', "Erreur lors de la modification <br>".$mesMessage);
+
+            }
         }
         return $this->render("JcJolieCarBundle:JolieCar:updateCar.html.twig",array(
                 'form' => $form->createView(),
@@ -89,29 +114,21 @@ JolieCarController extends Controller
      */
     public function addCar()
     {
+        $em = $this->getDoctrine()->getManager();
         $car = new Voiture();
-        $form = $this->createForm(new VoitureType(),$car);
+        $form = $this->createForm(new VoitureType($em),$car);
         $request = $this->get('request');
         $session = $this->get("session");
-        $form->handleRequest($request);
+
         if($request->isMethod("POST")) {
+            $form->handleRequest($request);
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
-                $em = $this->getDoctrine()->getManager();
-                $idModele = $car->getModele()->getNom();
-                $modele = $em->getRepository("JcJolieCarBundle:Modele")->find($idModele);
-                $car->setModele($modele);
-/*                $images = $car->getImages();
-                foreach($images as $image){
-                    if($image===null){
-
-                    }
-                }*/
                 $em->persist($car);
                 $em->flush();
-                $session->getFlashBag()->add('message', 'Votre annonce à bien été enregistré');
+                $session->getFlashBag()->add('message', 'Votre annonce a bien été enregistré');
 
-               // return $this->redirect($this->generateUrl('add_car'));
+                return $this->redirect($this->generateUrl('add_car'));
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){
@@ -154,7 +171,7 @@ JolieCarController extends Controller
                     $em->flush();
 
                     $monJson = $serializer->serialize(array(
-                            'message' => 'La nouvelle marque à été ajouté avec succes',
+                            'message' => 'La nouvelle marque a été ajouté avec succes',
                             'marque' => $serializer->serialize($marque,'json'),
                             'typeMessage'=>'success',
                         ),
@@ -198,7 +215,7 @@ JolieCarController extends Controller
                     $em->persist($modele);
                     $em->flush();
                     $monJson = $serializer->serialize(array(
-                            'message' => 'Le nouveau modele à été ajouté avec succes',
+                            'message' => 'Le nouveau modele a été ajouté avec succes',
                             'newModele' => $serializer->serialize($modele,'json'),
                             'typeMessage' => 'success'
                         ),
