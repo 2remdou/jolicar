@@ -6,13 +6,23 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Jc\JolieCarBundle\Form\ModeleType;
+use Doctrine\ORM\EntityManager;
+use Jc\JolieCarBundle\Form\EvenListener\UpdateVoitureSubscriber;
 
 class VoitureType extends AbstractType
 {
-        /**
+
+    private $em;
+
+    public function __construct(EntityManager $em){
+        $this->em = $em;
+    }
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -108,6 +118,7 @@ class VoitureType extends AbstractType
 //            ->add('parc')
 //            ->add('carburant')
         ;
+        $builder->addEventSubscriber(new UpdateVoitureSubscriber($this->em));
     }
     
     /**

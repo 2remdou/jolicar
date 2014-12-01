@@ -12,6 +12,12 @@ services:
         tags:
             - { name: form.type, alias: modele }
 
+    jc_joliecarbundle_modele.form.type.voiture:
+        class: Jc\JolieCarBundle\Form\VoitureType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: jc_joliecarbundle_voiture }
+
     jc_joliecarbundle_modele.form.type.image:
         class: Jc\JolieCarBundle\Form\ImageType
         tags:

@@ -19,12 +19,15 @@ class JolieCarExtension extends \Twig_Extension
         return array(
           new \Twig_SimpleFunction('controlNull', array($this,'controlNull')),
             new \Twig_SimpleFunction('replaceString', array($this,'replaceString')),
+            new \Twig_SimpleFunction('var_dump', array($this,'var_dump')),
         );
     }
     public function replaceString($text,$oldValue,$newValue){
         return str_replace($oldValue,$newValue,$text);
     }
-    
+    public function var_dump($value){
+        return var_dump($value);
+    }
     public function formaterPrix($value=null,$devise=null)
     {
         if($devise === null)

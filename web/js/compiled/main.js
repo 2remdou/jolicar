@@ -1272,6 +1272,7 @@ function addModeleInMarque(marque,valueModele,modele){
     marqueWithModele[marque].push(valueModele+';'+modele);
 }
 function liaisonMarqueModele(){
+    marqueSelectionne = $('#jc_joliecarbundle_voiture_modele_marque>option:selected').text();
         $('#jc_joliecarbundle_voiture_modele_marque>option').each(function(){
         
         var nomMarque=$(this).text();
@@ -1285,7 +1286,10 @@ function liaisonMarqueModele(){
                 {
                     addModeleInMarque(nomMarque,$(this).attr('value'),nomModele)
 
+                    if($(this).data('marque') !== marqueSelectionne){
                         $(this).remove();
+                    }
+
 
                 }
             });
@@ -1353,7 +1357,7 @@ function addUploadMiniature(parent,numeroClick){
         "</div> " +
         "</div>";
     var uploadMiniature= $(contenu);
-    if((nombreMaxImage <= numeroClick + 1) || (nombreMaxImage==0)){
+    if((nombreMaxImage <= numeroClick+1) || (nombreMaxImage==0)){
         uploadMiniature.appendTo($(parent));
       //  uploadMiniature.find('input[type="radio"]').attr('name','jc_joliecarbundle_voiture_images_enVedette');
         nombreMaxImage++;
@@ -1669,8 +1673,5 @@ $(document).ready(function(){
         $(this).remove();
 
     });
-    console.log(marqueWithModele);
-/*    $('#jc_joliecarbundle_voiture_modele_marque').click(function(){
-        alert("bonjour")
-    });*/
+
 });

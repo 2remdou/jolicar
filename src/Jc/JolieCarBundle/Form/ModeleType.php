@@ -4,10 +4,14 @@ namespace Jc\JolieCarBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Jc\JolieCarBundle\Entity\ModeleRepository;
 use Doctrine\ORM\EntityManager;
 use Jc\JolieCarBundle\Form\Extension\ListeModele;
+use Jc\JolieCarBundle\Form\EvenListener\AddNameModeleSubscriber;
+use Jc\JolieCarBundle\Form\EvenListener\UpdateAfterModeleSubscriber;
+use Jc\JolieCarBundle\Form\DataTransformer\IdToModeleTransformer;
 
 class ModeleType extends AbstractType
 {
@@ -22,7 +26,8 @@ class ModeleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $listeMarque = $this->em->getRepository('JcJolieCarBundle:Modele')->getMarque();
+
+
         $builder
             ->add('marque', 'entity',array(
                 'class' => 'Jc\JolieCarBundle\Entity\Marque',
@@ -34,19 +39,10 @@ class ModeleType extends AbstractType
                 )
                 
                 )
-            )
-
-                ->add('nom','choice',array(
-                        'choice_list' => new ListeModele($this->em),
-                        'label' => false,
-                        'attr' => array(
-                            'placeholder' => 'Modele'
-                        ),
-                        'liste_marque' => $listeMarque,
-                        'required' => false,
-
-                    ));
-
+            );
+         $builder->addEventSubscriber(new AddNameModeleSubscriber($this->em));
+         //$builder->addEventSubscriber(new UpdateAfterModeleSubscriber($this->em));
+        // $builder->addModelTransformer(new IdToModeleTransformer($this->em));
 
     }
 
@@ -69,4 +65,5 @@ class ModeleType extends AbstractType
     {
         return 'modele';
     }
+
 }
