@@ -88,7 +88,6 @@ class Voiture
     
     /**
      * @ORM\ManyToOne(targetEntity="Parc", inversedBy="voitures")
-     * @Assert\Valid()
      */
     private $parc;
     

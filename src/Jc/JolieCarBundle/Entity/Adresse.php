@@ -25,14 +25,14 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=12)
+     * @ORM\Column(name="telephone", type="string", length=12,nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255,nullable=true)
      * @Assert\Email(message="Veuillez fournir une adresse electronique valide")
      */
     private $email;
@@ -40,7 +40,7 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="site", type="string", length=255)
+     * @ORM\Column(name="site", type="string", length=255,nullable=true)
      * @Assert\Url(message="Veuillez fournir un site valide")
      */
     private $site;
@@ -48,21 +48,21 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255,nullable=true)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="quartier", type="string", length=255)
+     * @ORM\Column(name="quartier", type="string", length=255,nullable=true)
      */
     private $quartier;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="indicationLieu", type="text")
+     * @ORM\Column(name="indicationLieu", type="text",nullable=true)
      */
     private $indicationLieu;
 
