@@ -89,12 +89,12 @@ JolieCarController extends Controller
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été modifié');
 
-                return $this->redirect($this->generateUrl('joliecar_detail',array(
+                /*return $this->redirect($this->generateUrl('joliecar_detail',array(
                             'marque' => $car->getModele()->getMarque()->getNom(),
                             'modele' => $car->getModele()->getNom(),
                             'id' => $car->getId(),
 
-                        )));
+                        )));*/
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){

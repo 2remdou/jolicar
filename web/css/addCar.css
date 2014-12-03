@@ -30,6 +30,7 @@ form .row
 
 [id*=removeImage]:hover{
     background-color: red;
+    z-index: 1;
 }
 
 .fileinput-button {
