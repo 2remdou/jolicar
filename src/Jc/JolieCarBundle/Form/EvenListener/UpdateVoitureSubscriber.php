@@ -8,6 +8,8 @@
 
 namespace Jc\JolieCarBundle\Form\EvenListener;
 
+use Jc\JolieCarBundle\Form\Extension\ListeMarque;
+use Jc\JolieCarBundle\Form\Extension\ListeModele;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -42,13 +44,31 @@ class UpdateVoitureSubscriber implements EventSubscriberInterface {
     public static function getSubscribedEvents()
     {
         // TODO: Implement getSubscribedEvents() method.
-        return array(FormEvents::POST_SUBMIT => 'postSubmit');
+        return array(
+            FormEvents::PRE_SET_DATA => 'preSetData',
+        );
+    }
+    public function preSetData(FormEvent $event){
+        $form = $event->getForm();
+        $voiture = $event->getData();
+        $marque =  $voiture->getModele()->getMarque();
+
+        $options = array(
+            'choice_list' => new ListeMarque($this->em),
+            'required' => false,
+            'label' => false,
+            'mapped' => false,
+            'attr' => array(
+                'placeholder' => 'Marque',
+            ),
+        );
+
+        if($marque !== null){
+            $options['data']  = $marque->getId();
+        }
+
+        $form->add('marque','choice',$options);
+
     }
 
-    public function postSubmit(FormEvent $event){
-        $data = $event->getData();
-        $modele = $this->em->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $data->getModele()->getNom()));
-
-        $data->setModele($modele);
-    }
 }

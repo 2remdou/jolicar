@@ -2,12 +2,15 @@
 
 namespace Jc\JolieCarBundle\Form;
 
+use Jc\JolieCarBundle\Form\DataTransformer\ModelVoitureTransformer;
+use Jc\JolieCarBundle\Form\DataTransformer\ViewVoitureTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Jc\JolieCarBundle\Form\ModeleType;
 use Doctrine\ORM\EntityManager;
 use Jc\JolieCarBundle\Form\EvenListener\UpdateVoitureSubscriber;
+use Jc\JolieCarBundle\Form\DataTransformer\ModelIdToModeleTransformer;
 
 class VoitureType extends AbstractType
 {
@@ -25,11 +28,22 @@ class VoitureType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $listeMarque = $this->em->getRepository('JcJolieCarBundle:Modele')->getMarque();
         $builder
-            ->add('modele','modele',array(
+           /* ->add('modele','modele',array(
                 'label' => false,
                 'required' => false,
-            ))
+            ))*/
+            ->add('modele','entity',array(
+                   'class' => 'JcJolieCarBundle:Modele',
+                   'property' => 'nom',
+                   'required' => false,
+                   'label' => false,
+                   'liste_marque' => $listeMarque,
+                   'attr' => array(
+                       'placeholder' => 'Modele',
+                   ),
+               ))
             ->add('boitier','entity',array(
                 'class' => 'JcJolieCarBundle:Boitier',
                 'property' => 'nom',
@@ -110,15 +124,9 @@ class VoitureType extends AbstractType
                 )
             ->add('btnSave','submit',array(
                     'label' => 'Enregistrer',
-                ))
-////            ->add('top')
-////            ->add('newCar')
-//            ->add('modele')
-//            ->add('boitier')
-//            ->add('parc')
-//            ->add('carburant')
-        ;
-        $builder->addEventSubscriber(new UpdateVoitureSubscriber($this->em));
+                ));
+
+            $builder->addEventSubscriber(new UpdateVoitureSubscriber($this->em));
     }
     
     /**

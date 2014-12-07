@@ -12,17 +12,19 @@ class ModeleTypeExtension extends AbstractTypeExtension
 {
     public function buildView(FormView $view, FormInterface $form, array $options) {
         $view->vars = array_replace($view->vars, array(
-            'liste_marque' => $options['liste_marque']
+            'liste_marque' => $options['liste_marque'],
+            'optionSelect' => $options['optionSelect'] ,
         ));
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'liste_marque' => array()
+            'liste_marque' => array(),
+            'optionSelect' => null,
         ));
     }
 
     public function getExtendedType() {
-        return 'entity';
+        return 'choice';
     }
 
 }

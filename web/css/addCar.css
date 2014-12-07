@@ -26,6 +26,7 @@ form .row
 }
 [id*=removeImage]{
     cursor: pointer;
+    position: absolute;
 }
 
 [id*=removeImage]:hover{

@@ -2,9 +2,9 @@ parameters:
 #    jolie_car_jolie_car.example.class: JolieCar\JolieCarBundle\Example
 
 services:
-    jc_joliecarbundle.modele.marque:
-        class: Jc\JolieCarBundle\Model\MarqueModel
-        arguments: ["@doctrine.orm.entity_manager"]
+#    jc_joliecarbundle.modele.marque:
+#        class: Jc\JolieCarBundle\Model\MarqueModel
+#        arguments: ["@doctrine.orm.entity_manager"]
         
     jc_joliecarbundle_modele.form.type.modele:
         class: Jc\JolieCarBundle\Form\ModeleType

@@ -1,0 +1,361 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.6
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Dim 07 Décembre 2014 à 00:09
+-- Version du serveur: 5.5.33
+-- Version de PHP: 5.5.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données: `joliecar`
+--
+drop database `joliecar`;
+CREATE DATABASE IF NOT EXISTS `joliecar` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `joliecar`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `adresse`
+--
+
+DROP TABLE IF EXISTS `adresse`;
+CREATE TABLE `adresse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `telephone` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `site` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ville` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `quartier` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `indicationLieu` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Vider la table avant d'insérer `adresse`
+--
+
+TRUNCATE TABLE `adresse`;
+--
+-- Contenu de la table `adresse`
+--
+
+INSERT INTO `adresse` (`id`, `telephone`, `email`, `site`, `ville`, `quartier`, `indicationLieu`) VALUES
+(1, '666332244', 'aaaaa@gmail.com', 'www.aaaa.com', 'Conakry', 'yimbaya', 'a cote de moi'),
+(2, '666879654', 'bbbbb@yahoo.com', 'www.bbbbb.com', 'Conakry', 'ratoma', 'a cote de toi'),
+(3, '666889944', 'ccccc@gmail.com', 'www.cccccc.com', 'kindia', 'almamya', 'a cote de lui');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `boitier`
+--
+
+DROP TABLE IF EXISTS `boitier`;
+CREATE TABLE `boitier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Vider la table avant d'insérer `boitier`
+--
+
+TRUNCATE TABLE `boitier`;
+--
+-- Contenu de la table `boitier`
+--
+
+INSERT INTO `boitier` (`id`, `nom`) VALUES
+(1, 'Automatique'),
+(2, 'Manuel');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `carburant`
+--
+
+DROP TABLE IF EXISTS `carburant`;
+CREATE TABLE `carburant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Vider la table avant d'insérer `carburant`
+--
+
+TRUNCATE TABLE `carburant`;
+--
+-- Contenu de la table `carburant`
+--
+
+INSERT INTO `carburant` (`id`, `nom`) VALUES
+(1, 'Essence'),
+(2, 'Diesel');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE `image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `voiture_id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mainImage` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `IDX_C53D045F181A8BA` (`voiture_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+
+--
+-- Vider la table avant d'insérer `image`
+--
+
+TRUNCATE TABLE `image`;
+--
+-- Contenu de la table `image`
+--
+
+INSERT INTO `image` (`id`, `voiture_id`, `nom`, `path`, `mainImage`) VALUES
+(1, 1, '1_1.jpg', '1_1.jpg', 1),
+(2, 1, '1_2.jpg', '1_2.jpg', 0),
+(3, 1, '1_3.jpg', '1_3.jpg', 0),
+(4, 2, '2_1.jpg', '2_1.jpg', 1),
+(5, 2, '2_2.jpg', '2_2.jpg', 0),
+(6, 2, '2_3.jpg', '2_3.jpg', 0),
+(7, 3, '3_1.jpg', '3_1.jpg', 1),
+(8, 3, '3_2.jpg', '3_2.jpg', 0),
+(9, 3, '3_3.jpg', '3_3.jpg', 0),
+(10, 4, '4_1.jpg', '4_1.jpg', 1),
+(11, 4, '4_2.jpg', '4_2.jpg', 0),
+(12, 4, '4_3.jpg', '4_3.jpg', 0),
+(13, 5, '5_1.jpg', '5_1.jpg', 1),
+(14, 5, '5_2.jpg', '5_2.jpg', 0),
+(15, 5, '5_3.jpg', '5_3.jpg', 0),
+(16, 6, '6_1.jpg', '6_1.jpg', 1),
+(17, 6, '6_2.jpg', '6_2.jpg', 0),
+(18, 6, '6_3.jpg', '6_3.jpg', 0),
+(19, 7, '7_1.jpg', '7_1.jpg', 1),
+(20, 7, '7_2.jpg', '7_2.jpg', 0),
+(21, 7, '7_3.jpg', '7_3.jpg', 0),
+(22, 8, '8_1.jpg', '8_1.jpg', 1),
+(23, 8, '8_2.jpg', '8_2.jpg', 0),
+(24, 8, '8_3.jpg', '8_3.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `marque`
+--
+
+DROP TABLE IF EXISTS `marque`;
+CREATE TABLE `marque` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Vider la table avant d'insérer `marque`
+--
+
+TRUNCATE TABLE `marque`;
+--
+-- Contenu de la table `marque`
+--
+
+INSERT INTO `marque` (`id`, `nom`) VALUES
+(1, 'Mercedes'),
+(2, 'Renaults'),
+(3, 'Peugeot'),
+(4, 'Opel');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `modele`
+--
+
+DROP TABLE IF EXISTS `modele`;
+CREATE TABLE `modele` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `marque_id` int(11) DEFAULT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_100285584827B9B2` (`marque_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Vider la table avant d'insérer `modele`
+--
+
+TRUNCATE TABLE `modele`;
+--
+-- Contenu de la table `modele`
+--
+
+INSERT INTO `modele` (`id`, `marque_id`, `nom`) VALUES
+(1, 1, '170'),
+(2, 1, '180'),
+(3, 2, 'Clio'),
+(4, 2, 'Espace'),
+(5, 3, '104'),
+(6, 3, '106'),
+(7, 4, 'Astra'),
+(8, 4, 'Combo');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mon_user`
+--
+
+DROP TABLE IF EXISTS `mon_user`;
+CREATE TABLE `mon_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `username_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `locked` tinyint(1) NOT NULL,
+  `expired` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  `confirmation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_requested_at` datetime DEFAULT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `credentials_expired` tinyint(1) NOT NULL,
+  `credentials_expire_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_7758696A92FC23A8` (`username_canonical`),
+  UNIQUE KEY `UNIQ_7758696AA0D96FBF` (`email_canonical`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Vider la table avant d'insérer `mon_user`
+--
+
+TRUNCATE TABLE `mon_user`;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `parc`
+--
+
+DROP TABLE IF EXISTS `parc`;
+CREATE TABLE `parc` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adresse_id` int(11) DEFAULT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_CADCF5014DE7DC5C` (`adresse_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Vider la table avant d'insérer `parc`
+--
+
+TRUNCATE TABLE `parc`;
+--
+-- Contenu de la table `parc`
+--
+
+INSERT INTO `parc` (`id`, `adresse_id`, `nom`) VALUES
+(1, 1, 'Toure et frere'),
+(2, 2, 'AutoFaste'),
+(3, 3, 'ParcFamilly');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `voiture`
+--
+
+DROP TABLE IF EXISTS `voiture`;
+CREATE TABLE `voiture` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `modele_id` int(11) NOT NULL,
+  `boitier_id` int(11) DEFAULT NULL,
+  `parc_id` int(11) DEFAULT NULL,
+  `carburant_id` int(11) DEFAULT NULL,
+  `prix` bigint(20) NOT NULL,
+  `kmParcouru` int(11) DEFAULT NULL,
+  `dateAcquisition` date DEFAULT NULL,
+  `nombreRoueMotrice` smallint(6) DEFAULT NULL,
+  `nombrePorte` smallint(6) DEFAULT NULL,
+  `nombreSiege` smallint(6) DEFAULT NULL,
+  `top` tinyint(1) NOT NULL,
+  `newCar` tinyint(1) NOT NULL,
+  `mainImage_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_E9E2810F44D00FAF` (`mainImage_id`),
+  KEY `IDX_E9E2810FAC14B70A` (`modele_id`),
+  KEY `IDX_E9E2810F44DE6F7C` (`boitier_id`),
+  KEY `IDX_E9E2810F812D24CA` (`parc_id`),
+  KEY `IDX_E9E2810F32DAAD24` (`carburant_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Vider la table avant d'insérer `voiture`
+--
+
+TRUNCATE TABLE `voiture`;
+--
+-- Contenu de la table `voiture`
+--
+
+INSERT INTO `voiture` (`id`, `modele_id`, `boitier_id`, `parc_id`, `carburant_id`, `prix`, `kmParcouru`, `dateAcquisition`, `nombreRoueMotrice`, `nombrePorte`, `nombreSiege`, `top`, `newCar`, `mainImage_id`) VALUES
+(1, 1, 1, 3, 1, 3000000, 1700, '2014-08-15', 4, 4, 4, 1, 1, 1),
+(2, 2, 2, 2, 1, 9900000, 8800, '2014-08-15', 4, 4, 4, 1, 1, 4),
+(3, 6, 1, 1, 2, 556700000, 88900, '2018-08-15', 4, 4, 4, 1, 0, 7),
+(4, 1, 2, 3, 2, 7526728972, 345600, '2012-08-15', 4, 4, 2, 1, 1, 10),
+(5, 7, 2, 2, 2, 87272, 1700, '2014-08-11', 4, 4, 4, 1, 0, 13),
+(6, 8, 1, 1, 1, 256789, 8800, '2014-08-09', 4, 4, 4, 1, 1, 16),
+(7, 6, 2, 3, 1, 788908906, 88900, '2014-02-15', 4, 4, 4, 1, 0, 19),
+(8, 2, 1, 3, 2, 99850000, 2245600, '2014-08-15', 4, 4, 2, 1, 1, 22);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `FK_C53D045F181A8BA` FOREIGN KEY (`voiture_id`) REFERENCES `voiture` (`id`);
+
+--
+-- Contraintes pour la table `modele`
+--
+ALTER TABLE `modele`
+  ADD CONSTRAINT `FK_100285584827B9B2` FOREIGN KEY (`marque_id`) REFERENCES `marque` (`id`);
+
+--
+-- Contraintes pour la table `parc`
+--
+ALTER TABLE `parc`
+  ADD CONSTRAINT `FK_CADCF5014DE7DC5C` FOREIGN KEY (`adresse_id`) REFERENCES `adresse` (`id`);
+
+--
+-- Contraintes pour la table `voiture`
+--
+ALTER TABLE `voiture`
+  ADD CONSTRAINT `FK_E9E2810F44D00FAF` FOREIGN KEY (`mainImage_id`) REFERENCES `image` (`id`),
+  ADD CONSTRAINT `FK_E9E2810F32DAAD24` FOREIGN KEY (`carburant_id`) REFERENCES `carburant` (`id`),
+  ADD CONSTRAINT `FK_E9E2810F44DE6F7C` FOREIGN KEY (`boitier_id`) REFERENCES `boitier` (`id`),
+  ADD CONSTRAINT `FK_E9E2810F812D24CA` FOREIGN KEY (`parc_id`) REFERENCES `parc` (`id`),
+  ADD CONSTRAINT `FK_E9E2810FAC14B70A` FOREIGN KEY (`modele_id`) REFERENCES `modele` (`id`);

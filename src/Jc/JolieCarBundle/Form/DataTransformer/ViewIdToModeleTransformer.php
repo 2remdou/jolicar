@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: delphinsagno
- * Date: 30/11/14
- * Time: 19:32
+ * Date: 04/12/14
+ * Time: 21:42
  */
 
 namespace Jc\JolieCarBundle\Form\DataTransformer;
@@ -14,12 +14,12 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class IdToModeleTransformer implements DataTransformerInterface{
+class ViewIdToModeleTransformer implements DataTransformerInterface {
 
-    private $om;
+    private $em;
 
-    public function __construct(ObjectManager $om){
-        $this->om = $om;
+    public function __construct(ObjectManager $em){
+        $this->em = $em;
     }
     /**
      * Transforms a value from the original representation to a transformed representation.
@@ -51,10 +51,14 @@ class IdToModeleTransformer implements DataTransformerInterface{
     public function transform($modele)
     {
         // TODO: Implement transform() method.
-        if($modele === null){
-            return "";
+        if(null === $modele){
+            return null;
         }
-        return $modele->getNom();
+        //$modele->setNom($modele->getId());
+            var_dump('before View(transform) id='.$modele->getId().' nom='.$modele->getNom()."<br/>");
+            $modele = $this->em->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $modele->getId()));
+            var_dump('after View(transform) id='.$modele->getId().' nom='.$modele->getNom()."<br/>");
+        return $modele;
     }
 
     /**
@@ -81,19 +85,19 @@ class IdToModeleTransformer implements DataTransformerInterface{
      *
      * @throws TransformationFailedException When the transformation fails.
      */
-    public function reverseTransform($idModele)
+    public function reverseTransform($value)
     {
         // TODO: Implement reverseTransform() method.
-        if(!$idModele){
+        if(!$value){
             return null;
         }
-
-        $modele = $this->om->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $idModele));
-
+        var_dump(' before View(reverseTransform) id='.$value->getId().' nom='.$value->getNom()."<br/>");
+        $modele = $this->em->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $value->getId()));
+        var_dump(' afterView(reverseTransform) id='.$value->getId().' nom='.$value->getNom()."<br/>");
         if($modele === null){
             throw new TransformationFailedException(sprintf(
                     'Le numéro "%s" ne peut pas être trouvé!',
-                    $idModele
+                    $value->getId()
                 ));
         }
         return $modele;

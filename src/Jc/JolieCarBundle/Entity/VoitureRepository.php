@@ -26,6 +26,8 @@ class VoitureRepository extends EntityRepository
                 ->addSelect('carburant')
                 ->leftJoin('v.parc', 'parc')
                 ->addSelect('parc')
+                ->leftJoin('parc.adresse','adresse')
+                ->addSelect('adresse')
                 ->leftJoin('v.mainImage','mainImage')
                 ->addSelect('mainImage')
                 ->leftJoin('v.images', 'image')

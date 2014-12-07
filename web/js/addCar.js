@@ -27,11 +27,11 @@ function loadImage(parent,file,img,numeroClick,isRemove){
     }
 }
 function configSelect2(){
-     $("#jc_joliecarbundle_voiture_modele_marque").select2({
+     $("#jc_joliecarbundle_voiture_marque").select2({
          //placeholder: 'Selectionner une marque', 
          allowClear: true
          }); 
-     $("#jc_joliecarbundle_voiture_modele_nom").select2({
+     $("#jc_joliecarbundle_voiture_modele").select2({
          //placeholder: 'Selectionner un modele', 
          allowClear: true
          }); 
@@ -103,14 +103,14 @@ function addModeleInMarque(marque,valueModele,modele){
     marqueWithModele[marque].push(valueModele+';'+modele);
 }
 function liaisonMarqueModele(){
-    marqueSelectionne = $('#jc_joliecarbundle_voiture_modele_marque>option:selected').text();
-        $('#jc_joliecarbundle_voiture_modele_marque>option').each(function(){
+    marqueSelectionne = $('#jc_joliecarbundle_voiture_marque>option:selected').text();
+        $('#jc_joliecarbundle_voiture_marque>option').each(function(){
         
         var nomMarque=$(this).text();
         if(nomMarque !== "")
         {
             marqueWithModele[nomMarque] = [];
-            $('#jc_joliecarbundle_voiture_modele_nom>option').each(function(){
+            $('#jc_joliecarbundle_voiture_modele>option').each(function(){
                 var nomModele = $(this).text();
                 
                 if($(this).data('marque')===nomMarque)
@@ -127,14 +127,14 @@ function liaisonMarqueModele(){
 
         }
     });
-    //$('#jc_joliecarbundle_voiture_modele_marque>option').children().remove();
+    //$('#jc_joliecarbundle_voiture_marque>option').children().remove();
 }
 
 function loadMarque(listMarque){
-    $('#jc_joliecarbundle_voiture_modele_marque>option:gt(0)').remove();
+    $('#jc_joliecarbundle_voiture_marque>option:gt(0)').remove();
     for(var i=0;i<listMarque.length;i++){
 
-            $('#jc_joliecarbundle_voiture_modele_marque').append('<option value="'+listMarque[i].id+'">'+listMarque[i].nom+'</option>');
+            $('#jc_joliecarbundle_voiture_marque').append('<option value="'+listMarque[i].id+'">'+listMarque[i].nom+'</option>');
 
     }
 }
@@ -144,13 +144,13 @@ function addMarque(element,value,nom){
 }
 
 function loadModeleForMarque(marqueSelectionne){
-     $('#jc_joliecarbundle_voiture_modele_nom>option:gt(0)').remove();
-        $('#jc_joliecarbundle_voiture_modele_nom').select2("val","");      
+     $('#jc_joliecarbundle_voiture_modele>option:gt(0)').remove();
+        $('#jc_joliecarbundle_voiture_modele').select2("val","");      
         for(var i=0;i<marqueWithModele[marqueSelectionne].length;i++)
         {           
             value = marqueWithModele[marqueSelectionne][i].split(";")[0];
             nomModele = marqueWithModele[marqueSelectionne][i].split(";")[1];
-            $('#jc_joliecarbundle_voiture_modele_nom').append('<option value='+value+'>'+nomModele+'</option>');
+            $('#jc_joliecarbundle_voiture_modele').append('<option value='+value+'>'+nomModele+'</option>');
         }
 }
 
@@ -209,10 +209,11 @@ $(document).ready(function(){
     $('#accordion').accordion({collapsible: true});
       configSelect2();
       liaisonMarqueModele();
+    console.log(marqueWithModele);
     //stockage des marques et des modeles qui lui liés
 
-    $('#jc_joliecarbundle_voiture_modele_marque').change(function(){
-       marqueSelectionne = $('#jc_joliecarbundle_voiture_modele_marque>option:selected').text();
+    $('#jc_joliecarbundle_voiture_marque').change(function(){
+       marqueSelectionne = $('#jc_joliecarbundle_voiture_marque>option:selected').text();
        loadModeleForMarque(marqueSelectionne);
     });
 
@@ -257,7 +258,7 @@ $(document).ready(function(){
             displayMessage($('#message'),'Veuillez saisr la nouvelle marque','danger');
             return;
         }
-        var test = existInSelect($('#jc_joliecarbundle_voiture_modele_marque'),newNomMarque);
+        var test = existInSelect($('#jc_joliecarbundle_voiture_marque'),newNomMarque);
         if(test){
             displayMessage($('#message'),'Une marque de même nom existe déja','danger');
             return;
@@ -274,7 +275,7 @@ $(document).ready(function(){
                     displayMessage($('#message'), data.message, data.typeMessage);
                     marqueWithModele[newNomMarque] = [];
                     var marque = $.parseJSON(data.marque);
-                    addMarque($('#jc_joliecarbundle_voiture_modele_marque'), marque['id'], marque['nom']);
+                    addMarque($('#jc_joliecarbundle_voiture_marque'), marque['id'], marque['nom']);
                     hideMarque();
                 } else {
                     var errors = $.parseJSON(data.message);
@@ -296,7 +297,7 @@ $(document).ready(function(){
     $("#nomModele").on('click',"button", function(e){
         e.preventDefault();
         //*********** si la marque est selectionnee
-        idMarque = $('#s2id_jc_joliecarbundle_voiture_modele_marque').select2("val");
+        idMarque = $('#s2id_jc_joliecarbundle_voiture_marque').select2("val");
         if(idMarque === ""){
             displayMessage($('#message'),'Veuillez selectionner une marque','danger');
             return;
@@ -308,7 +309,7 @@ $(document).ready(function(){
             displayMessage($('#message'),'Veuillez saisir le nouveau modele','danger');
             return;
         }
-        if(existInSelect($('#jc_joliecarbundle_voiture_modele_nom'),newNomModele)){
+        if(existInSelect($('#jc_joliecarbundle_voiture_modele'),newNomModele)){
             displayMessage($('#message'),'un modele de même nom existe déja','danger');
             return;
         }
@@ -326,7 +327,7 @@ $(document).ready(function(){
                         var newModele = $.parseJSON(data.newModele);
                         addModeleInMarque(newModele['marque'].nom,newModele['id'],newModele['nom']);
                         loadModeleForMarque(newModele['marque'].nom);
-                        $('#jc_joliecarbundle_voiture_modele_nom').select2("val",newModele['id']);
+                        $('#jc_joliecarbundle_voiture_modele').select2("val",newModele['id']);
                         hideModele();
                     }
                     else{

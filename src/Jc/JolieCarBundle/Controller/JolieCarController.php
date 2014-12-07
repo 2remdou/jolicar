@@ -88,13 +88,12 @@ JolieCarController extends Controller
             if (count($errors)<=0) {
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été modifié');
-
-                /*return $this->redirect($this->generateUrl('joliecar_detail',array(
+                return $this->redirect($this->generateUrl('joliecar_detail',array(
                             'marque' => $car->getModele()->getMarque()->getNom(),
                             'modele' => $car->getModele()->getNom(),
                             'id' => $car->getId(),
 
-                        )));*/
+                        )));
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){
@@ -128,7 +127,7 @@ JolieCarController extends Controller
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été enregistré');
 
-                return $this->redirect($this->generateUrl('add_car'));
+                //return $this->redirect($this->generateUrl('add_car'));
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){
