@@ -11,8 +11,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="modele")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ModeleRepository")
- * @UniqueEntity(fields={"marque","nom"},message="Cette marque possède déja un modele de même nom")
+ *
  */
+//@UniqueEntity(fields={"marque","nom"},message="Cette marque possède déja un modele de même nom")
 class Modele
 {
     /**
@@ -33,8 +34,7 @@ class Modele
      */
     private $nom;
     /**
-     *@ORM\ManyToOne(targetEntity="Marque", inversedBy="modeles",cascade={"persist"})
-     *@ORM\JoinColumn(referencedColumnName="id")
+     *@ORM\ManyToOne(targetEntity="Marque", inversedBy="modeles")
      *@Assert\Valid()
      */
     private $marque;

@@ -46,9 +46,9 @@ class Image
     private $file;
 
     /**
-     * @ORM\Column(type="boolean",options={"default"=false})
+     * @ORM\Column(type="boolean",options={"default"=0})
      */
-    private $mainImage;
+    private $mainImage=false;
 
     protected  function getAbsolutePath(){
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
@@ -66,7 +66,6 @@ class Image
     }
     public function __construct() {
         $this->enVedette = false;
-        $this->mainImage = false;
     }
     /**
      * @ORM\PrePersist()
@@ -99,7 +98,8 @@ class Image
      * @ORM\PostRemove()
      */
     public function removeUpload(){
-        if($file = $this->getAbsolutePath()){
+        $file = $this->getAbsolutePath();
+        if($file){
             unlink($file);
         }
     }
@@ -211,6 +211,16 @@ class Image
      * @return boolean 
      */
     public function isMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * Get mainImage
+     *
+     * @return boolean 
+     */
+    public function getMainImage()
     {
         return $this->mainImage;
     }

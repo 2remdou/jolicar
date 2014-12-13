@@ -12,7 +12,7 @@ use Jc\JolieCarBundle\Entity\Carburant;
 class LoadCarburantData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder() {
-        return 2;
+        return 3;
     }
 
     public function load(ObjectManager $manager) {

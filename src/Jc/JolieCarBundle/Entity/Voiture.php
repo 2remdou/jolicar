@@ -5,6 +5,7 @@ namespace Jc\JolieCarBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Jc\JolieCarBundle\Validator\Constraints as AssertJc;
+use Jc\UserBundle\Entity\User;
 
 /**
  * Voiture
@@ -87,9 +88,9 @@ class Voiture
     private  $boitier;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Parc", inversedBy="voitures")
+     * @ORM\ManyToOne(targetEntity="Jc\UserBundle\Entity\User", inversedBy="voitures")
      */
-    private $parc;
+    private $user;
     
     /**
      * @ORM\ManyToOne(targetEntity="Carburant", inversedBy="voitures")
@@ -100,7 +101,7 @@ class Voiture
     /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist","remove"})
      * @Assert\Valid()
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $images;
     /**
@@ -285,26 +286,27 @@ class Voiture
     }
 
     /**
-     * Set parc
+     * Set user
      *
-     * @param \Jc\JolieCarBundle\Entity\Parc $parc
+     * @param \Jc\UserBundle\Entity\User
      * @return Voiture
      */
-    public function setParc(Parc $parc = null)
+    public function setUser(User $user = null)
     {
-        $this->parc = $parc;
+        //var_dump($user);
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get parc
+     * Get user
      *
-     * @return \Jc\JolieCarBundle\Entity\Parc
+     * @return \Jc\JolieCarBundle\Entity\User
      */
-    public function getParc()
+    public function getUser()
     {
-        return $this->parc;
+        return $this->user;
     }
 
     /**
@@ -341,22 +343,7 @@ class Voiture
         $this->newCar =false;
     }
 
-    /**
-     * Add images
-     *
-     * @param \Jc\JolieCarBundle\Entity\Image $images
-     * @return Voiture
-     */
-    public function addImage(Image $images)
-    {
-        if($images->getFile() === null){
-            return $this;
-        }
-        $images->setVoiture($this);
-        $this->images[] = $images;
 
-        return $this;
-    }
 
     /**
      * Remove images
@@ -390,6 +377,8 @@ class Voiture
 
         return $this;
     }
+
+
 
     /**
      * Get modele
@@ -462,6 +451,24 @@ class Voiture
             $this->mainImage->setVoiture($this);
             $this->mainImage->setMainImage(true);
         }
+
+        return $this;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Jc\JolieCarBundle\Entity\Image $images
+     * @return Voiture
+     */
+    public function addImage(Image $images)
+    {
+        if($images->getFile() !== null){
+        $images->setVoiture($this);
+        $images->setMainImage(false);
+        $this->images[] = $images;
+        }
+
 
         return $this;
     }

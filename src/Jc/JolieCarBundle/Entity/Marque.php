@@ -33,8 +33,7 @@ class Marque
      */
     private $nom;
     /**
-     *@ORM\OneToMany(targetEntity="Modele", mappedBy="marque", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=true)
+     *@ORM\OneToMany(targetEntity="Modele", mappedBy="marque", cascade={"remove"})
      * @Exclude()
      */
     private $modeles;

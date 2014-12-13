@@ -11,7 +11,7 @@ use Jc\JolieCarBundle\Entity\Modele;
 
 class LoadMarqueData extends AbstractFixture implements OrderedFixtureInterface{
     public function getOrder() {
-        return 3;
+        return 4;
     }
 
     public function load(ObjectManager $manager) {

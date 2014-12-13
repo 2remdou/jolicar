@@ -7,7 +7,7 @@ sensio_framework_extra:
     router: {annotations: true }
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,14 +33,14 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'JcJolieCarBundle:Form:fields.html.twig'
+            - 'fields.html.twig'
     
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ JcJolieCarBundle, JcUserBundle, FOSUserBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -83,6 +83,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Jc\UserBundle\Entity\User
+    registration:
+        form:
+            type: jc_user_registration
 #genemu_form:
 #    select2:
 #        enabled: true

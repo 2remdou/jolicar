@@ -10,7 +10,7 @@ use Jc\JolieCarBundle\Entity\Voiture;
 
 class LoadVoitureData extends AbstractFixture implements OrderedFixtureInterface{
     public function getOrder() {
-        return 6;
+        return 7;
         
     }
 
@@ -88,8 +88,8 @@ class LoadVoitureData extends AbstractFixture implements OrderedFixtureInterface
             $carburant = $this->getReference('carburant'.rand(0, count($manager->getRepository("JcJolieCarBundle:Carburant")->findAll())-1));
             $voitures[$i]->setCarburant($carburant);
             
-            $parc = $this->getReference('parc'.rand(0, count($manager->getRepository("JcJolieCarBundle:Parc")->findAll())-1));
-            $voitures[$i]->setParc($parc);
+            $user = $this->getReference('user'.rand(0, count($manager->getRepository("JcUserBundle:User")->findAll())-1));
+            $voitures[$i]->setUser($user);
             
             $modele = $this->getReference('modele'.rand(0, count($manager->getRepository("JcJolieCarBundle:Modele")->findAll())-1));
             $voitures[$i]->setModele($modele);

@@ -12,7 +12,7 @@ use Jc\JolieCarBundle\Entity\Adresse;
 class LoadAdresseData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder() {
-        return 1;
+        return 5;
     }
 
     public function load(ObjectManager $manager) {

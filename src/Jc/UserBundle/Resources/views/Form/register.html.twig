@@ -1,0 +1,14 @@
+
+{% block _fos_user_registration_form_plainPassword_first_widget -%}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <input class="form-control" type="{{ type }}" placeholder="Veuillez saisir le mot de passe" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
+{% endblock  _fos_user_registration_form_plainPassword_first_widget%}
+
+{% block _fos_user_registration_form_plainPassword_second_widget -%}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <input class="form-control" type="{{ type }}" placeholder="Veuillez confirmer le mot de passe" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
+{% endblock  _fos_user_registration_form_plainPassword_second_widget%}

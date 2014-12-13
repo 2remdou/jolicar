@@ -1,6 +1,15 @@
 {# src/Jc/JolieCarBundle/resources/views/JolieCar/detail.html.twig #}
 {%extends "JcJolieCarBundle::layout.html.twig"%}
 
+{%block otherStylesheets%}
+    {% stylesheets filter='cssrewrite'
+    'css/detail.css'
+    output='css/compiled/main.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {%endstylesheets%}
+{%endblock otherStylesheets%}
+
 {%block tabAccesRapide%}
     {{parent()}}
 {%endblock%}
@@ -40,21 +49,24 @@
         <h3>Le vendeur</h3>
         <div>
             <table class="table">
-                {% if car.parc %}
-                    <tr><td>Nom</td><td>{{car.parc.nom}}</td></tr>
-                    <tr><td>Telephone</td><td>{{car.parc.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
-                    <tr><td>Email</td><td>{{car.parc.adresse.email}}</td></tr>
-                    <tr><td>Site web</td><td>{{car.parc.adresse.site}}</td></tr>
-                    <tr><td>Ville</td><td>{{car.parc.adresse.ville}}</td></tr>
-                    <tr><td>Quartier</td><td>{{car.parc.adresse.quartier}}</td></tr>
-                    <tr><td>Indication</td><td>{{car.parc.adresse.indicationLieu}}</td></tr>
+                {% if car.user %}
+                    <tr><td>Nom</td><td>{{car.user.nom}}</td></tr>
+                    {% if car.user.adresse %}
+                        <tr><td>Telephone</td><td>{{car.user.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
+                        <tr><td>Email</td><td>{{car.user.adresse.email}}</td></tr>
+                        <tr><td>Site web</td><td>{{car.user.adresse.site}}</td></tr>
+                        <tr><td>Ville</td><td>{{car.user.adresse.ville}}</td></tr>
+                        <tr><td>Quartier</td><td>{{car.user.adresse.quartier}}</td></tr>
+                        <tr><td>Indication</td><td>{{car.user.adresse.indicationLieu}}</td></tr>
+                    {% endif %}
+
                 {% endif %}
             </table> 
         </div>
     </div>
 {%endblock%}
-
-{#{%block javascripts%}
-    {{parent()}}
-    <script type="text/javascript" src="{{asset('js/detail.js')}}"></script>
-{%endblock%}#}
+      {%block otherScript%}
+          {% javascripts 'js/detail.js' output='js/compiled/main.js' %}
+          <script type="text/javascript" src="{{ asset_url }}"></script>
+          {%endjavascripts%}
+      {%endblock%}

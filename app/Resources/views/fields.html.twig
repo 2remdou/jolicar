@@ -1,0 +1,89 @@
+{# src/Jc/JolieCarBundle/resources/views/Form/field.html.twig #}
+
+{% block form_start -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form role="form" name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start %}
+        
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endspaceless %}
+{% endblock form_widget_simple %}
+   
+{% block choice_widget_collapsed -%}
+    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+        {% set required = false %}
+    {%- endif -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
+        {% if empty_value is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %} class="form-control">{{ empty_value|trans({}, translation_domain) }}</option>
+        {%- endif %}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {% if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif %}
+        {%- endif -%}
+        {% set options = choices -%}
+        {{- block('choice_widget_options') -}}
+    </select>
+{%- endblock choice_widget_collapsed %}
+    
+{% block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options %}
+
+{% block button_widget -%}
+    {% if label is empty -%}
+        {% set label = name|humanize %}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }} class="btn btn-primary">{{ label|trans({}, translation_domain) }}</button>
+{%- endblock button_widget %}
+
+{% block date_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- date_pattern|replace({
+                '{{ year }}':  form_widget(form.day,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+                '{{ month }}': form_widget(form.month,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+                '{{ day }}':   form_widget(form.year,{'attr':{'class':'col-lg-4 col-md-4 col-xs-4'}}),
+            })|raw -}}
+        </div>
+    {%- endif %}
+{%- endblock date_widget %}
+
+{% block form_row -%}
+    {%set champ="col-lg-8" %}
+    {%set label="col-lg-2" %}
+    <div class="row">
+        <div class="{{ label }}">
+            {{- form_label(form) -}}
+        </div>
+        <div class="{{ champ }}">
+            {{- form_widget(form) -}}
+        </div>
+    </div>
+
+{%- endblock form_row %}

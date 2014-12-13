@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoadImageData extends AbstractFixture implements OrderedFixtureInterface{
     public function getOrder() {
-        return 7;
+        return 8;
     }
 
     public function load(ObjectManager $manager) {
