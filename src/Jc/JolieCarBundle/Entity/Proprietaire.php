@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Parc
+ * Proprietaire
  *
- * @ORM\Table(name="parc")
- * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ParcRepository")
+ * @ORM\Table(name="proprietaire")
+ * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ProprietaireRepository")
  */
-class Parc
+class Proprietaire
 {
     /**
      * @var integer
@@ -26,12 +26,12 @@ class Parc
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez fournir le nom du parc")
+     * @Assert\NotBlank(message="Veuillez fournir le nom du Proprietaire")
      */
     private $nom;
     
     /**
-     * @ORM\OneToMany(targetEntity="Voiture", mappedBy="parc")
+     * @ORM\OneToMany(targetEntity="Voiture", mappedBy="proprietaire")
      */
     private $voitures;
     
@@ -41,6 +41,11 @@ class Parc
      */
     private $adresse;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="TypeProprietaire",inversedBy="proprietaires")
+     * @Assert\Valid()
+     */
+    private $typeProprietaire;
     /**
      * Get id
      *
@@ -55,7 +60,7 @@ class Parc
      * Set nom
      *
      * @param string $nom
-     * @return Parc
+     * @return Proprietaire
      */
     public function setNom($nom)
     {
@@ -85,7 +90,7 @@ class Parc
      * Add voiture
      *
      * @param \Jc\JolieCarBundle\Entity\Voiture $voiture
-     * @return Parc
+     * @return Proprietaire
      */
     public function addVoiture(Voiture $voiture)
     {
@@ -118,7 +123,7 @@ class Parc
      * Set adresse
      *
      * @param \Jc\JolieCarBundle\Entity\Adresse $adresse
-     * @return Parc
+     * @return Proprietaire
      */
     public function setAdresse(Adresse $adresse = null)
     {
@@ -145,5 +150,28 @@ class Parc
     public function getVoitures()
     {
         return $this->voitures;
+    }
+
+    /**
+     * Set typeProprietaire
+     *
+     * @param \Jc\JolieCarBundle\Entity\TypeProprietaire $typeProprietaire
+     * @return Proprietaire
+     */
+    public function setTypeProprietaire(\Jc\JolieCarBundle\Entity\TypeProprietaire $typeProprietaire = null)
+    {
+        $this->typeProprietaire = $typeProprietaire;
+
+        return $this;
+    }
+
+    /**
+     * Get typeProprietaire
+     *
+     * @return \Jc\JolieCarBundle\Entity\TypeProprietaire 
+     */
+    public function getTypeProprietaire()
+    {
+        return $this->typeProprietaire;
     }
 }

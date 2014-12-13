@@ -50,8 +50,7 @@ class UpdateVoitureSubscriber implements EventSubscriberInterface {
     }
     public function preSetData(FormEvent $event){
         $form = $event->getForm();
-        $voiture = $event->getData();
-        $marque =  $voiture->getModele()->getMarque();
+        $modele = $event->getData()->getModele();
 
         $options = array(
             'choice_list' => new ListeMarque($this->em),
@@ -63,9 +62,17 @@ class UpdateVoitureSubscriber implements EventSubscriberInterface {
             ),
         );
 
-        if($marque !== null){
-            $options['data']  = $marque->getId();
+        if($modele){
+            $marque =  $modele->getMarque();
+
+            if($marque !== null){
+                $options['data']  = $marque->getId();
+            }
+
         }
+
+
+
 
         $form->add('marque','choice',$options);
 

@@ -88,8 +88,8 @@ class LoadVoitureData extends AbstractFixture implements OrderedFixtureInterface
             $carburant = $this->getReference('carburant'.rand(0, count($manager->getRepository("JcJolieCarBundle:Carburant")->findAll())-1));
             $voitures[$i]->setCarburant($carburant);
             
-            $parc = $this->getReference('parc'.rand(0, count($manager->getRepository("JcJolieCarBundle:Parc")->findAll())-1));
-            $voitures[$i]->setParc($parc);
+            $proprietaire = $this->getReference('proprietaire'.rand(0, count($manager->getRepository("JcJolieCarBundle:Proprietaire")->findAll())-1));
+            $voitures[$i]->setProprietaire($proprietaire);
             
             $modele = $this->getReference('modele'.rand(0, count($manager->getRepository("JcJolieCarBundle:Modele")->findAll())-1));
             $voitures[$i]->setModele($modele);

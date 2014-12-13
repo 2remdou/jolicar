@@ -53,8 +53,8 @@
         </div>
     </div>
 {%endblock%}
-
-{#{%block javascripts%}
-    {{parent()}}
-    <script type="text/javascript" src="{{asset('js/detail.js')}}"></script>
-{%endblock%}#}
+      {%block otherScript%}
+          {% javascripts 'js/detail.js' output='js/compiled/main.js' %}
+          <script type="text/javascript" src="{{ asset_url }}"></script>
+          {%endjavascripts%}
+      {%endblock%}

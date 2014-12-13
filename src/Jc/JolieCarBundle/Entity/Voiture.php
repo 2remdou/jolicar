@@ -87,9 +87,9 @@ class Voiture
     private  $boitier;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Parc", inversedBy="voitures")
+     * @ORM\ManyToOne(targetEntity="Proprietaire", inversedBy="voitures")
      */
-    private $parc;
+    private $proprietaire;
     
     /**
      * @ORM\ManyToOne(targetEntity="Carburant", inversedBy="voitures")
@@ -100,7 +100,7 @@ class Voiture
     /**
      * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist","remove"})
      * @Assert\Valid()
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $images;
     /**
@@ -285,26 +285,27 @@ class Voiture
     }
 
     /**
-     * Set parc
+     * Set proprietaire
      *
-     * @param \Jc\JolieCarBundle\Entity\Parc $parc
+     * @param \Jc\JolieCarBundle\Entity\Proprietaire
      * @return Voiture
      */
-    public function setParc(Parc $parc = null)
+    public function setProprietaire(Proprietaire $proprietaire = null)
     {
-        $this->parc = $parc;
+        //var_dump($proprietaire);
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }
 
     /**
-     * Get parc
+     * Get proprietaire
      *
-     * @return \Jc\JolieCarBundle\Entity\Parc
+     * @return \Jc\JolieCarBundle\Entity\Proprietaire
      */
-    public function getParc()
+    public function getProprietaire()
     {
-        return $this->parc;
+        return $this->proprietaire;
     }
 
     /**
@@ -341,22 +342,7 @@ class Voiture
         $this->newCar =false;
     }
 
-    /**
-     * Add images
-     *
-     * @param \Jc\JolieCarBundle\Entity\Image $images
-     * @return Voiture
-     */
-    public function addImage(Image $images)
-    {
-        if($images->getFile() === null){
-            return $this;
-        }
-        $images->setVoiture($this);
-        $this->images[] = $images;
 
-        return $this;
-    }
 
     /**
      * Remove images
@@ -390,6 +376,8 @@ class Voiture
 
         return $this;
     }
+
+
 
     /**
      * Get modele
@@ -462,6 +450,24 @@ class Voiture
             $this->mainImage->setVoiture($this);
             $this->mainImage->setMainImage(true);
         }
+
+        return $this;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Jc\JolieCarBundle\Entity\Image $images
+     * @return Voiture
+     */
+    public function addImage(Image $images)
+    {
+        if($images->getFile() !== null){
+        $images->setVoiture($this);
+        $images->setMainImage(false);
+        $this->images[] = $images;
+        }
+
 
         return $this;
     }

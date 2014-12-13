@@ -9,10 +9,10 @@
         <div id="accordion">
             <h3>Informations générales</h3>
             <div>
-{#                <div class='row' id="nomMarque">
-                    <div class='{{col}}'>{{form_row(form.modele.marque)}}</div>
+                <div class='row' id="nomMarque">
+                    <div class='{{col}}'>{{form_row(form.marque)}}</div>
                     <div id="ajoutMarque" data-url="{{path('add_marque')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
-                </div>#}
+                </div>
                 <div class='row' id="nomModele">
                     <div class='{{col}}'>{{form_row(form.modele)}}</div>
                     <div id="ajoutModele" data-url="{{path('add_modele')}}" class='{{colSpan}}'><span class='glyphicon glyphicon-plus'></span></div>
@@ -76,3 +76,8 @@
     </div>
     {{form_end(form)}}
 {%endblock contenu%}
+      {%block otherScript%}
+          {% javascripts 'js/addCar.js' output='js/compiled/main.js' %}
+          <script type="text/javascript" src="{{ asset_url }}"></script>
+          {%endjavascripts%}
+      {%endblock%}

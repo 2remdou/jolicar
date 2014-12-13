@@ -68,7 +68,7 @@
             {% set image = element.vars.value %}
             {% if image.mainImage==false %}
                 <div id="uploadMiniature_{{ loop.index-1 }}" class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-                    <span id="removeImage_"{{ loop.index-1 }} class='glyphicon glyphicon-remove'></span>
+                    <span id="removeImage_{{ loop.index-1 }}" class='glyphicon glyphicon-remove'></span>
                     <div class='libelleImage text-center'>Image {{ loop.index }}</div>
                     <img src='{{asset(image.webPath~image.path)}}' alt='logo_joliecar' class='img-responsive'/>
                     <div class='fileinput-button text-center'>

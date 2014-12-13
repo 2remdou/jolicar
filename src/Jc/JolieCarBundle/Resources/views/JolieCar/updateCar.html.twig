@@ -76,3 +76,11 @@
     </div>
     {{form_end(form)}}
 {%endblock contenu%}
+      {%block otherScript%}
+          {% javascripts
+            'js/addCar.js'
+            'js/updateCar.js'
+          output='js/compiled/main.js' %}
+          <script type="text/javascript" src="{{ asset_url }}"></script>
+          {%endjavascripts%}
+      {%endblock%}

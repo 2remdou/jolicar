@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bonjour!{% endblock %}</title>
         {%block stylesheets%}
             {% stylesheets filter='cssrewrite' 
                     'jquery-ui/jquery-ui.min.css'
@@ -28,7 +28,7 @@
         {% block body %}
         <header>
                 {%block header%}
-
+                    {% include 'JcJolieCarBundle::header.html.twig'%}
                 {% endblock header%}
         </header>
         <div class="container" id="global">   
@@ -59,11 +59,13 @@
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
         {% block javascripts%}
             {% javascripts             
-                            'jquery-ui/jquery-ui.min.js' 
+                            'jquery-ui/jquery-ui.min.js'
                             'css/bootstrap/js/bootstrap.min.js'
+                            'js/outils.js'
+                            'js/boot.js'
                             'js/select2/select2.min.js'
                             'js/Elastislide/js/*'
-                            'js/*'
+                            'js/index.js'
                             output='js/compiled/main.js'%}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {%endjavascripts%}
@@ -72,7 +74,7 @@
                 </script>
         {% endblock javascripts%}
         {%block otherScript%}
-        
+
         {%endblock%}
        {# <script src="{{asset('jquery-1.11.1.min.js')}}"></script>
         {% block javascripts %}
