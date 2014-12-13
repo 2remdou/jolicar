@@ -30,7 +30,7 @@ class ModeleType extends AbstractType
 
         $builder
             ->add('marque', 'entity',array(
-                'class' => 'Jc\JolieCarBundle\Entity\Marque',
+                'class' => 'JcJolieCarBundle:Marque',
                 'property' => 'nom',
                 'label' => false,
                 'required' => false,

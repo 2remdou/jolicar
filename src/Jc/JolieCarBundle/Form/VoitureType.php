@@ -120,7 +120,6 @@ class VoitureType extends AbstractType
         ;
         $builder->addEventSubscriber(new UpdateVoitureSubscriber($this->em));
     }
-    
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -129,6 +128,7 @@ class VoitureType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Jc\JolieCarBundle\Entity\Voiture'
         ));
+
     }
 
     /**

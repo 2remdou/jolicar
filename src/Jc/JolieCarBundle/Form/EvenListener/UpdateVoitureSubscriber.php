@@ -42,11 +42,19 @@ class UpdateVoitureSubscriber implements EventSubscriberInterface {
     public static function getSubscribedEvents()
     {
         // TODO: Implement getSubscribedEvents() method.
-        return array(FormEvents::POST_SUBMIT => 'postSubmit');
+        return array(
+           // FormEvents::POST_SUBMIT => 'postSubmit',
+            FormEvents::PRE_SUBMIT => 'preSubmit'
+        );
     }
+    public function preSubmit(FormEvent $event){
+        $data = $event->getForm()->getData();
+        $modele = $this->em->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $data->getModele()->getNom()));
 
+        $data->setModele($modele);
+    }
     public function postSubmit(FormEvent $event){
-        $data = $event->getData();
+        $data = $event->getForm()->getData();
         $modele = $this->em->getRepository("JcJolieCarBundle:Modele")->findOneBy(array('id'=> $data->getModele()->getNom()));
 
         $data->setModele($modele);
