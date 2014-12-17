@@ -75,15 +75,17 @@
 {%- endblock date_widget %}
 
 {% block form_row -%}
-    {%set champ="col-lg-8" %}
-    {%set label="col-lg-2" %}
     <div class="row">
-        <div class="{{ label }}">
+        <div>
             {{- form_label(form) -}}
         </div>
-        <div class="{{ champ }}">
+        <div>
             {{- form_widget(form) -}}
         </div>
     </div>
 
 {%- endblock form_row %}
+
+{% block textarea_widget -%}
+    <textarea class="form-control" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget %}

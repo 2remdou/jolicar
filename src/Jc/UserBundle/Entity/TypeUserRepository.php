@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class TypeUserRepository extends EntityRepository
 {
+    public function findAllArray(){
+        $q = $this->createQueryBuilder('ty')
+            ->getQuery();
+
+        return $q->getArrayResult();
+    }
 }

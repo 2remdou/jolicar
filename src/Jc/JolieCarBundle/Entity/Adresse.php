@@ -29,13 +29,6 @@ class Adresse
      */
     private $telephone;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255,nullable=true)
-     * @Assert\Email(message="Veuillez fournir une adresse electronique valide")
-     */
-    private $email;
 
     /**
      * @var string
@@ -100,28 +93,6 @@ class Adresse
         return $this->telephone;
     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Adresse
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
 
     /**
      * Set site
