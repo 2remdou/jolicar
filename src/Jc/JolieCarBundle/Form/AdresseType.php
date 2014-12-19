@@ -15,12 +15,39 @@ class AdresseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('telephone')
-            ->add('email')
-            ->add('site')
-            ->add('ville')
-            ->add('quartier')
-            ->add('indicationLieu')
+            ->add('telephone',null,array(
+                'attr' => array(
+                    'placeholder' => 'Veuillez saisir votre numero de telephone',
+                ),
+                'required'=>false,
+            ))
+            ->add('site',null,array(
+                'attr' => array(
+                    'placeholder' => "Veuillez saisir l'adresse de votre site internet",
+                ),
+                'required'=>false,
+            ))
+            ->add('ville',null,array(
+                'attr' => array(
+                    'placeholder' => 'Veuillez saisir votre ville de residence',
+                ),
+                'required'=>false,
+            ))
+            ->add('quartier',null,array(
+                'attr' => array(
+                    'placeholder' => 'Veuillez saisir votre quartier',
+                ),
+                'required'=>false,
+            ))
+            ->add('indicationLieu','textarea',array(
+                'attr' => array(
+                    'placeholder' => 'Veuillez saisir une indication precise du lieu.
+                    Exemple: En face de la station Total au rond point tanerie',
+                    //'rows' => 3,
+                    //'cols' =>75,
+                ),
+                'required'=>false,
+            ))
         ;
     }
     
@@ -39,6 +66,6 @@ class AdresseType extends AbstractType
      */
     public function getName()
     {
-        return 'jc_joliecarbundle_adresse';
+        return 'jc_adresse';
     }
 }

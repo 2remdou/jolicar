@@ -2,12 +2,19 @@
 
 namespace Jc\UserBundle\Form;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
+
+    private $em;
+
+    public function __construct(EntityManager $em){
+        $this->em = $em;
+    }
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -21,16 +28,20 @@ class UserType extends AbstractType
                 ),
             ))
             ->add('autreNom','text',array(
+                'required' => false,
                 'label' => 'Prenom',
                 'attr' => array(
-                    'placeholder' => 'Veuillez fournir votre nom',
+                    'placeholder' => 'Veuillez fournir votre prenom',
                 ),
             ))
-            ->add('typeUser','entity',array(
+           ->add('typeUser','entity',array(
                 'class' => 'JcUserBundle:TypeUser',
                 'property' => 'nom',
                 'expanded' => true,
+                'multiple' => false,
+
             ))
+            ->add('adresse','jc_adresse')
         ;
     }
     

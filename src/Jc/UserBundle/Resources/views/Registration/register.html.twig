@@ -16,11 +16,11 @@
 {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
 
-{#
+
 {%block otherScript%}
     {% javascripts
-    'js/addCar.js'
+    'js/registration.js'
     output='js/compiled/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {%endjavascripts%}
-{%endblock%}#}
+{%endblock%}
