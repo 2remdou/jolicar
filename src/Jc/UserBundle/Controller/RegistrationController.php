@@ -14,12 +14,13 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class RegistrationController extends  BaseController {
 
     public function registerAction(Request $request)
     {
-        var_dump("Toure");
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -36,6 +37,12 @@ class RegistrationController extends  BaseController {
         $form->setData($user);
 
         if ('POST' === $request->getMethod()) {
+            $attributForm = $request->request->get('fos_user_registration_form');
+            $attributForm =  array_replace($attributForm,array(
+                   'username' => $attributForm['email'],
+                ));
+            $request->request->set('fos_user_registration_form',$attributForm);
+            //$request->request->set('username',$request->request->get('email'));
             $form->bind($request);
 
             if ($form->isValid()) {
@@ -55,7 +62,7 @@ class RegistrationController extends  BaseController {
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
                 'form' => $form->createView(),
             ));
     }
