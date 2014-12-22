@@ -12,44 +12,56 @@ namespace Jc\UserBundle\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class RegistrationController extends  BaseController {
 
     public function registerAction(Request $request)
     {
-        $form = $this->container->get('fos_user.registration.form');
-        $formHandler = $this->container->get('fos_user.registration.form.handler');
-        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.registration.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
 
-        $process = $formHandler->process($confirmationEnabled);
-        if ($process) {
-            $user = $form->getData();
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
 
-            /*****************************************************
-             * Add new functionality (e.g. log the registration) *
-             *****************************************************/
-            $user->setUsername($user->getEmail());
-            $this->container->get('logger')->info(
-                sprintf('New user registration: %s', $user)
-            );
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
 
-            if ($confirmationEnabled) {
-                $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
-                $route = 'fos_user_registration_check_email';
-            } else {
-                $this->authenticateUser($user);
-                $route = 'fos_user_registration_confirmed';
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+
+        if ('POST' === $request->getMethod()) {
+            $request->attributes->set('username',$user->getEmail());
+            $form->bind($request);
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+
+
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
             }
-
-            $this->setFlash('fos_user_success', 'registration.flash.user_created');
-            $url = $this->container->get('router')->generate($route);
-
-            return new RedirectResponse($url);
         }
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
         ));
     }
-
 } 
