@@ -1,19 +1,31 @@
 {# src/Jc/JolieCar/resources/views/header.html.twig  #}
-<div class="row">
-    {%set tailleCol="col-lg-4 col-sm-6 col-xs-12"%}
-    <div class="{{tailleCol}}">
-        <a href="{{path('joliecar_accueil')}}" title="acceder à la page d'accueil">
-             <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" class="img-responsive"/>
-        </a> 
-     </div>
-     <a href="{{path('add_car')}}">Ajouter une annonce</a><br/>
-    {% if car is defined %}
-        <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
-    {% endif %}
+    <div id="logo">
+        {%set tailleCol="col-lg-4 col-sm-6 col-xs-12"%}
+        <div>
+            <a href="{{path('joliecar_accueil')}}" title="acceder à la page d'accueil">
+                <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
+            </a>
+        </div>
+    </div>
+    <div id="headerSearch">
+        {{render(controller('JcJolieCarBundle:JolieCar:headerSearch'))}}
+    </div>
 
-     <div id="headerSearch" class="pull-right">
-         {{render(controller('JcJolieCarBundle:JolieCar:headerSearch'))}}
-     </div>
-    
-</div>
+    <div id="profil">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+            <a href="{{path('add_car')}}">Ajouter une annonce</a><br/>
+            {% if car is defined %}
+                <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        {% endif %}
+
+    </div>
+
+
     

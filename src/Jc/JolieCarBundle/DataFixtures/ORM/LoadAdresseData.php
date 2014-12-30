@@ -38,7 +38,6 @@ class LoadAdresseData extends AbstractFixture implements OrderedFixtureInterface
         );
         foreach ($listeAdresses as $i => $element) {
                 $adresses[$i] = new Adresse();
-                $adresses[$i]->setEmail($element['email']);
                 $adresses[$i]->setIndicationLieu($element['indicationLieu']);
                 $adresses[$i]->setQuartier($element['quartier']);
                 $adresses[$i]->setSite($element['site']);

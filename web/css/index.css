@@ -42,6 +42,12 @@ a:hover
 {
     padding: 0px;
     color: black;
+
+}
+.apercuCarInfo > div
+{
+    overflow: hidden;
+    font-size: small;
 }
 #contenu
 {

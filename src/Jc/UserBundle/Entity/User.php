@@ -39,7 +39,6 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="autreNom", type="string", length=255,nullable=true)
-     * @Assert\NotBlank(message="Veuillez fournir le nom du Proprietaire")
      */
     private $autreNom;
 
@@ -50,7 +49,7 @@ class User extends BaseUser
     private $voitures;
 
     /**
-     * @ORM\OneToOne(targetEntity="Jc\JolieCarBundle\Entity\Adresse")
+     * @ORM\ManyToOne(targetEntity="Jc\JolieCarBundle\Entity\Adresse",inversedBy="users",cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      * @Assert\Valid()
      */

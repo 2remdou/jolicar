@@ -29,7 +29,8 @@ class TypeUser
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="Jc\UserBundle\Entity\TypeUser",mappedBy="typeUser")
+     * @ORM\OneToMany(targetEntity="Jc\UserBundle\Entity\User",mappedBy="typeUser")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $users;
 
@@ -64,5 +65,45 @@ class TypeUser
     public function getNom()
     {
         return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Jc\UserBundle\Entity\TypeUser $users
+     * @return TypeUser
+     */
+    public function addUser(\Jc\UserBundle\Entity\TypeUser $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Jc\UserBundle\Entity\TypeUser $users
+     */
+    public function removeUser(\Jc\UserBundle\Entity\TypeUser $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

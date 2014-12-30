@@ -59,6 +59,10 @@ class Adresse
      */
     private $indicationLieu;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Jc\UserBundle\Entity\User",mappedBy="adresse")
+     */
+    private $users;
 
     /**
      * Get id
@@ -184,5 +188,45 @@ class Adresse
     public function getIndicationLieu()
     {
         return $this->indicationLieu;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Jc\UserBundle\Entity\User $users
+     * @return Adresse
+     */
+    public function addUser(\Jc\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Jc\UserBundle\Entity\User $users
+     */
+    public function removeUser(\Jc\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

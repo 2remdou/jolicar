@@ -36,21 +36,24 @@ class RegistrationController extends  BaseController {
         $form = $formFactory->createForm();
         $form->setData($user);
 
-
         if ('POST' === $request->getMethod()) {
-            $request->attributes->set('username',$user->getEmail());
+            $attributForm = $request->request->get('fos_user_registration_form');
+            $attributForm =  array_replace($attributForm,array(
+                   'username' => $attributForm['email'],
+                ));
+            $request->request->set('fos_user_registration_form',$attributForm);
+            //$request->request->set('username',$request->request->get('email'));
             $form->bind($request);
+
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
                 $userManager->updateUser($user);
 
-
-
-
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                    //$url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                    $url = $this->container->get('router')->generate('joliecar_accueil');
                     $response = new RedirectResponse($url);
                 }
 
@@ -61,7 +64,8 @@ class RegistrationController extends  BaseController {
         }
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
-            'form' => $form->createView(),
-        ));
+                'form' => $form->createView(),
+            ));
     }
+
 } 

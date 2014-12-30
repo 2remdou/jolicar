@@ -1,7 +1,7 @@
 {# src/Jc/UserBundle/resources/views/layout.html.twig#}
+{% trans_default_domain 'FOSUserBundle' %}
 
 {% extends "::base.html.twig" %}
-
 
 
 {# Dans notre layout, il faut définir le block body #}
@@ -18,10 +18,12 @@
     </div>
 
     {# On affiche les messages flash que définissent les contrôleurs du bundle #}
-    {% for key, message in app.session.flashbag.all() %}
-        <div class="alert alert-{{ key }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
+    {% for key, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ key }}">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
     {% endfor %}
 
     {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
