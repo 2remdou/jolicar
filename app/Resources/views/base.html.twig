@@ -4,16 +4,15 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Bonjour!{% endblock %}</title>
         {%block stylesheets%}
-            {% stylesheets filter='cssrewrite' 
-                    'jquery-ui/jquery-ui.min.css'
-                    'css/bootstrap/css/*'
+            {% stylesheets filter='cssrewrite'
+                    'libs/bootstrap/dist/css/bootstrap.min.css'
                     'css/base.css'
                     'css/index.css'
                     'css/header.css'
-                    'js/select2/select2.css'
-                    'js/select2/select2-bootstrap.css'
-                    'js/Elastislide/css/elastislide.css'
-                    output='css/compiled/main.css'
+                    'libs/select2/select2.css'
+                    'libs/select2/select2-bootstrap.css'
+                    'libs/elastislide/css/elastislide.css'
+                    output='compiled/main.css'
                      %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />            
             {%endstylesheets%}
@@ -22,9 +21,9 @@
 
         {% endblock otherStylesheets %}
         {% javascripts
-                        'css/bootstrap/js/jquery-min.js'
-                        'js/Elastislide/js/modernizr.custom.17475.js'            
-                        output='js/compiled/main.js'%}
+                        'libs/jquery/dist/jquery.min.js'
+                        'libs/Elastislide/js/modernizr.custom.17475.js'
+                        output='compiled/main.js'%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {%endjavascripts%}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -67,14 +66,14 @@
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
         {% block javascripts%}
             {% javascripts             
-                            'jquery-ui/jquery-ui.min.js'
-                            'css/bootstrap/js/bootstrap.min.js'
+                            'libs/jquery-ui/jquery-ui.min.js'
+                            'libs/bootstrap/dist/js/bootstrap.min.js'
                             'js/outils.js'
                             'js/boot.js'
-                            'js/select2/select2.min.js'
-                            'js/Elastislide/js/*'
+                            'libs/select2/select2.min.js'
+                            'libs/elastislide/js/*'
                             'js/index.js'
-                            output='js/compiled/main.js'%}
+                            output='compiled/main.js'%}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {%endjavascripts%}
                 <script type="text/javascript">

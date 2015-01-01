@@ -5,7 +5,7 @@
 {%block otherStylesheets%}
     {% stylesheets filter='cssrewrite'
     'css/addCar.css'
-    output='css/compiled/main.css'
+    output='compiled/main.css'
     %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {%endstylesheets%}
@@ -87,7 +87,7 @@
     {{form_end(form)}}
 {%endblock contenu%}
       {%block otherScript%}
-          {% javascripts 'js/addCar.js' output='js/compiled/main.js' %}
+          {% javascripts 'js/addCar.js' output='compiled/main.js' %}
           <script type="text/javascript" src="{{ asset_url }}"></script>
           {%endjavascripts%}
       {%endblock%}
