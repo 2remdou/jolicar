@@ -1,0 +1,14 @@
+{
+  "name": "elastislide",
+  "homepage": "https://github.com/codrops/Elastislide",
+  "_release": "26e0edb04f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "26e0edb04f119e512af7f6920ce5858319683391"
+  },
+  "_source": "git://github.com/codrops/Elastislide.git",
+  "_target": "*",
+  "_originalSource": "elastislide",
+  "_direct": true
+}

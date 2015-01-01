@@ -1,6 +1,5 @@
 /web/bundles/
-/web/css/compiled/
-/web/js/compiled/
+/web/compiled/
 /web/images/cars/
 .idea/
 /nbproject/
