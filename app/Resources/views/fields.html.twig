@@ -75,15 +75,12 @@
 {%- endblock date_widget %}
 
 {% block form_row -%}
-    <div class="row">
-        <div>
-            {{- form_label(form) -}}
-        </div>
-        <div>
+    <div class="ligneForm">
+        {{- form_label(form) -}}
+        <div class="elementForm">
             {{- form_widget(form) -}}
         </div>
     </div>
-
 {%- endblock form_row %}
 
 {% block textarea_widget -%}

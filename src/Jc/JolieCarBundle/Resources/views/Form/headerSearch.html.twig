@@ -1,0 +1,15 @@
+{# empty Twig template #}
+
+{% block _jc_joliecarbundle_headerSearch_btnRechercher_widget -%}
+    {% if label is empty -%}
+        {% set label = name|humanize %}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" class="glyphicon glyphicon-search" {{ block('button_attributes') }}></button>
+{%- endblock _jc_joliecarbundle_headerSearch_btnRechercher_widget %}
+
+{% block form_row -%}
+    {{- form_widget(form) -}}
+{%- endblock form_row %}
+
+
+

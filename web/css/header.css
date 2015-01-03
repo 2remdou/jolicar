@@ -12,31 +12,113 @@ header
 {
     background-color:#00bbec;
     width: 100%;
-    height: 100px;
+    height: auto;
+    position: relative;
 }
-header>div
+#logo{
+    max-width: 440px;
+}
+#notLogo
 {
-    float: left;
-    box-sizing: border-box;
-    margin-left: 2%;
-    margin-right: 2%;
+    position: relative;
+    margin-left: 15px;
 }
 #headerSearch
 {
-    margin-bottom: 0px;
+    width: 80%;
 }
+
 #headerSearch
 {
-    margin-right: 5%;
-    /*box-sizing: border-box;*/
+    margin: 0;
+    padding: 2px;
+    position: relative;
 }
-#headerSearch div
+#headerSearch>form
 {
+    width: 95%;
+}
+#menu
+{
+    position: absolute;
+    top:10px;
+    right: 0px;
+}
+#headerSearch>form>div{
     float: left;
-    margin-right: 2px;
 }
-#headerSearch button
+#headerSearch>form>div:first-child{
+     width: 90%;
+ }
+#headerSearch>form>div:nth-child(2){
+    width: 10%;
+}
+#jc_joliecarbundle_headerSearch_rechercher
 {
-    height: 28px;
-    padding: 0px;
+    width: 100%;
+    height: 30px;
 }
+#jc_joliecarbundle_headerSearch_btnRechercher
+{
+    width: 100%;
+    height: 30px;
+}
+#profil
+{
+    max-width: 400px;
+    position: relative;
+}
+#profil .btn
+{
+    border: 1px solid rgba(2,2,2,0.18);
+    box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+    -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+
+    margin-left: 20px;
+}
+
+.hideProfil
+{
+    display: none;
+}
+
+
+@media screen and (min-width: 500px) {
+     header>div
+      {
+          float: left;
+      }
+
+     #menu
+      {
+          display: none;
+      }
+
+      .hideProfil{
+          display: block ;
+      }
+}
+
+
+@media screen and (min-width: 970px) {
+
+    #notLogo
+    {
+        padding-top: 15px;
+        width: 500px;
+        position: absolute;
+        right: 30px;
+    }
+    #headerSearch
+    {
+        width: 50%;
+        float: left;
+    }
+    #profil
+    {
+        width: 50%;
+        float: left;
+    }
+
+}
+

@@ -1,24 +1,26 @@
 {# empty Twig template #}
 
 {% block _jc_joliecarbundle_voiture_modele_widget -%}
-    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
-        {% set required = false %}
-    {%- endif -%}
-    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
-        {% if empty_value is not none -%}
-            <option value=""{% if required and value is empty %} selected="selected"{% endif %} class="form-control">{{ empty_value|trans({}, translation_domain) }}</option>
-        {%- endif %}
-        {%- if preferred_choices|length > 0 -%}
-            {% set options = preferred_choices %}
-            {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
-            {% if choices|length > 0 and separator is not none -%}
-                <option disabled="disabled">{{ separator }}</option>
-            {%- endif %}
+    <div>
+        {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+            {% set required = false %}
         {%- endif -%}
-        {% set options = choices -%}
-        {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
-    </select>   
-{%- endblock _jc_joliecarbundle_voiture_modele_widget %} 
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
+            {% if empty_value is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %} class="form-control">{{ empty_value|trans({}, translation_domain) }}</option>
+            {%- endif %}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
+                {% if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif %}
+            {%- endif -%}
+            {% set options = choices -%}
+            {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
+        </select>
+    </div>
+{%- endblock _jc_joliecarbundle_voiture_modele_widget %}
 
 {% block _jc_joliecarbundle_voiture_modele_choice_widget_options -%}
 {% spaceless%}
@@ -43,38 +45,55 @@
     {% endfor %}
 {% endspaceless%}
 {% endblock _jc_joliecarbundle_voiture_modele_choice_widget_options %}
-            
+
+
+
 {% block form_row -%}
+    <div class="ligneForm">
         {{- form_widget(form) -}}
+    </div>
 {%- endblock form_row %}
 
-{% block _jc_joliecarbundle_voiture_images_row -%}
-    <div class="row" id="imagesUpload">
+
+{% block _jc_joliecarbundle_voiture_mainImage_row -%}
+    <div id='uploadMiniature_mainImage'>
+        <div class='text-center'>Image Principale</div>
+        <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
+        <div class="conteneurBtnUpload">
             {{- form_widget(form) -}}
+            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+        </div>
     </div>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_row %}
 
-{%- endblock _jc_joliecarbundle_voiture_images_row %}
-
+{% block _jc_joliecarbundle_voiture_mainImage_widget -%}
+    {% set type = 'file' -%}
+    <input class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_widget %}
 
 {% block collection_widget -%}
     {% if prototype is defined %}
-        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+        {%- set attr = attr|merge({'data-prototype': block('file_row') }) -%}
     {% endif %}
     {{- block('form_widget') -}}
-
 {%- endblock collection_widget %}
 
-{% block _jc_joliecarbundle_voiture_mainImage_row -%}
-<div id='uploadMiniature_mainImage' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-    <div class='text-center'>Image Principale</div>
-    <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar' class='img-responsive'/>
-    <div class='fileinput-button text-center'>
+
+
+{% block _jc_joliecarbundle_voiture_images_row -%}
         {{- form_widget(form) -}}
-        <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+{%- endblock _jc_joliecarbundle_voiture_images_row %}
+
+
+{% block file_row -%}
+    <div id='uploadMiniature'>
+        <div id="jc_joliecarbundle_voiture_images___name__">
+            <div class='text-center'>Image Principale</div>
+            <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
+            <div class="conteneurBtnUpload">
+                <input class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images___name___file" name="jc_joliecarbundle_voiture[images][__name__][file]" />
+                <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+            </div>
+        </div>
     </div>
-</div>
-
-
-{%- endblock _jc_joliecarbundle_voiture_mainImage_row %}
-
-
+{%- endblock file_row %}

@@ -7,19 +7,11 @@
     {#{%block tabAccesRapide%}
         {{render(controller('JcJolieCarBundle:AccesRapide:tabAcces'))}}
     {% endblock tabAccesRapide%}#}
-    <div id='contenu' class="row">
-        {%block contenu%}
+        {% block search%}
 
-                <section class="row">
-                    {% block search%}
+        {% endblock search%}
 
-                   {% endblock search%}
-                </section>
-                <section id="zoneLibre" class="row center-block">
-                    {% block zoneLibre%}
+        {% block zoneLibre%}
 
-                   {% endblock zoneLibre%}
-                </section>  
-        {%endblock contenu%}
-    </div>
-{%endblock%}
+        {% endblock zoneLibre%}
+{%endblock main%}

@@ -7,18 +7,47 @@ and open the template in the editor.
     Created on : 27 oct. 2014, 14:11:31
     Author     : Toure
 */
-form .row
+form
 {
-    margin: 5px;
+    margin: 0 auto;
+    max-width: 700px;
+    margin-top: 30px;
 }
+#nomMarque,#nomModele{
+    width: 100%;
+    position: relative;
+}
+#nomMarque>.ligneForm,#nomModele>.ligneForm
+{
+    width: 95%;
+    float: left;
+}
+
 #ajoutMarque,#ajoutModele
 {
     cursor: pointer;
+    position: absolute;
+    right: 3px;
+    float: left;
+    width: 5%;
+    margin-top: 5px;
 }
-
+.ligneForm{
+    width: 95%;
+}
+#accordion
+{
+    margin-top: 10px;
+}
+#accordion>*
+{
+    margin-top: 5px;
+}
 [id*=uploadMiniature]{
     margin: 5px;
     padding: 5px;
+    width: 25%;
+    float: left;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid rgba(2,2,2,0.18);
     box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
@@ -33,6 +62,7 @@ form .row
     background-color: red;
 }
 
+/*
 .fileinput-button {
     position: relative;
     overflow: hidden;
@@ -51,4 +81,4 @@ form .row
      font-size: 200px;
      direction: ltr;
      cursor: pointer;
-}
+}*/

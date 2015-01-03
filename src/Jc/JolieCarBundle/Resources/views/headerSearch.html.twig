@@ -1,9 +1,12 @@
 {# src/Jc/JolieCarBundle/resources/views/headerSearch.html.twig#}
+{%form_theme formHeader 'JcJolieCarBundle:Form:headerSearch.html.twig'%}
 {{form_start(formHeader,{'attr': {'class': 'form-inline'}})}}
     <div>
         {{form_row(formHeader.rechercher)}}
     </div>
     <div>
-        {{form_row(formHeader.btnRechercher)}}
-    </div>         
+        {{form_widget(formHeader.btnRechercher)}}
+    </div>
+    {{ form_rest(formHeader) }}
+<br clear="both">
 {{form_end(formHeader)}}

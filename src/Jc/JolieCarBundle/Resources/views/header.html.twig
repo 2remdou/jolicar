@@ -1,31 +1,57 @@
 {# src/Jc/JolieCar/resources/views/header.html.twig  #}
     <div id="logo">
-        {%set tailleCol="col-lg-4 col-sm-6 col-xs-12"%}
-        <div>
             <a href="{{path('joliecar_accueil')}}" title="acceder à la page d'accueil">
                 <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
             </a>
+    </div>
+    <div id="notLogo">
+        <div id="headerSearch">
+            {{render(controller('JcJolieCarBundle:JolieCar:headerSearch'))}}
+            <div id="menu" class="glyphicon glyphicon-align-justify white" data-infobulle="afficher le menu"></div>
         </div>
-    </div>
-    <div id="headerSearch">
-        {{render(controller('JcJolieCarBundle:JolieCar:headerSearch'))}}
-    </div>
 
-    <div id="profil">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-            <a href="{{ path('fos_user_security_logout') }}">
-                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-            </a>
-            <a href="{{path('add_car')}}">Ajouter une annonce</a><br/>
-            {% if car is defined %}
-                <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
+
+        <div id="profil" class="hideProfil">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                        {{ app.user.nom }}
+                        {% if app.user.autreNom %}
+                            {{ app.user.autreNom }}
+                        {% endif %}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <a href="{##}">Profil</a>
+                        </li>
+                        <li>
+                            <a href="{{path('add_car')}}">Ajouter une annonce</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" tabindex="-1" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                        <li>
+                            {% if car is defined %}
+                                <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                </div>
+                {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.nom}, 'FOSUserBundle') }} |#}
+                <br/>
+
+            {% else %}
+                <a class="btn btn-default" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
+                {#<button class="btn btn-default" data-url="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</button>#}
             {% endif %}
-        {% else %}
-            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-        {% endif %}
 
+        </div>
+        <br clear="both">
     </div>
+
 
 
     

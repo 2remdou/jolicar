@@ -11,7 +11,6 @@ function adopteLibelle(typeUser){
 
     }
     else{
-        console.log($(this).attr('placeholder'));
         $('label[for="fos_user_registration_form_autreNom"]').fadeIn('fast');
         $("#fos_user_registration_form_autreNom").fadeIn('fast');
         $('label[for="fos_user_registration_form_nom"]').text("Nom");

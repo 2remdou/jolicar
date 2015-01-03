@@ -161,7 +161,9 @@ $(document).ready(function(){
 
     // for an others images
     $('#jc_joliecarbundle_voiture_images').on('change','input[type="file"]', function (){
-       var parent = $(this).parent().parent().parent();
+        console.log($(this));
+        var parent = $(this).parent().parent().parent();
+       // var parent = $('#images');
        var numeroClick = getNumero($(parent).attr('id'));
       //(uploadMiniature_)=16 caracteres
        var file = document.querySelector('#uploadMiniature_'+numeroClick+' input[type="file"]');
@@ -181,5 +183,8 @@ $(document).ready(function(){
         removeUploadMiniature(element);
     })
 
-
+/*    $('#images').masonry({
+        itemSelector: '[id*="uploadMiniature_"]',
+        isFitWidth: false
+    });*/
 });

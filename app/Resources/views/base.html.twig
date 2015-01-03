@@ -34,8 +34,10 @@
                 {%block header%}
                     {% include 'JcJolieCarBundle::header.html.twig'%}
                 {% endblock header%}
+            <br clear="both">
         </header>
-        <div class="container" id="global">   
+        <div class="container" id="global">
+            <div id="showSearch" class="glyphicon glyphicon-search" data-infobulle="Afficher les criteres de recherches"></div>
             <div id="message" class="row">
                  {#{% for message in app.session.flashbag.get('message') %}#}
                  {% for messages in app.session.flashbag.all() %}
@@ -50,12 +52,9 @@
                      {% endfor %}
                  {% endfor %}
             </div>
-            <div>
-                 {% block main%}
+            {% block main%}
                 
-                {% endblock main%}                
-            </div>
-           
+            {% endblock main%}
             <footer>
                 {%block footer%}
                 
@@ -70,9 +69,10 @@
                             'libs/bootstrap/dist/js/bootstrap.min.js'
                             'js/outils.js'
                             'js/boot.js'
+                            'js/base.js'
                             'libs/select2/select2.min.js'
                             'libs/elastislide/js/*'
-                            'js/index.js'
+                            'libs/masonry/dist/masonry.pkgd.min.js'
                             output='compiled/main.js'%}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {%endjavascripts%}

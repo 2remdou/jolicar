@@ -106,11 +106,9 @@ function displayMessage(element,message,type) {   //****** Suppression des messa
 }
 function showModele(){
     $('#ajoutModele').children("span").attr('class','glyphicon glyphicon-minus');
-    var col = "col-lg-6 col-sm-6 col-md-6 col-xs-6";
-    var colButton = "col-lg-2 col-sm-2 col-md-2 col-xs-2";
-    var element = '<div id="newModele" class="row" style="margin-top:40px;">';
-    element = element + '<div class="'+col+'"><input type="text"  placeholder="Saisissez le nouveau modele" name="newNomModele" id="newNomModele" class="form-control" "/> </div>'
-    element = element + '<button id="btnAjoutModele" class="'+colButton+'">Enregistrer</button>';
+    var element = '<div id="newModele" class="ligneForm">';
+    element = element + '<input type="text"  placeholder="Saisissez le nouveau modele" name="newNomModele" id="newNomModele" class="form-control" "/>'
+    element = element + '<button id="btnAjoutModele">Enregistrer</button>';
     element = element + '</div>';
     $("#nomModele").append(element);
     $("#newModele").hide();
@@ -123,12 +121,11 @@ function hideModele(){
 }
 function showMarque(){
     $('#ajoutMarque').children("span").attr('class','glyphicon glyphicon-minus');
-    var col = "col-lg-6 col-sm-6 col-md-6 col-xs-6";
-    var colButton = "col-lg-2 col-sm-2 col-md-2 col-xs-2";
-    var element = '<div id="newMarque"class="row" style="margin-top:40px;">';
-    element = element + '<div class="'+col+'"><input type="text" placeholder="Saisissez la nouvel marque" name="nom" id="newNomMarque" class="form-control" "/> </div>'
-    element = element + '<button id="btnAjoutMarque" class="'+colButton+'">Enregistrer</button>';
-    element = element + '</div>'
+    var element = '<div id="newMarque" class="ligneForm">';
+    element = element + '<input type="text" placeholder="Saisissez la nouvel marque" name="nom" id="newNomMarque" class="form-control" "/>'
+    element = element + '<button id="btnAjoutMarque">Enregistrer</button>';
+    element = element + '</div>';
+    console.log(element);
     $("#nomMarque").append(element);
     $("#newMarque").hide();
     $("#newMarque").show('slow');
@@ -176,18 +173,8 @@ function existInSelect(select,value){
 }
 
 function addUploadMiniature(parent,numeroClick){
-    prototype = $(parent).data('prototype');
-
-    var contenu =  "<div id='uploadMiniature_"+mesImages.nextNumber+"' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'> " +
-        "<div class='libelleImage text-center'></div>" +
-        "<img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar' class='img-responsive'/> " +
-        "<div class='fileinput-button text-center'> <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div> ";
-    if(typeof prototype != "undefined"){
-        contenu = contenu + prototype.replace(/__name__/g,mesImages.nextNumber)
-    }
-    contenu = contenu +
-    "</div> " +
-    "</div>";
+    var prototype = $(parent).data('prototype');
+    var contenu = contenu + prototype.replace(/__name__/g,mesImages.nextNumber)
     var uploadMiniature= $(contenu);
     if(isInsertImage(numeroClick)){
         uploadMiniature.appendTo($(parent));
@@ -205,5 +192,51 @@ function removeUploadMiniature(element){
 function refreshNumber(){
     $.each($('.libelleImage'), function (index,value) {
         $(value).text('Image '+(index+2));
+    });
+}
+
+function attachInfobulle(element){
+    $(element).mouseover(function(){
+        var $this = $(this);
+
+        if(typeof $this.data('infobulle')== "undefined") return false;
+
+        $('body').append('<span class="infobulle"></span>');
+        var bulle = $(".infobulle:last");
+        bulle.append($this.data('infobulle'));
+        var posTop = $this.offset().top - $this.height()*2;
+        posTop<0?0:posTop+5;
+        var posLeft = $this.offset().left;
+        posLeft<0?0:posLeft+5;
+        bulle.css({
+            left:posLeft,
+            top:posTop,
+            opacity:0
+        });
+
+        bulle.animate({
+            top:posTop,
+            opacity:0.99
+        });
+
+    });
+
+    $(element).mouseout(function(){
+
+        var $this = $(this);
+        if(typeof $this.data('infobulle')== "undefined") return false;
+        var bulle = $(".infobulle:last");
+
+        bulle.animate(
+            {
+                top: bulle.offset().top+10,
+                opacity: 0
+            },
+            500,
+            "linear",
+            function(){
+                bulle.remove();
+            }
+        );
     });
 }

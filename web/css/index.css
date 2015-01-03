@@ -16,28 +16,24 @@ and open the template in the editor.
 {  
     margin-top: 5px;
 }
+/*********SEARCH***************/
 
-a
+
+/*#search>form [id*='carburant'],#search>form [id*='boitier'],#search>form [id*='prixMin']
 {
-    color: white;
-}
-a:hover
-{
-    background-color: #00bbec;
-}
+    display: none;
+}*/
+
+
+/********* IMAGE***************/
 
 .apercuCar
 {
-    width: 190px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    display: inline-block;
+    width: 40%;
+    height: 200px;
+    float: left;
+    margin: 5px;
 }
-/*.apercuCar:first-child
-{
-    margin-left: 10px;
-}*/
 .apercuCarInfo
 {
     padding: 0px;
@@ -49,30 +45,29 @@ a:hover
     overflow: hidden;
     font-size: small;
 }
-#contenu
+
+.hideSearch
 {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid rgba(2,2,2,0.18);
-    box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
-    -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
+    display: none;
 }
 
 
+@media screen and (min-width: 500px){
 
-.form-control
-{
-    height: 28px;
-}
-.zone
-{
-    margin-bottom: 5px;
+    .apercuCar{
+        width: 30%;
+    }
+    #search>form>.ligneForm{
+        float: left;
+        width: 50%;
+    }
 }
 
+@media screen and (min-width: 800px){
 
-#zoneLibre
-{
-    margin-top: 5px;
-    margin-left: 35px;
+    .apercuCar{
+        width: 20%;
+    }
+
 }
+
