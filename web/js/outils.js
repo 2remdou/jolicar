@@ -1,6 +1,102 @@
 /**
  * Created by Toure on 09/12/14.
  */
+function addMarqueAjax(e){
+    e.preventDefault();
+    newNomMarque = $('#newNomMarque').val();
+
+
+    if(newNomMarque===""){
+        displayMessage($('#message'),'Veuillez saisr la nouvelle marque','danger');
+        return;
+    }
+    var test = existInSelect($('#jc_joliecarbundle_voiture_marque'),newNomMarque);
+    if(test){
+        displayMessage($('#message'),'Une marque de même nom existe déja','danger');
+        return;
+    }
+    var url = $('#ajoutMarque').data('url');
+    $.ajax({
+        url: url,
+        type: "POST",
+        dataType: "json",
+        data: {nom:newNomMarque}
+    })
+        .done(function(data,jqXHR){
+            if (data.typeMessage=="success") {
+                displayMessage($('#message'), data.message, data.typeMessage);
+                var marque = $.parseJSON(data.marque);
+                mesMarques.add(marque);
+                addMarque($('#jc_joliecarbundle_voiture_marque'), marque['id'], marque['nom']);
+                hideMarque();
+            } else {
+                var errors = $.parseJSON(data.message);
+                for(var i=0;i<errors.length;i++){
+                    displayMessage($('#message'),errors[i].message, data.typeMessage);
+                }
+
+            }
+
+        })
+        .fail(function(jqXHR){
+            displayMessage($('#message'),jqXHR.responseText,'danger');
+        })
+    ;//fin ajax
+
+
+}
+function addModeleAjax(e){
+    e.preventDefault();
+    //*********** si la marque est selectionnee
+    idMarque = $('#s2id_jc_joliecarbundle_voiture_marque').select2("val");
+    if(idMarque === ""){
+        displayMessage($('#message'),'Veuillez selectionner une marque','danger');
+        return;
+    }
+
+    //******* si le modele est saisi ********
+    newNomModele = $('#newNomModele').val();
+    if(newNomModele === ""){
+        displayMessage($('#message'),'Veuillez saisir le nouveau modele','danger');
+        return;
+    }
+    if(existInSelect($('#jc_joliecarbundle_voiture_modele'),newNomModele)){
+        displayMessage($('#message'),'un modele de même nom existe déja','danger');
+        return;
+    }
+
+    var url = $('#ajoutModele').data('url');
+    $.ajax({
+        url: url,
+        type: "POST",
+        dataType: 'json',
+        data: {marque:idMarque,nom:newNomModele}
+    })
+        .done(function(data){
+            if(data.typeMessage == "success"){
+                displayMessage($('#message'),data.message,data.typeMessage);
+                var newModele = $.parseJSON(data.newModele);
+                mesModeles.add(newModele);
+                //addModeleInMarque(newModele['marque'].nom,newModele['id'],newModele['nom']);
+                loadModeleForMarque(newModele['marque'].nom);
+                $('#jc_joliecarbundle_voiture_modele').select2("val",newModele['id']);
+                hideModele();
+            }
+            else{
+                var errors = $.parseJSON(data.message);
+                for(var i=0;i<errors.length;i++){
+                    displayMessage($('#message'),errors[i].message, data.typeMessage);
+                }
+            }
+
+        })
+        .fail(function(jqXHR,data){
+            displayMessage($('#message'),data.message,'danger');
+        })
+    ;//fin ajax
+
+
+}
 function initMarque(){
     $('#jc_joliecarbundle_voiture_marque>option').each(function(){
 
@@ -31,8 +127,14 @@ function isInsertImage(numeroClick){
     }
     return false;
 }
-function getNumero(id){
-    return id.substr(16);
+function getNumero(chaine,limite){
+    var num = chaine.substr(limite);
+    if(isNaN(parseInt(num)) ){
+        return 0;
+    }
+    else{
+        return num;
+    }
 }
 function loadImage(parent,file,img,numeroClick,isRemove){
     var file = file.files[0];
@@ -44,7 +146,7 @@ function loadImage(parent,file,img,numeroClick,isRemove){
         var valId = 'removeImage_'+numeroClick;
 
         if(isRemove){
-            $("<span id='"+valId+"'class='glyphicon glyphicon-remove'></span>").prependTo($(parent));
+            $("<span id='"+valId+"'class='glyphicon glyphicon-remove'></span>").prependTo($(parent).find('.libelle'));
         }
         var image = Object.create(Image);
         image.numero = mesImages.nextNumber;
@@ -53,7 +155,7 @@ function loadImage(parent,file,img,numeroClick,isRemove){
         //if(isInsertImage(numeroClick))
         if(!mesImages.exist(numeroClick)){
             mesImages.add(image);
-            addUploadMiniature($('#jc_joliecarbundle_voiture_images'),parseInt(numeroClick));
+            addUploadMiniature($('#images'),parseInt(numeroClick));
         }
         else{
             mesImages.update(image);
@@ -108,9 +210,14 @@ function showModele(){
     $('#ajoutModele').children("span").attr('class','glyphicon glyphicon-minus');
     var element = '<div id="newModele" class="ligneForm">';
     element = element + '<input type="text"  placeholder="Saisissez le nouveau modele" name="newNomModele" id="newNomModele" class="form-control" "/>'
-    element = element + '<button id="btnAjoutModele">Enregistrer</button>';
+    //element = element + '<button id="btnAjoutModele">Ajouter le modele</button>';
     element = element + '</div>';
-    $("#nomModele").append(element);
+    var btn = $('<button id="btnAjoutModele">Ajouter le modele</button>').click(function(e){
+        addModeleAjax(e);
+    });
+    $(element).insertAfter('#nomModele');
+    btn.appendTo('#newModele');
+    //$("#nomModele").append(element);
     $("#newModele").hide();
     $("#newModele").show('slow');
 }
@@ -123,10 +230,14 @@ function showMarque(){
     $('#ajoutMarque').children("span").attr('class','glyphicon glyphicon-minus');
     var element = '<div id="newMarque" class="ligneForm">';
     element = element + '<input type="text" placeholder="Saisissez la nouvel marque" name="nom" id="newNomMarque" class="form-control" "/>'
-    element = element + '<button id="btnAjoutMarque">Enregistrer</button>';
+    //element = element + '<button id="btnAjoutMarque">Ajouter la marque</button>';
     element = element + '</div>';
-    console.log(element);
-    $("#nomMarque").append(element);
+    var btn = $('<button id="btnAjoutMarque">Ajouter la marque</button>').click(function(e){
+        addMarqueAjax(e);
+    });
+    $(element).insertBefore('#nomModele');
+    btn.appendTo($('#newMarque'));
+    //$("#nomMarque").append(element);
     $("#newMarque").hide();
     $("#newMarque").show('slow');
 
@@ -173,16 +284,23 @@ function existInSelect(select,value){
 }
 
 function addUploadMiniature(parent,numeroClick){
-    var prototype = $(parent).data('prototype');
-    var contenu = contenu + prototype.replace(/__name__/g,mesImages.nextNumber)
+    var prototype = $('#jc_joliecarbundle_voiture_images').data('prototype');
+    var contenu = prototype.replace(/__name__/g,mesImages.nextNumber)
     var uploadMiniature= $(contenu);
     if(isInsertImage(numeroClick)){
-        uploadMiniature.appendTo($(parent));
-        refreshNumber();
+        var br = $(parent).find('br');
+        if(br.length){
+            uploadMiniature.insertBefore($(br));
+           // alert('bonjour');
+        }
+        else{
+            uploadMiniature.appendTo($(parent));
+        }
+     //   $('#images').masonry('appended',uploadMiniature);
     }
 }
 function removeUploadMiniature(element){
-    var position= getNumero($(element).attr('id'));
+    var position= getNumero($(element).attr('id'),16);
     var image = mesImages.findByNumero(position);
     $(element).remove();
     mesImages.remove(image);
@@ -190,7 +308,7 @@ function removeUploadMiniature(element){
 }
 
 function refreshNumber(){
-    $.each($('.libelleImage'), function (index,value) {
+    $.each($('.libelle>em'), function (index,value) {
         $(value).text('Image '+(index+2));
     });
 }

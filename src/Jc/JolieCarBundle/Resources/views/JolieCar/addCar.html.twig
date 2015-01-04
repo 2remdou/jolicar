@@ -15,7 +15,7 @@
 {%block main%}
     {{form_start(form,{'attr': {'class': 'contour'}})}}
         <div id="accordion">
-            <h3>Informations générales</h3>
+            <h6>Infos générales</h6>
             <div>
                 <div id="nomMarque">
                     {{form_row(form.marque)}}
@@ -33,7 +33,7 @@
                 {{form_row(form.dateAcquisition)}}
             </div>
 
-            <h3>Les images</h3>
+            <h6>Images</h6>
             <div>
                 <div id="images">
                     {{form_row(form.mainImage)}}
@@ -41,7 +41,7 @@
                 </div>
 
             </div>
-            <h3>Informations detaillées(facultatives)</h3>
+            <h6>Infos detaillées</h6>
             <div>
                 {{form_row(form.kmParcouru)}}
                 {{form_row(form.nombreRoueMotrice)}}

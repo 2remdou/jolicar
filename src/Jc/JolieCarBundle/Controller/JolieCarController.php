@@ -15,8 +15,7 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
-class
-JolieCarController extends Controller
+class JolieCarController extends Controller
 {
     /**
      * 
@@ -96,27 +95,23 @@ JolieCarController extends Controller
             $form->handleRequest($request);
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
-                if($originalMainImage !== $car->getMainImage()){
+                if($originalMainImage !== $car->getMainImage() && $originalMainImage !== null){
+                    var_dump($originalMainImage);
                     $originalMainImage->setMainImage(false);
                 }
                 foreach($originalImages as $image){
                     if(!$car->getImages()->contains($image) && !$image->isMainImage()){
-                        //$originalImages->removeElement($image);
-                        //$car->getImages()->removeElement($image);
                         $em->remove($image);
-
-
                     }
                 }
-                //$em->persist($car);
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été modifié');
-                /*return $this->redirect($this->generateUrl('joliecar_detail',array(
+                return $this->redirect($this->generateUrl('joliecar_detail',array(
                             'marque' => $car->getModele()->getMarque()->getNom(),
                             'modele' => $car->getModele()->getNom(),
                             'id' => $car->getId(),
 
-                        )));*/
+                        )));
             } else {
                 $mesErreur = array();
                 foreach($errors as $error){

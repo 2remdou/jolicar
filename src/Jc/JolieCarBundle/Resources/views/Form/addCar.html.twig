@@ -54,30 +54,33 @@
     </div>
 {%- endblock form_row %}
 
-
 {% block _jc_joliecarbundle_voiture_mainImage_row -%}
-    <div id='uploadMiniature_mainImage'>
-        <div class='text-center'>Image Principale</div>
-        <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
-        <div class="conteneurBtnUpload">
-            {{- form_widget(form) -}}
-            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
-        </div>
-    </div>
+<div id='uploadMiniature_mainImage'>
+        {{- form_widget(form) -}}
+</div>
 {%- endblock _jc_joliecarbundle_voiture_mainImage_row %}
 
-{% block _jc_joliecarbundle_voiture_mainImage_widget -%}
-    {% set type = 'file' -%}
-    <input class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-{%- endblock _jc_joliecarbundle_voiture_mainImage_widget %}
+
+{% block _jc_joliecarbundle_voiture_mainImage_file_row -%}
+            <div class='text-center libelle'>Image Principale</div>
+            <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
+            <div class="conteneurBtnUpload">
+                {#{{- form_widget(form) -}}#}
+                {% set type = type|default('file') -%}
+                <input data-numero="0" class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+                <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+    </div>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_file_row %}
+
 
 {% block collection_widget -%}
     {% if prototype is defined %}
-        {%- set attr = attr|merge({'data-prototype': block('file_row') }) -%}
+        {%- set attr = attr|merge({'data-prototype': block('themeFile_row') }) -%}
     {% endif %}
     {{- block('form_widget') -}}
-{%- endblock collection_widget %}
 
+{%- endblock collection_widget %}
 
 
 {% block _jc_joliecarbundle_voiture_images_row -%}
@@ -85,15 +88,19 @@
 {%- endblock _jc_joliecarbundle_voiture_images_row %}
 
 
-{% block file_row -%}
-    <div id='uploadMiniature'>
+{% block themeFile_row -%}
+    <div id='uploadMiniature___name__'>
         <div id="jc_joliecarbundle_voiture_images___name__">
-            <div class='text-center'>Image Principale</div>
+            <div class='text-center libelle'><em>Image</em></div>
             <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
             <div class="conteneurBtnUpload">
-                <input class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images___name___file" name="jc_joliecarbundle_voiture[images][__name__][file]" />
+                <input data-numero="__name__" class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images___name___file" name="jc_joliecarbundle_voiture[images][__name__][file]" />
                 <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
             </div>
         </div>
     </div>
-{%- endblock file_row %}
+{%- endblock themeFile_row %}
+
+{% block button_row -%}
+        {{- form_widget(form) -}}
+{%- endblock button_row %}

@@ -5,7 +5,7 @@
  */
 
 $(function(){
-    $('#accordion').accordion();
+    $('#accordion').accordion({collapsible: true});
     $('#caroussel').elastislide();
     //*********ajuster imageTop au contenu**************$*
     $(".imageTop>img").width($(".imageTop").parent().width());

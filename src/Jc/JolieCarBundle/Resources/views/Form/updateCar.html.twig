@@ -1,107 +1,150 @@
 {# empty Twig template #}
 
 {% block _jc_joliecarbundle_voiture_modele_widget -%}
-    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
-        {% set required = false %}
-    {%- endif -%}
-    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
-        {% if empty_value is not none -%}
-            <option value=""{% if required and value is empty %} selected="selected"{% endif %} class="form-control">{{ empty_value|trans({}, translation_domain) }}</option>
-        {%- endif %}
-        {%- if preferred_choices|length > 0 -%}
-            {% set options = preferred_choices %}
-            {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
-            {% if choices|length > 0 and separator is not none -%}
-                <option disabled="disabled">{{ separator }}</option>
-            {%- endif %}
+    <div>
+        {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+            {% set required = false %}
         {%- endif -%}
-        {% set options = choices -%}
-        {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
-    </select>   
-{%- endblock _jc_joliecarbundle_voiture_modele_widget %} 
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
+            {% if empty_value is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %} class="form-control">{{ empty_value|trans({}, translation_domain) }}</option>
+            {%- endif %}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
+                {% if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif %}
+            {%- endif -%}
+            {% set options = choices -%}
+            {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
+        </select>
+    </div>
+{%- endblock _jc_joliecarbundle_voiture_modele_widget %}
 
 {% block _jc_joliecarbundle_voiture_modele_choice_widget_options -%}
-{% spaceless%}
-    {% for group_label, choice in options %}
-        {%- if choice is iterable -%}
-            <optgroup label="{{ group_label|trans({}) }}">
-                {% set options = choice %}
-                {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
-            </optgroup>
-        {%- else -%}
-            <option data-test="{{ optionSelect }}" value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
+    {% spaceless%}
+        {% for group_label, choice in options %}
+            {%- if choice is iterable -%}
+                <optgroup label="{{ group_label|trans({}) }}">
+                    {% set options = choice %}
+                    {{- block('_jc_joliecarbundle_voiture_modele_choice_widget_options') -}}
+                </optgroup>
+            {%- else -%}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
                         {%if liste_marque is defined %}
-                            {%for val in liste_marque%}
-                                {%if choice.value in val%}
-                                    data-marque="{{val.marque.nom}}"
+                            {%for value in liste_marque%}
+                                {%if choice.value in value%}
+                                    data-marque="{{value.marque.nom}}"
                                 {%endif%}
                             {%endfor%}
                         {%endif%}
-                     
-                     >{{ choice.label|trans({}, translation_domain) }}</option>
-        {%- endif -%}
-    {% endfor %}
-{% endspaceless%}
+
+                        >{{ choice.label|trans({}, translation_domain) }}</option>
+            {%- endif -%}
+        {% endfor %}
+    {% endspaceless%}
 {% endblock _jc_joliecarbundle_voiture_modele_choice_widget_options %}
-            
+
+
+
 {% block form_row -%}
+    <div class="ligneForm">
         {{- form_widget(form) -}}
+    </div>
 {%- endblock form_row %}
 
 
-{% block _jc_joliecarbundle_voiture_images_row -%}
-    <div class="row" id="imagesUpload">
-        <button id="ajoutImage" class="btn btn-info pull-right">Ajouter une image</button>
+{#{% block _jc_joliecarbundle_voiture_mainImage_row -%}
+
+    <div id='uploadMiniature_mainImage'>
+        <div class='text-center libelle'>Image Principale</div>
+        {% set mainImage = form.vars.value %}
+        {% if mainImage %}
+            <img src='{{asset(mainImage.WebPath~mainImage.path)}}' alt='{{ mainImage.nom }}' class='img-responsive'/>
+        {% else %}
+            <img src='{{asset('images/specimenCar.png')}}' alt='logo_joliecar' class='img-responsive'/>
+        {% endif %}
+        <div class="conteneurBtnUpload">
             {{- form_widget(form) -}}
+            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
+        </div>
     </div>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_row %}#}
+{% block _jc_joliecarbundle_voiture_mainImage_row -%}
+    <div id='uploadMiniature_mainImage'>
+        <div class='text-center libelle'>Image Principale</div>
+        {% set mainImage = form.vars.value %}
+        {% if mainImage %}
+            <img src='{{asset(mainImage.WebPath~mainImage.path)}}' alt='{{ mainImage.nom }}' class='img-responsive'/>
+        {% else %}
+            <img src='{{asset('images/specimenCar.png')}}' alt='logo_joliecar' class='img-responsive'/>
+        {% endif %}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_row %}
 
-{%- endblock _jc_joliecarbundle_voiture_images_row %}
+{% block _jc_joliecarbundle_voiture_mainImage_file_row -%}
 
+    <div class="conteneurBtnUpload">
+        {% set type = type|default('file') -%}
+        <input data-numero="0" class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 
+        <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
+    </div>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_file_row %}
+
+{#{% block _jc_joliecarbundle_voiture_mainImage_widget -%}
+    {% set type = type|default('file') -%}
+    <input data-numero="0" class="btnUpload"
+           type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %} {% endif %}/>
+{%- endblock _jc_joliecarbundle_voiture_mainImage_widget %}#}
 
 {% block collection_widget -%}
     {% if prototype is defined %}
-        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+        {%- set attr = attr|merge({'data-prototype': block('file_row') }) -%}
     {% endif %}
     <div {{ block('widget_attributes') }}>
         {% for element in form %}
             {% set image = element.vars.value %}
             {% if image.mainImage==false %}
-                <div id="uploadMiniature_{{ loop.index-1 }}" class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-                    <span id="removeImage_{{ loop.index-1 }}" class='glyphicon glyphicon-remove'></span>
-                    <div class='libelleImage text-center'>Image {{ loop.index }}</div>
-                    <img src='{{asset(image.webPath~image.path)}}' alt='logo_joliecar' class='img-responsive'/>
-                    <div class='fileinput-button text-center'>
-                        <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
-                        {{- form_widget(element) -}}
+
+                <div id='uploadMiniature_{{ loop.index }}'>
+                    <div id="jc_joliecarbundle_voiture_images_{{ loop.index }}">
+                        <div class='text-center libelle'><span id="removeImage_{{ loop.index }}" class='glyphicon glyphicon-remove'></span><em>Image</em></div>
+                        <img src='{{asset(image.webPath~image.path)}}' alt='{{asset(image.webPath~image.nom)}}'/>
+                        <div class="conteneurBtnUpload">
+                            <input data-numero="{{ loop.index }}" class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images_{{ loop.index }}_file" name="jc_joliecarbundle_voiture[images][{{ loop.index }}][file]" />
+                            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
+                        </div>
                     </div>
                 </div>
-        {% endif %}
+
+            {% endif %}
         {% endfor %}
     </div>
 {%- endblock collection_widget %}
 
 
 
-{% block _jc_joliecarbundle_voiture_mainImage_row -%}
-    <div id='uploadMiniature_mainImage' class='col-lg-2 col-md-3 col-sm-3 col-xs-4 thumbnail'>
-        <div class='text-center'>Image Principale</div>
-        {% set mainImage = form.vars.value %}
-        {% if mainImage %}
-            <img src='{{asset(mainImage.webPath~mainImage.path)}}' alt='{{ mainImage.nom }}' class='img-responsive'/>
-            {% else %}
-                <img src='{{asset('images/specimenCar.png')}}' alt='logo_joliecar' class='img-responsive'/>
-        {% endif %}
+{% block _jc_joliecarbundle_voiture_images_row -%}
+    {{- form_widget(form) -}}
+{%- endblock _jc_joliecarbundle_voiture_images_row %}
 
-        <div class='fileinput-button text-center'>
-            {{- form_widget(form) -}}
-            <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
+
+{% block file_row -%}
+    <div id='uploadMiniature___name__'>
+        <div id="jc_joliecarbundle_voiture_images___name__">
+            <div class='text-center libelle'><em>Image</em></div>
+            <img src='/jolicar/web/images/specimenCar.png' alt='logo_joliecar'/>
+            <div class="conteneurBtnUpload">
+                <input data-numero="__name__" class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images___name___file" name="jc_joliecarbundle_voiture[images][__name__][file]" />
+                <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
+            </div>
         </div>
     </div>
-{% endblock _jc_joliecarbundle_voiture_mainImage_row -%}
+{%- endblock file_row %}
 
-
-
-
-
-
+{% block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock button_row %}

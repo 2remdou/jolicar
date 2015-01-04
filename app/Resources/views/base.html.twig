@@ -5,6 +5,7 @@
         <title>{% block title %}Bonjour!{% endblock %}</title>
         {%block stylesheets%}
             {% stylesheets filter='cssrewrite'
+                    'libs/jquery-ui/themes/cupertino/jquery-ui.min.css'
                     'libs/bootstrap/dist/css/bootstrap.min.css'
                     'css/base.css'
                     'css/index.css'
@@ -64,7 +65,7 @@
         
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
         {% block javascripts%}
-            {% javascripts             
+            {% javascripts
                             'libs/jquery-ui/jquery-ui.min.js'
                             'libs/bootstrap/dist/js/bootstrap.min.js'
                             'js/outils.js'

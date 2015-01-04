@@ -14,7 +14,7 @@
     {{parent()}}
 {%endblock%}
 
-{%block contenu%}
+{%block main%}
     
     <div class="col-lg-6 col-sm-6" id="imagesCar">
         <div class="imageTop">
@@ -64,7 +64,7 @@
             </table> 
         </div>
     </div>
-{%endblock%}
+{%endblock main%}
       {%block otherScript%}
           {% javascripts 'js/detail.js' output='compiled/main.js' %}
           <script type="text/javascript" src="{{ asset_url }}"></script>

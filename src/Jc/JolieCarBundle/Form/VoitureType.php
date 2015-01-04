@@ -64,6 +64,7 @@ class VoitureType extends AbstractType
             ))
             ->add('mainImage','imageCar',array(
                     'by_reference' => false,
+                    'required' => false,
                 ))
             ->add('prix','number',array(
                 'required' => false,
@@ -79,7 +80,7 @@ class VoitureType extends AbstractType
                     'placeholder' => 'Veuillez fournir le nombre de Km parcourus',
                 ))
                 )
-            ->add('dateAcquisition','birthday',array(
+            /*->add('dateAcquisition','birthday',array(
                 'required' => false,
                 'label' => false,
                 'format' => 'yyyyMMdd',
@@ -89,10 +90,15 @@ class VoitureType extends AbstractType
                     'year' => 'Année',
                     'month' => 'Mois',
                     'day' => 'Jour'
-                ),
-                'attr' => array(
-                    'placeholder' => "Veuillez fournir la date d'acquisition",
-                ))
+                ),*/
+            ->add('dateAcquisition','date',array(
+                    'required' => false,
+                    'label' => false,
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy',
+                    'attr' => array(
+                        'placeholder' => "Veuillez fournir la date d'acquisition",
+                    ))
                     )
 
             ->add('images','collection',array(
@@ -135,7 +141,7 @@ class VoitureType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Jc\JolieCarBundle\Entity\Voiture'
+            'data_class' => 'Jc\JolieCarBundle\Entity\Voiture',
         ));
 
     }

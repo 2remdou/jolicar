@@ -30,6 +30,35 @@ var Modele = {
     marque : Object.create(Marque)
 }
 
+var Page = {
+    numero : '0',
+    contenu : ''
+}
+var listePage = {
+    pages : [],
+
+    add : function(page){
+        this.pages.push(page);
+    },
+
+    list : function(){
+        return this.pages;
+    },
+
+    findByNumero : function(numero){
+        for(var i=0;i<this.pages.length;i++){
+            if(this.pages[i].numero == numero){
+                return this.pages[i];
+            }
+        }
+        return false;
+    },
+
+    count: function(){
+        return this.pages.length;
+    }
+
+}
 var listeMarque = {
     marques : [],
 
@@ -166,3 +195,4 @@ var listeImage = {
 var mesMarques = Object.create(listeMarque);
 var mesModeles = Object.create(listeModele);
 var mesImages = Object.create(listeImage);
+var mesPages = Object.create(listePage);

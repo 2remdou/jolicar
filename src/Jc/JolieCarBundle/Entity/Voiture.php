@@ -46,7 +46,6 @@ class Voiture
      *
      * @ORM\Column(name="dateAcquisition", type="date",nullable=true)
      * @Assert\Date(message="Veuillez fournir une date valide")
-     * @AssertJc\ConstraintDate()
      */
     private $dateAcquisition;
 
@@ -444,8 +443,12 @@ class Voiture
      * @param \Jc\JolieCarBundle\Entity\Image $mainImage
      * @return Voiture
      */
-    public function setMainImage(\Jc\JolieCarBundle\Entity\Image $mainImage)
+    public function setMainImage(\Jc\JolieCarBundle\Entity\Image $mainImage = null)
     {
+        if($mainImage==null){
+            return $this;
+        }
+
         if($mainImage->getFile() != null){
             $this->mainImage = $mainImage;
             $this->mainImage->setVoiture($this);
@@ -464,9 +467,9 @@ class Voiture
     public function addImage(Image $images)
     {
         if($images->getFile() !== null){
-        $images->setVoiture($this);
-        $images->setMainImage(false);
-        $this->images[] = $images;
+            $images->setVoiture($this);
+            $images->setMainImage(false);
+            $this->images[] = $images;
         }
 
 
