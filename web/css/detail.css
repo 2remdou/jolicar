@@ -11,17 +11,51 @@ and open the template in the editor.
 {
     margin-top: 10px;
 }
-
+.elastislide-horizontal{
+    padding: 0;
+}
 .miniature
 {
     cursor: pointer;
+    width: auto;
     margin: 10px;
     padding: 10px;
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid rgba(2,2,2,0.18);
-    box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
-    -webkit-box-shadow: 0 1px 1px 1px rgba(1,1,1,0.17);
 }
 
+.ui-accordion .ui-accordion-header{
+    padding: 0;
+    padding-left: 2.5em;
+}
+
+
+@media screen and (min-width: 700px){
+    #detail>div{
+        float: left;
+    }
+    #imagesCar{
+        max-width: 350px;
+    }
+    #accordion{
+        max-width: 330px;
+    }
+    #accordion * {
+        font-size: small;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    #detail>div{
+        float: left;
+    }
+    #imagesCar{
+        max-width: 500px;
+    }
+    #accordion{
+        max-width: 400px;
+    }
+    #accordion * {
+        font-size: medium;
+    }
+}
 
 

@@ -17,9 +17,9 @@ class JolieCarExtension extends \Twig_Extension
     }
     public function getFunctions(){
         return array(
-          new \Twig_SimpleFunction('controlNull', array($this,'controlNull')),
             new \Twig_SimpleFunction('replaceString', array($this,'replaceString')),
             new \Twig_SimpleFunction('var_dump', array($this,'var_dump')),
+            new \Twig_SimpleFunction('isNull', array($this,'isNull')),
         );
     }
     public function replaceString($text,$oldValue,$newValue){
@@ -27,6 +27,14 @@ class JolieCarExtension extends \Twig_Extension
     }
     public function var_dump($value){
         return var_dump($value);
+    }
+    public function isNull($value){
+        if($value == null){
+            return "";
+        }
+        else{
+            return $value;
+        }
     }
     public function formaterPrix($value=null,$devise=null)
     {
@@ -52,12 +60,6 @@ class JolieCarExtension extends \Twig_Extension
         {
             return 'success';
         }
-    }
-    public function controlNull($value){
-        if($value == null){
-        return "";
-        }
-        return $value;
     }
 
     public function getName() {

@@ -4,6 +4,7 @@
 {%block otherStylesheets%}
     {% stylesheets filter='cssrewrite'
     'css/detail.css'
+    'libs/fotorama/fotorama.css'
     output='compiled/main.css'
     %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
@@ -15,58 +16,58 @@
 {%endblock%}
 
 {%block main%}
-    
-    <div class="col-lg-6 col-sm-6" id="imagesCar">
-        <div class="imageTop">
-            {%if car.mainImage %}
-            <img src="{{asset(car.mainImage.webPath~car.mainImage.path)}}" alt="{{car.mainImage.path}}" class="img-thumbnail" />
-            {%else%}
-            <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" />
-            {%endif%}
-        </div>
-        <ul class="miniatures elastislide-list" id="caroussel">
+    <div id="detail">
+        <div id="imagesCar" class="contour fotorama" data-nav="thumbs" data-arrows="true" data-click="true" data-swipe="false">
+                {%if car.mainImage %}
+                    <img ssrc="{{asset(car.mainImage.webPath~car.mainImage.path)}}" alt="{{car.mainImage.path}}" class="miniature"/>
+                {%else%}
+                    <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" class="miniature"/>
+                {%endif%}
                 {%for image in car.images %}
-                        <li><a href="#"><img style="height: 200px;" src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="miniature"/></a></li>
+                    <img  src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="miniature"/></a>
                 {%else%}
                     <h3>Aucun aperçu disponible pour cette voiture</h3>
                 {% endfor%}
-        </ul>
-    </div>
-    <div id="accordion" class="col-lg-4 col-sm-6">
-        <h3>Informations générales</h3>
-        <div>
-            <table class="table">
-                <tr><td>Marque</td><td>{{car.modele.marque.nom}}</td></tr>
-                <tr><td>Modele</td><td>{{car.modele.nom}}</td></tr>
-                <tr><td>Prix</td><td>{{car.prix|formaterPrix}}</td></tr>
-                <tr><td>Boite de vitesse</td><td>{% if car.boitier %}{{car.boitier.nom}}{% endif %}</td></tr>
-                <tr><td>Kilometre parcouru</td><td>{{car.kmParcouru|number_format(0,',','.')}}</td></tr>
-                <tr><td>Carburant</td><td>{% if car.carburant %}{{car.carburant.nom}}{% endif %}</td></tr>
-                <tr><td>Nombre de portes</td><td>{{car.nombrePorte}}</td></tr>
-                <tr><td>Nombre de sieges</td><td>{{car.nombreSiege}}</td></tr>                           
-            </table>       
         </div>
-        <h3>Le vendeur</h3>
-        <div>
-            <table class="table">
-                {% if car.user %}
-                    <tr><td>Nom</td><td>{{car.user.nom}}</td></tr>
-                    {% if car.user.adresse %}
-                        <tr><td>Telephone</td><td>{{car.user.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
-                        <tr><td>Email</td><td>{{car.user.adresse.email}}</td></tr>
-                        <tr><td>Site web</td><td>{{car.user.adresse.site}}</td></tr>
-                        <tr><td>Ville</td><td>{{car.user.adresse.ville}}</td></tr>
-                        <tr><td>Quartier</td><td>{{car.user.adresse.quartier}}</td></tr>
-                        <tr><td>Indication</td><td>{{car.user.adresse.indicationLieu}}</td></tr>
-                    {% endif %}
+        <div id="accordion">
+            <h3>Informations générales</h3>
+            <div>
+                <table class="table">
+                    <tr><td>Marque</td><td>{{car.modele.marque.nom}}</td></tr>
+                    <tr><td>Modele</td><td>{{car.modele.nom}}</td></tr>
+                    <tr><td>Prix</td><td>{{car.prix|formaterPrix}}</td></tr>
+                    <tr><td>Boite de vitesse</td><td>{% if car.boitier %}{{car.boitier.nom}}{% endif %}</td></tr>
+                    <tr><td>Kilometre parcouru</td><td>{{car.kmParcouru|number_format(0,',','.')}}</td></tr>
+                    <tr><td>Carburant</td><td>{% if car.carburant %}{{car.carburant.nom}}{% endif %}</td></tr>
+                    <tr><td>Nombre de portes</td><td>{{car.nombrePorte}}</td></tr>
+                    <tr><td>Nombre de sieges</td><td>{{car.nombreSiege}}</td></tr>
+                </table>
+            </div>
+            <h3>Le vendeur</h3>
+            <div>
+                <table class="table">
+                    {% if car.user %}
+                        <tr><td>Nom</td><td>{{car.user.nom}}</td></tr>
+                        {% if car.user.adresse %}
+                            <tr><td>Telephone</td><td>{{car.user.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
+                            <tr><td>Email</td><td>{{isNull(null)}}</td></tr>
+                            <tr><td>Site web</td><td>{{car.user.adresse.site}}</td></tr>
+                            <tr><td>Ville</td><td>{{car.user.adresse.ville}}</td></tr>
+                            <tr><td>Quartier</td><td>{{car.user.adresse.quartier}}</td></tr>
+                            <tr><td>Indication</td><td>{{car.user.adresse.indicationLieu}}</td></tr>
+                        {% endif %}
 
-                {% endif %}
-            </table> 
+                    {% endif %}
+                </table>
+            </div>
         </div>
     </div>
 {%endblock main%}
       {%block otherScript%}
-          {% javascripts 'js/detail.js' output='compiled/main.js' %}
+          {% javascripts
+          'js/detail.js'
+          'libs/fotorama/fotorama.js'
+          output='compiled/main.js' %}
           <script type="text/javascript" src="{{ asset_url }}"></script>
           {%endjavascripts%}
       {%endblock%}

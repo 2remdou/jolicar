@@ -12,7 +12,6 @@
                     'css/header.css'
                     'libs/select2/select2.css'
                     'libs/select2/select2-bootstrap.css'
-                    'libs/elastislide/css/elastislide.css'
                     output='compiled/main.css'
                      %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />            
@@ -23,7 +22,6 @@
         {% endblock otherStylesheets %}
         {% javascripts
                         'libs/jquery/dist/jquery.min.js'
-                        'libs/Elastislide/js/modernizr.custom.17475.js'
                         output='compiled/main.js'%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {%endjavascripts%}
@@ -72,7 +70,6 @@
                             'js/boot.js'
                             'js/base.js'
                             'libs/select2/select2.min.js'
-                            'libs/elastislide/js/*'
                             'libs/masonry/dist/masonry.pkgd.min.js'
                             output='compiled/main.js'%}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
