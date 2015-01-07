@@ -5,6 +5,10 @@ imports:
 
 sensio_framework_extra:
     router: {annotations: true }
+    request:  { converters: true, auto_convert: true }
+    view:     { annotations: true }
+    cache:    { annotations: true }
+    security: { annotations: true }
 framework:
     #esi:             ~
     translator:      { fallback: "%locale%" }
@@ -86,6 +90,12 @@ fos_user:
     registration:
         form:
             type: jc_user_registration
+
+#jms_di_extra:
+#    locations:
+#        all_bundles: false
+#        bundles: [JolieCarBundle, UserBundle]
+#        directories: ["%kernel.root_dir%/../src"]
 #genemu_form:
 #    select2:
 #        enabled: true

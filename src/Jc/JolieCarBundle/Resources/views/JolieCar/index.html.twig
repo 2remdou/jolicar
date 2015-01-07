@@ -17,6 +17,8 @@
 
 
 {%block zoneLibre%}
+    <div id="showSearch" class="glyphicon glyphicon-search" data-infobulle="Afficher les criteres de recherches"></div>
+    <br clear="both">
     <div id="zoneApercu" class="contour">
         {%for car in listeCar%}
             {%include 'JcJolieCarBundle:JolieCar:apercuCar.html.twig' with {'car': car}%}

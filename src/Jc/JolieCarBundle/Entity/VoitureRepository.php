@@ -2,7 +2,9 @@
 
 namespace Jc\JolieCarBundle\Entity;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * VoitureRepository
@@ -12,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoitureRepository extends EntityRepository
 {
-    
+
     protected function getAllInformations()
     {
         $qb = $this->createQueryBuilder('v')
@@ -81,6 +83,26 @@ class VoitureRepository extends EntityRepository
                 ->getQuery();
         
         return $q->getResult();
+    }
+
+    public function findByUser($id){
+        $qb = $this->getApercuInformation();
+
+        $q = $qb->where('v.user = :id')
+                ->setParameter('id',$id)
+                ->getQuery();
+
+        return $q->getResult();
+    }
+
+    public function isForUser($id,$user){
+        $car = $this->find($id);
+        //$user = $this->securityContext->getToken()->getUser();
+        if($user === null || $car === null || $car->getUser() != $user){
+            return false;
+        }
+
+        return true;
     }
    
 }

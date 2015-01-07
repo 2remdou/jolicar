@@ -44,6 +44,9 @@ and open the template in the editor.
 }
 
 @media screen and (min-width: 1000px){
+    #detail{
+        margin: 0 auto;
+    }
     #detail>div{
         float: left;
     }

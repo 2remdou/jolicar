@@ -10,3 +10,11 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: jc_user_registration}
+
+    jc_user.loginsucceshandle:
+        class: Jc\UserBundle\Model\LoginSuccessHandler
+        arguments:  [ @router, @session]
+
+    jc_user.logoutsucceshandle:
+        class: Jc\UserBundle\Model\LogoutSuccessHandler
+        arguments:  [ @router, @session]

@@ -36,7 +36,6 @@
             <br clear="both">
         </header>
         <div class="container" id="global">
-            <div id="showSearch" class="glyphicon glyphicon-search" data-infobulle="Afficher les criteres de recherches"></div>
             <div id="message" class="row">
                  {#{% for message in app.session.flashbag.get('message') %}#}
                  {% for messages in app.session.flashbag.all() %}
@@ -46,7 +45,7 @@
                                  <span aria-hidden='true'>&times;</span>
                                  <span class='sr-only'></span>
                              </button>
-                             <strong>{{ message|raw|trans({}, 'FOSUserBundle') }}</strong>
+                             <strong>{{ message|trans({}, 'FOSUserBundle')|raw }}</strong>
                          </div>
                      {% endfor %}
                  {% endfor %}
@@ -75,7 +74,7 @@
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {%endjavascripts%}
                 <script type="text/javascript">
-                    $('#tabAccesRapide').elastislide();
+                   // $('#tabAccesRapide').elastislide();
                 </script>
         {% endblock javascripts%}
         {%block otherScript%}

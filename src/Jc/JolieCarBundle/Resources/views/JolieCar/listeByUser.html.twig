@@ -1,0 +1,52 @@
+{# src/Jc/JolieCarBundle/resources/views/listByUser.html.twig #}
+
+{%block otherStylesheets%}
+    {% stylesheets filter='cssrewrite'
+    'css/listByUser.css'
+    output='compiled/main.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {%endstylesheets%}
+{%endblock otherStylesheets%}
+{% extends "JcJolieCarBundle::layout.html.twig"%}
+
+
+
+{#{%block tabAccessRapide%}
+    {{parent()}}
+{% endblock%}#}
+ 
+
+{%block search%}
+    <div id="search" class="hideSearch contour">
+        {{render(controller('JcJolieCarBundle:Search:shortSearch'))}}
+    </div>
+{%endblock search%}
+
+
+{%block zoneLibre%}
+        <div id="zoneApercu" class="contour">
+        {%for car in listeCar%}
+                {%include 'JcJolieCarBundle:JolieCar:apercuCar.html.twig' with {'car': car}%}
+        {% else %}
+            <div id="message" class="row">
+                        <div class="alert alert-warning" role="alert">
+                            <button type='button' class='close' data-dismiss='alert'>
+                                <span aria-hidden='true'>&times;</span>
+                                <span class='sr-only'></span>
+                            </button>
+                            <strong>Vous n'avez aucune voiture encore.
+                                <a href="{{ path('add_car') }}"> Cliquer pour ajouter une voiture</a>
+                            </strong>
+                        </div>
+            </div>
+        {%endfor%}
+        </div>
+{%endblock zoneLibre%}
+ {%block otherScript%}
+     {% javascripts
+        'js/index.js'
+     output='compiled/main.js' %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {%endjavascripts%}
+ {%endblock otherScript%}

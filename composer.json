@@ -21,7 +21,8 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "jms/serializer-bundle": "~0.13"
+        "jms/serializer-bundle": "~0.13",
+        "jms/security-extra-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

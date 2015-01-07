@@ -7,8 +7,15 @@
  */
 namespace Jc\JolieCarBundle\Twig;
 
+use Doctrine\ORM\EntityManager;
+use Jc\JolieCarBundle\Entity\VoitureRepository;
 class JolieCarExtension extends \Twig_Extension
 {
+    private $em;
+
+    public function __construct(EntityManager $em){
+        $this->em = $em;
+    }
     public function getFilters() {
         return array(
             new \Twig_SimpleFilter('formaterPrix', array($this,'formaterPrix')),
@@ -20,10 +27,12 @@ class JolieCarExtension extends \Twig_Extension
             new \Twig_SimpleFunction('replaceString', array($this,'replaceString')),
             new \Twig_SimpleFunction('var_dump', array($this,'var_dump')),
             new \Twig_SimpleFunction('isNull', array($this,'isNull')),
+            new \Twig_SimpleFunction('isForUser', array($this,'isForUser')),
         );
     }
     public function replaceString($text,$oldValue,$newValue){
         return str_replace($oldValue,$newValue,$text);
+
     }
     public function var_dump($value){
         return var_dump($value);
@@ -65,5 +74,7 @@ class JolieCarExtension extends \Twig_Extension
     public function getName() {
         return 'joliecar_extension';
     }
-
+    public function isForUser($id,$user){
+        return $this->em->getRepository("JcJolieCarBundle:Voiture")->isForUser($id,$user);
+    }
 }

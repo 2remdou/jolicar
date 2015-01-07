@@ -29,12 +29,17 @@
                             <a href="{{path('add_car')}}">Ajouter une annonce</a>
                         </li>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                            {% if car is defined %}
+                                {% if isForUser(car.id,app.user) %}
+                                <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier cette voiture</a>
+                                {% endif %}
+                            {% endif %}
                         </li>
                         <li>
-                            {% if car is defined %}
-                                <a href="{{path('update_car', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}">Modifier une annonce</a>
-                            {% endif %}
+                            <a href="{{path('list_by_user')}}">Mes voitures</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" tabindex="-1" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
                     </ul>
 

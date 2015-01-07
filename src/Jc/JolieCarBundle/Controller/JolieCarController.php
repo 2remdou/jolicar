@@ -4,9 +4,11 @@
 namespace Jc\JolieCarBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Jc\JolieCarBundle\Model\FormErrorManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 use Symfony\Component\HttpFoundation\Response;
 use Jc\JolieCarBundle\Form\VoitureType;
 use Jc\JolieCarBundle\Form\MarqueType;
@@ -15,6 +17,9 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
+use Jc\JolieCarBundle\Security\ControlAccess;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 class JolieCarController extends Controller
 {
     /**
@@ -68,10 +73,15 @@ class JolieCarController extends Controller
      * @param type $id
      * @return type
      * @Route("/update/{marque}-{modele}-{id}",name="update_car",requirements={"id" = "\d+"})
+     * @Security("has_role('ROLE_USER')")
      */
-    public function updateCar($marque, $modele, $id)
+    public function updateCarAction($marque, $modele, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if(!$em->getRepository("JcJolieCarBundle:Voiture")->isForUser($id,$user)){
+            throw $this->createAccessDeniedException('Vous ne pouvez modifier cette voiture, car elle ne vous appartient pas');
+        }
         $request = $this->get('request');
         $session = $this->get('session');
         $car = $em->getRepository("JcJolieCarBundle:Voiture")->findByIdwithAllInformation($id);
@@ -113,12 +123,8 @@ class JolieCarController extends Controller
 
                         )));
             } else {
-                $mesErreur = array();
-                foreach($errors as $error){
-                    $mesErreur[] = $error->getMessage();
-                }
-                $mesMessage = "<h5>".implode("<br>",$mesErreur)."</h5>";
-                $session->getFlashBag()->add('message', "Erreur lors de la modification <br>".$mesMessage);
+                $mesMessage = new FormErrorManager($errors);
+                $session->getFlashBag()->add('message', "Erreur lors de la modification <br>".$mesMessage->listError());
 
             }
         }
@@ -128,8 +134,9 @@ class JolieCarController extends Controller
     }
     /**
      *@Route("/ajout", name="add_car")
+     * @Security("has_role('ROLE_USER')")
      */
-    public function addCar()
+    public function addCarAction()
     {
         $em = $this->getDoctrine()->getManager();
         $car = new Voiture();
@@ -141,20 +148,17 @@ class JolieCarController extends Controller
             $form->handleRequest($request);
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
+                $user = $this->getUser();
+                $car->setUser($user);
                 $em->persist($car);
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été enregistré');
 
                 //return $this->redirect($this->generateUrl('add_car'));
             } else {
-                $mesErreur = array();
-                foreach($errors as $error){
-                    $mesErreur[] = $error->getCause().":".$error->getMessage();
-                }
-                $mesMessage = "<h5>".implode("<br>",$mesErreur)."</h5>";
-                $session->getFlashBag()->add('message', "Erreur lors de l'enregistrement <br>".$mesMessage);
+                $mesMessage = new FormErrorManager($errors);
 
-                //return $this->redirect($this->generateUrl('add_car'));
+                $session->getFlashBag()->add('message', "Erreur lors de l'enregistrement <br/>".$mesMessage->listError());
             }
         }
 
@@ -165,13 +169,13 @@ class JolieCarController extends Controller
     /**
      * @Route("/listMarque", name="list_marque")
      */
-    public function listMarque(){
+    public function listMarqueAction(){
         return;
     }
     /**
      * @Route("/ajoutMarque", name="add_marque")
      */
-    public function addMarque()
+    public function addMarqueAction()
     {
         $em = $this->getDoctrine()->getManager();
         $marque = new Marque();
@@ -212,7 +216,7 @@ class JolieCarController extends Controller
     /**
      * @Route("/ajoutModele",name="add_modele")
      */
-    public function addModele()
+    public function addModeleAction()
     {
         $modele = new Modele();
         $em = $this->getDoctrine()->getManager();
@@ -261,6 +265,22 @@ class JolieCarController extends Controller
            }
         }
         
+    }
+    /**
+     *
+     * @Route("/mes-voitures",name="list_by_user")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function listCarByUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->findByUser($user->getId());
+
+        return $this->render("JcJolieCarBundle:JolieCar:listeByUser.html.twig",array(
+                'listeCar' => $listeCar,
+            ));
     }
 }
 
