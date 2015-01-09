@@ -9,4 +9,9 @@ jolieCar:
     prefix:   /joliecar
     type: annotation
 
+user:
+    resource: "@JcUserBundle/Controller/"
+    prefix:   /
+    type: annotation
+
 

@@ -7,8 +7,8 @@ function addMarqueAjax(e){
 
 
     if(newNomMarque===""){
-        displayMessage($('#message'),'Veuillez saisr la nouvelle marque','danger');
-        return;
+            displayMessage($('#message'),'Veuillez saisr la nouvelle marque','danger');
+            return;
     }
     var test = existInSelect($('#jc_joliecarbundle_voiture_marque'),newNomMarque);
     if(test){

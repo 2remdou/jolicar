@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{%block otherStylesheets%}
+    {% stylesheets filter='cssrewrite'
+    'css/registration.css'
+    'css/updateUser.css'
+    output='compiled/main.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {%endstylesheets%}
+{%endblock otherStylesheets%}
+
+{% extends "JcUserBundle::layout.html.twig" %}
+
+{%form_theme form 'JcUserBundle:Form:register.html.twig'%}
+
+{% block fos_user_content %}
+{% include "JcUserBundle:Update:update_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{%block otherScript%}
+    {% javascripts
+    'js/registration.js'
+    'js/updateUser.js'
+    output='compiled/main.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {%endjavascripts%}
+{%endblock%}

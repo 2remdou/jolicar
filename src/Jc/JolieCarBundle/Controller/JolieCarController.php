@@ -17,7 +17,6 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
-use Jc\JolieCarBundle\Security\ControlAccess;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class JolieCarController extends Controller

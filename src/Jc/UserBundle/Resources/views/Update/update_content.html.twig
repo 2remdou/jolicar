@@ -1,0 +1,36 @@
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form {{ form_enctype(form) }} method="POST" id="formRegister" class="fos_user_registration_register contour">
+    {#{{ form_widget(form) }}#}
+    <div id="accordion">
+        <h3>Informations Générales</h3>
+        <div>
+            <div id="messageInfoGeneral"></div>
+            {{ form_row(form.typeUser) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.autreNom) }}
+            {{ form_row(form.email,{'attr': {'placeholder':'Votre adresse email'} } ) }}
+            <button type="button" id="btnInfo" class="btn btn-info pull-right" data-url="{{ path('update_info_user') }}" >Enregistrer</button>
+            <br/>
+            {{ form_row(form.plainPassword,{'attr': {'placeholder':'Votre mot de passe'} } ) }}
+            <button type="button" id="btnPassword" class="btn btn-info pull-right" data-url="{{ path('update_password') }}">Enregistrer</button>
+        </div>
+        <h3>Votre adresse</h3>
+        <div>
+            {{ form_row(form.adresse.telephone) }}
+            {{ form_row(form.adresse.site) }}
+            {{ form_row(form.adresse.ville) }}
+            {{ form_row(form.adresse.quartier) }}
+            {{ form_row(form.adresse.indicationLieu) }}
+            <button type="button" id="btnAdresse" class="btn btn-info pull-right" data-url="{{ path('update_adresse') }}">Enregistrer</button>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-default" type="submit" id="_submit" name="_submit">{{ 'registration.submit'|trans }}</button>
+    </div>
+    {{ form_row(form._token) }}
+
+</form>
+
+

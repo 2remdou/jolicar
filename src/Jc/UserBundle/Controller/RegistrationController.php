@@ -9,6 +9,7 @@
 
 namespace Jc\UserBundle\Controller;
 
+use Jc\JolieCarBundle\Model\FormErrorManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +62,12 @@ class RegistrationController extends  BaseController {
 
                 return $response;
             }
+            else{
+                $errors = new FormErrorManager($form->getErrors(true));
+                $request->getSession()->getFlashBag()->add('message', "Erreur lors de la modification <br>".$errors->listError());
+            }
         }
+
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
                 'form' => $form->createView(),
