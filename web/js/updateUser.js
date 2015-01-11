@@ -1,6 +1,18 @@
 /**
  * Created by Toure on 08/01/15.
  */
+
+function done(ForShowMessage,data,jqXHR){
+    data = $.parseJSON(data);
+    if (data.typeMessage=="success") {
+        displayMessage($(ForShowMessage), data.message, data.typeMessage);
+    } else {
+            displayMessage($(ForShowMessage),data.message, data.typeMessage);
+    }
+}
+function fail(ForShowMessage,jqXHR,data){
+    displayMessage($(ForShowMessage),data.message,'danger');
+}
 $(document).ready(function(){
     $('#btnInfo').click(function(e){
         var $this = $(this);
@@ -44,13 +56,12 @@ $(document).ready(function(){
                 }
             })
             .fail(function(jqXHR,data){
-                data = $.parseJSON(data);
-                displayMessage($('#messageInfoGeneral'),data.message,'danger');
+                displayMessage($('#message'),data.message,'danger');
             })
         ;
 
     });
-    $('#btnPassword').click(function(e){
+    $('#btnAdresse').click(function(e){
         var $this = $(this);
         e.preventDefault();
         var telephone = $('#fos_user_registration_form_adresse_telephone').val();
@@ -78,23 +89,44 @@ $(document).ready(function(){
             .done(function(data,jqXHR){
                 data = $.parseJSON(data);
                 if (data.typeMessage=="success") {
-                    displayMessage($('#messageInfoGeneral'), data.message, data.typeMessage);
+                    displayMessage($('#messageAdresse'), data.message, data.typeMessage);
                 } else {
                     var errors = $.parseJSON(data.message);
                     for(var i=0;i<errors.length;i++){
-                        displayMessage($('#messageInfoGeneral'),errors[i].message, data.typeMessage);
+                        displayMessage($('#messageAdresse'),errors[i].message, data.typeMessage);
                     }
 
                 }
             })
             .fail(function(jqXHR){
-                displayMessage($('#messageInfoGeneral'),data.message,'danger');
+                displayMessage($('#messageAdresse'),data.message,'danger');
             });
     });
-    $('#btnAdresse').click(function(e){
+    $('#btnPassword').click(function(e){
         var $this = $(this);
         e.preventDefault();
 
         var url = $this.data('url');
+        var password1 = $('#fos_user_registration_form_plainPassword_first').val();
+        var password2 = $('#fos_user_registration_form_plainPassword_second').val();
+        if( password1.length ==0 || password1 !== password2){
+            displayMessage($('#messageInfoGeneral'),'Les mots de passe ne sont pas identiques','danger');
+            return;
+        }
+        var data = {password1:password1,password2:password2};
+
+        $.ajax({
+            url : url,
+            type: "POST",
+            data : data,
+            datatype : "json"
+        })
+            .done(function(data,jqXHR){
+                done($('#messageInfoGeneral'),data,jqXHR);
+            })
+            .fail(function(jqXHR,data){
+                fail($('#messageInfoGeneral'),jqXHR,data)
+            })
+        ;
     });
 });

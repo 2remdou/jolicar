@@ -37,7 +37,8 @@
      configSelect2();
      $('#zoneApercu').masonry({
          itemSelector: '.apercuCar',
-         isFitWidth: false
+         isFitWidth: false,
+         "gutter": 10
      });
  });
 

@@ -19,7 +19,7 @@ class HeaderSearchType extends AbstractType
                 'label' => false,
                 'attr' => array(
                     'placeholder' => 'Rechercher',
-                    'size' => 40,
+                    //'size' => 40,
                 )
                 ))
            ->add('btnRechercher','submit',array(

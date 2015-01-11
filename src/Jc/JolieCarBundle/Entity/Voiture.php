@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Jc\JolieCarBundle\Validator\Constraints as AssertJc;
 use Jc\UserBundle\Entity\User;
+use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * Voiture
@@ -77,6 +78,7 @@ class Voiture
      * @ORM\ManyToOne(targetEntity="Modele", inversedBy="voitures")
      * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
      * @Assert\Valid()
+     * @MaxDepth(1)
      */
     private $modele;
     
@@ -88,6 +90,7 @@ class Voiture
     
     /**
      * @ORM\ManyToOne(targetEntity="Jc\UserBundle\Entity\User", inversedBy="voitures")
+     * @MaxDepth(2)
      */
     private $user;
     
