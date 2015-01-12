@@ -34,7 +34,6 @@ class Adresse
      * @var string
      *
      * @ORM\Column(name="site", type="string", length=255,nullable=true)
-     * @Assert\Url(message="Veuillez fournir un site valide")
      */
     private $site;
 

@@ -5,12 +5,15 @@ namespace Jc\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * User
  *
  * @ORM\Table(name="mon_user")
  * @ORM\Entity(repositoryClass="Jc\UserBundle\Entity\UserRepository")
+ * ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -32,6 +35,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="nom", type="string", length=255,options={"default"="unknown"})
      * @Assert\NotBlank(message="Veuillez fournir le nom du Proprietaire")
+     * @Expose()
      */
     private $nom;
 
@@ -39,6 +43,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="autreNom", type="string", length=255,nullable=true)
+     * @Expose()
      */
     private $autreNom;
 
@@ -58,6 +63,7 @@ class User extends BaseUser
     /**
      * @ORM\ManyToOne(targetEntity="Jc\UserBundle\Entity\TypeUser",inversedBy="users")
      * @Assert\Valid()
+     * @Expose()
      */
     private $typeUser;
     /**

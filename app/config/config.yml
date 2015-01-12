@@ -91,6 +91,55 @@ fos_user:
         form:
             type: jc_user_registration
 
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        jc:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_french_analyzer:
+                                type: custom
+                                tokenizer: letter
+                                filter: ["asciifolding", "lowercase", "french_stem", "stop_fr"]
+                        filter:
+                            stop_fr:
+                                type: "stop"
+                                stopwords: ["l","m","n","j","qu","n","s","d"]
+            client: default
+            types:
+                Marque:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model:  Jc\JolieCarBundle\Entity\Marque
+                        provider: ~
+                        finder: ~
+                Modele:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model:  Jc\JolieCarBundle\Entity\Modele
+                        provider: ~
+                        finder: ~
+                Voiture:
+                    mappings:
+                        prix: ~
+                        kmParcouru: ~
+                        dateAcquisition: ~
+                    persistence:
+                        driver: orm
+                        model:  Jc\JolieCarBundle\Entity\Voiture
+                        provider: ~
+                        finder: ~
+
+
+
 #jms_di_extra:
 #    locations:
 #        all_bundles: false
@@ -102,3 +151,4 @@ fos_user:
 #        configs:
 #            placeholder: selectionner
 #            allowClear: true
+

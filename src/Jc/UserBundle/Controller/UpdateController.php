@@ -9,6 +9,8 @@
 
 namespace Jc\UserBundle\Controller;
 
+use FOS\UserBundle\Doctrine\UserManager;
+use Jc\JolieCarBundle\Entity\Adresse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,7 +97,6 @@ class UpdateController extends  BaseController {
             $serializer = $this->get('jms_serializer');
 
             if(count($errors)<=0){
-                var_dump('bien');
                 $em->flush();
 
                 $result = array(
@@ -106,11 +107,11 @@ class UpdateController extends  BaseController {
                 return new Response($monJson);
             }
             else{
-                $result = array(
-                    'message' => $serializer->serialize($errors,'json'),
-                    'typeMessage' => 'danger'
-                );
-                $monJson = $serializer->serialize($result,'json');
+                $monJson = $serializer->serialize(array(
+                        'message' => $serializer->serialize($errors,'json'),
+                        'typeMessage' => 'danger'
+                    ),
+                    'json');
                 return new Response($monJson);
             }
         }
@@ -124,14 +125,18 @@ class UpdateController extends  BaseController {
         $request = $this->get('request');
         if($request->isXmlHttpRequest()){
             $user = $this->getUser();
+            $adresse = $user->getAdresse();
+            /*if($adresse === null){
+                $adresse = new Adresse();
+            }
+            */
+            $adresse->setTelephone($request->request->get('telephone'));
+            $adresse->setSite($request->request->get('site'));
+            $adresse->setVille($request->request->get('ville'));
+            $adresse->setQuartier($request->request->get('quartier'));
+            $adresse->setIndicationLieu($request->request->get('indicationLieu'));
 
-            $user->setTelephone($request->request->get('telephone'));
-            $user->setSite($request->request->get('site'));
-            $user->setVille($request->request->get('ville'));
-            $user->setQuartier($request->request->get('quartier'));
-            $user->setIndicationLieu($request->request->get('indicationLieu'));
-
-            $validator = $this->get('validator');
+            $validator = $this->get('validator',array('Profile'));
             $errors = $validator->validate($user);
 
             $serializer = $this->get('jms_serializer');
@@ -161,6 +166,52 @@ class UpdateController extends  BaseController {
      * @Route("/update-userp",name="update_password")
      */
     public function updatePasswordAction(){
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request');
+        if($request->isXmlHttpRequest()){
+            $user = $this->getUser();
 
+            $password1 = $request->request->get('password1');
+            $password2 = $request->request->get('password2');
+
+            $serializer = $this->get('jms_serializer');
+
+            if(strlen($password1)==0 || $password1 !== $password2){
+                $monJson = $serializer->serialize(array(
+                        'message' => 'Veuillez fournir des mots de passe identiques et non vide',
+                        'typeMessage' => 'danger'
+                    ),
+                    'json');
+                return new Response($monJson);
+            }
+
+            $userManager = $this->get('fos_user.user_manager');
+            $user->setPlainPassword($password1);
+            $userManager->updatePassword($user);
+
+            $validator = $this->get('validator',array('Profile'));
+            $errors = $validator->validate($user);
+
+
+
+            if(count($errors)<=0){
+                $em->flush();
+
+                $result = array(
+                    'message' => 'Mot de passe modifié avec succes',
+                    'typeMessage'=>'success'
+                );
+                $monJson = $serializer->serialize($result,'json');
+                return new Response($monJson);
+            }
+            else{
+                $monJson = $serializer->serialize(array(
+                        'message' => $serializer->serialize($errors,'json'),
+                        'typeMessage' => 'danger'
+                    ),
+                    'json');
+                return new Response($monJson);
+            }
+        }
     }
 } 
