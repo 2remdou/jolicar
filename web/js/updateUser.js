@@ -35,7 +35,8 @@ $(document).ready(function(){
             return;
         }
         var data = {nom : nom, autreNom: autreNom, email: email, typeUser: typeUser};
-        var url = $this.data('url');
+       // var url = $this.data('url');
+        var url = Routing.generate('update_info_user',null,true);
 
         $.ajax({
             url: url,
@@ -78,8 +79,8 @@ $(document).ready(function(){
             indicationLieu: indicationLieu
 
         };
-        var url = $this.data('url');
-
+        //var url = $this.data('url');
+        var url = Routing.generate('update_adresse',null,true);
         $.ajax({
             url: url,
             type: "POST",
@@ -106,7 +107,9 @@ $(document).ready(function(){
         var $this = $(this);
         e.preventDefault();
 
-        var url = $this.data('url');
+        //var url = $this.data('url');
+        var url = Routing.generate('update_password',null,true);
+
         var password1 = $('#fos_user_registration_form_plainPassword_first').val();
         var password2 = $('#fos_user_registration_form_plainPassword_second').val();
         if( password1.length ==0 || password1 !== password2){

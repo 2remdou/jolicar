@@ -15,7 +15,8 @@ function addMarqueAjax(e){
         displayMessage($('#message'),'Une marque de même nom existe déja','danger');
         return;
     }
-    var url = $('#ajoutMarque').data('url');
+   // var url = $('#ajoutMarque').data('url');
+    var url = Routing.generate('add_marque',null,true);
     $.ajax({
         url: url,
         type: "POST",
@@ -64,8 +65,8 @@ function addModeleAjax(e){
         displayMessage($('#message'),'un modele de même nom existe déja','danger');
         return;
     }
-
-    var url = $('#ajoutModele').data('url');
+    var url = Routing.generate('add_modele',null,true);
+    //var url = $('#ajoutModele').data('url');
     $.ajax({
         url: url,
         type: "POST",
