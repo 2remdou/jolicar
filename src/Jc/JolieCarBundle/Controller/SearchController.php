@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/search",name="jc_search")
+     * @Route("/search",name="jc_search",options={"expose"=true})
      */
     public function shortSearchAction()
     {

@@ -12,7 +12,9 @@ $(document).ready(function(){
     $('#jc_joliecarbundle_headerSearch_btnRechercher').click(function(e){
         e.preventDefault();
         var $this = $(this);
-        var url = $this.data('url');
+        //var url = $this.data('url');
+        var url = Routing.generate('jc_search');
+        alert(url);
         var keySearch = $('#jc_joliecarbundle_headerSearch_rechercher').val();
 
         $.ajax({
