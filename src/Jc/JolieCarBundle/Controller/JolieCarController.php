@@ -105,7 +105,6 @@ class JolieCarController extends Controller
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
                 if($originalMainImage !== $car->getMainImage() && $originalMainImage !== null){
-                    var_dump($originalMainImage);
                     $originalMainImage->setMainImage(false);
                 }
                 foreach($originalImages as $image){
