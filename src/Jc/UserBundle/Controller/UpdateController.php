@@ -25,7 +25,7 @@ class UpdateController extends  BaseController {
 
     /**
      * @param Request $request
-     * @Route("/update-user",name="update_user")
+     * @Route("/update-user",name="update_user", options={"expose"=true})
      */
     public function UpdateAction(Request $request)
     {
@@ -77,7 +77,7 @@ class UpdateController extends  BaseController {
     }
 
     /**
-     * @Route("/update-info-user",name="update_info_user")
+     * @Route("/update-info-user",name="update_info_user", options={"expose"=true})
      */
     public function updateInfoAction(){
         $em = $this->getDoctrine()->getManager();
@@ -118,7 +118,7 @@ class UpdateController extends  BaseController {
     }
 
     /**
-     * @Route("/update-adresse",name="update_adresse")
+     * @Route("/update-adresse",name="update_adresse", options={"expose"=true})
      */
     public function updateAdresseAction(){
         $em = $this->getDoctrine()->getManager();
@@ -163,7 +163,7 @@ class UpdateController extends  BaseController {
     }
 
     /**
-     * @Route("/update-userp",name="update_password")
+     * @Route("/update-userp",name="update_password", options={"expose"=true})
      */
     public function updatePasswordAction(){
         $em = $this->getDoctrine()->getManager();

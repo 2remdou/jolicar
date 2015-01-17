@@ -23,7 +23,7 @@ class JolieCarController extends Controller
 {
     /**
      * 
-     * @Route("/",name="joliecar_accueil")
+     * @Route("/",name="joliecar_accueil", options={"expose"=true})
      */
     public function indexAction()
     {
@@ -49,7 +49,7 @@ class JolieCarController extends Controller
      * @param type $modele
      * @param type $id
      * @return type
-     * @Route("/detail/{marque}-{modele}-{id}",name="joliecar_detail",requirements={"id" = "\d+"})
+     * @Route("/detail/{marque}-{modele}-{id}",name="joliecar_detail",requirements={"id" = "\d+"}, options={"expose"=true})
      */
     public function detailAction($marque, $modele, $id)
     {
@@ -71,7 +71,7 @@ class JolieCarController extends Controller
      * @param type $modele
      * @param type $id
      * @return type
-     * @Route("/update/{marque}-{modele}-{id}",name="update_car",requirements={"id" = "\d+"})
+     * @Route("/update/{marque}-{modele}-{id}",name="update_car",requirements={"id" = "\d+"}, options={"expose"=true})
      * @Security("has_role('ROLE_USER')")
      */
     public function updateCarAction($marque, $modele, $id)
@@ -105,7 +105,6 @@ class JolieCarController extends Controller
             $errors = $form->getErrors(true);
             if (count($errors)<=0) {
                 if($originalMainImage !== $car->getMainImage() && $originalMainImage !== null){
-                    var_dump($originalMainImage);
                     $originalMainImage->setMainImage(false);
                 }
                 foreach($originalImages as $image){
@@ -132,7 +131,7 @@ class JolieCarController extends Controller
             ));
     }
     /**
-     *@Route("/ajout", name="add_car")
+     *@Route("/ajout", name="add_car", options={"expose"=true})
      * @Security("has_role('ROLE_USER')")
      */
     public function addCarAction()
@@ -172,7 +171,7 @@ class JolieCarController extends Controller
         return;
     }
     /**
-     * @Route("/ajoutMarque", name="add_marque")
+     * @Route("/ajoutMarque", name="add_marque", options={"expose"=true})
      */
     public function addMarqueAction()
     {
@@ -213,7 +212,7 @@ class JolieCarController extends Controller
     }
     
     /**
-     * @Route("/ajoutModele",name="add_modele")
+     * @Route("/ajoutModele",name="add_modele", options={"expose"=true})
      */
     public function addModeleAction()
     {
@@ -267,7 +266,7 @@ class JolieCarController extends Controller
     }
     /**
      *
-     * @Route("/mes-voitures",name="list_by_user")
+     * @Route("/mes-voitures",name="list_by_user", options={"expose"=true})
      * @Security("has_role('ROLE_USER')")
      */
     public function listCarByUserAction()

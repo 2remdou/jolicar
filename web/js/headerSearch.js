@@ -13,7 +13,7 @@ $(document).ready(function(){
         e.preventDefault();
         var $this = $(this);
         //var url = $this.data('url');
-        var url = Routing.generate('jc_search');
+        var url = Routing.generate('jc_search',null,true);
         alert(url);
         var keySearch = $('#jc_joliecarbundle_headerSearch_rechercher').val();
 

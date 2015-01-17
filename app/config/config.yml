@@ -90,7 +90,8 @@ fos_user:
     registration:
         form:
             type: jc_user_registration
-
+fos_js_routing:
+    routes_to_expose: ['jc_search']
 fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
