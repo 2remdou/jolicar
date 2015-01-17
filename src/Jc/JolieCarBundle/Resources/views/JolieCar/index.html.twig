@@ -17,7 +17,9 @@
 
 
 {%block zoneLibre%}
-    {% include 'JcJolieCarBundle:JolieCar:listeCar.html.twig' with {'listeCar':listeCar} %}
+    {% if listeCar%}
+        {% include 'JcJolieCarBundle:JolieCar:listeCar.html.twig' with {'listeCar':listeCar} %}
+    {% endif %}
 {%endblock zoneLibre%}
  {%block otherScript%}
      {% javascripts

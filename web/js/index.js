@@ -35,6 +35,19 @@
          $('#search').toggleClass("hideSearch");
      });
      configSelect2();
+     var url = Routing.generate('list_car',null,true);
+     $.ajax({
+         url : url,
+         type: 'POST',
+         datatype: 'json'
+     })
+         .done(function(data,jqXHR){
+
+         })
+         .fail(function(jqXHR,data){
+
+         })
+
      $('#zoneApercu').masonry({
          itemSelector: '.apercuCar',
          isFitWidth: false,

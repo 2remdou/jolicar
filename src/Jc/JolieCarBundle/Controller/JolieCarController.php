@@ -27,14 +27,11 @@ class JolieCarController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        
-        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->getAll();
-              
-        return $this->render("JcJolieCarBundle:JolieCar:index.html.twig",array(
-            'listeCar' => $listeCar,          
-        ));
+        return $this->render("JcJolieCarBundle:JolieCar:index.html.twig");
     }
+
+
+
     public function headerSearchAction()
     {
         $formHeader = $this->createForm(new HeaderSearchType()); 
