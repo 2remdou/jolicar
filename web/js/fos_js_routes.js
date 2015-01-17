@@ -1,1 +1,1 @@
-fos.Router.setData({"base_url":"","routes":[],"prefix":"","host":"localhost","scheme":"http"});
+fos.Router.setData({"base_url":"","routes":{"jc_search":{"tokens":[["text","\/joliecar\/search"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

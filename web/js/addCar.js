@@ -18,7 +18,7 @@ $(document).ready(function(){
     });
     $('#accordion').accordion({collapsible: true});
     configSelect2();
-
+    Math.random()
 
     //stockage des marques et des modeles qui lui liés
 
