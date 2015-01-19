@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
  $(document).ready(function() {
+     function doneListCarsAjax(data,jqXHR){
+         var listCar = $.parseJSON(data);
+     }
+     function failListCarsAjax(jqXHR,data){
+         displayMessage($('#message'),"Ouups! quelque chose c'est mal passé",'danger')
+     }
      function configSelect2() {
          $("#jc_joliecarbundle_searchvoiture_modele_marque").select2({
              //placeholder: 'Selectionner une marque',
@@ -36,9 +42,11 @@
      });
      configSelect2();
      var url = Routing.generate('list_car',null,true);
+     //var url = Routing.generate('add_modele',null,true);
+     //alert(url);
      $.ajax({
          url : url,
-         type: 'POST',
+         type: 'GET',
          datatype: 'json'
      })
          .done(function(data,jqXHR){

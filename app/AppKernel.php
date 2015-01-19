@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new JMS\TwigJsBundle\JMSTwigJsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

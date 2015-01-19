@@ -30,6 +30,26 @@ class JolieCarController extends Controller
         return $this->render("JcJolieCarBundle:JolieCar:index.html.twig");
     }
 
+    /**
+     * @Route("/liste-voitures",name="list_car", options={"expose"=true})
+     */
+    public function listCarAction(){
+        $request = $this->get('request');
+
+        if(!$request->isXmlHttpRequest()){
+            return new Response("",404);
+        }
+        $em = $this->getDoctrine()->getManager();
+
+        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->find(1);
+
+        $serializer = $this->get('jms_serializer');
+
+        $listeCarJson = $serializer->serialize($listeCar,'json');
+        return new Response($listeCarJson,200);
+
+    }
+
 
 
     public function headerSearchAction()

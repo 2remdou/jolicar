@@ -2,12 +2,7 @@
  * Created by Toure on 09/12/14.
  */
 
-function doneListCarsAjax(data,jqXHR){
-    var listCar = $.parseJSON(data);
-}
-function failListCarsAjax(jqXHR,data){
-    displayMessage($('#message'),"Ouups! quelque chose c'est mal passé",'danger')
-}
+
 function displayCar($car){
 
 }
