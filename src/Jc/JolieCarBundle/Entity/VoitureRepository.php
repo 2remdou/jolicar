@@ -4,6 +4,7 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -103,6 +104,14 @@ class VoitureRepository extends EntityRepository
         }
 
         return true;
+    }
+
+    public function listByPage($page=1,$nombreCar){
+        $qb = $this->getApercuInformation();
+
+        $qb->setFirstResult(($page-1)*$nombreCar)
+            ->setMaxResults($nombreCar);
+        return new Paginator($qb);
     }
    
 }

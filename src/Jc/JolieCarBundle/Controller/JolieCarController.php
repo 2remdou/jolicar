@@ -27,13 +27,20 @@ class JolieCarController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("JcJolieCarBundle:JolieCar:index.html.twig");
+        $em = $this->getDoctrine()->getManager();
+        $nbreParPage = $this->container->getParameter('max_car_per_page');
+        $page = 1;
+        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->listByPage($page,$nbreParPage);
+
+        return $this->render("JcJolieCarBundle:JolieCar:index.html.twig",array(
+                'listeCar' => $listeCar,
+            ));
     }
 
     /**
-     * @Route("/liste-voitures",name="list_car", options={"expose"=true})
+     * @Route("/liste-voitures/{page}",name="list_car", options={"expose"=true})
      */
-    public function listCarAction(){
+    public function listCarAction($page=1){
         $request = $this->get('request');
 
         if(!$request->isXmlHttpRequest()){
