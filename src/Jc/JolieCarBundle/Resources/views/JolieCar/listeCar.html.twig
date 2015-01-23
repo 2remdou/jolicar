@@ -1,9 +1,13 @@
 {% twig_js name="list_car" %}
 <div id="showSearch" class="glyphicon glyphicon-search" data-infobulle="Afficher les criteres de recherches"></div>
 <br clear="both">
-<div id="zoneApercu" class="contour">
-    {%for car in listeCar%}
-        {%include 'JcJolieCarBundle:JolieCar:apercuCar.html.twig' with {'car': car}%}
-    {%endfor%}
-    <br clear="both">
-</div>s
+<div class="contour">
+    <div id="zoneApercu">
+        {%for car in listeCar%}
+            {%include 'JcJolieCarBundle:JolieCar:apercuCar.html.twig' with {'car': car}%}
+        {%endfor%}
+
+        <br clear="both">
+    </div>
+    <div id="loader" class="cacher"><img src="{{ asset('images/jc_loader.gif') }}" alt="jc_loader"/></div>
+</div>

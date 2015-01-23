@@ -51,6 +51,14 @@ and open the template in the editor.
     display: none;
 }
 
+#loader>img{
+    margin-left: 50%;
+    margin-top: 20px;
+}
+.cacher
+{
+    display: none;
+}
 
 @media screen and (min-width: 500px){
 

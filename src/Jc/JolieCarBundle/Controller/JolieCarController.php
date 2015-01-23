@@ -42,18 +42,19 @@ class JolieCarController extends Controller
      */
     public function listCarAction($page=1){
         $request = $this->get('request');
-
         if(!$request->isXmlHttpRequest()){
-            return new Response("",404);
+            $page = $request->query->get('page');
+            $em = $this->getDoctrine()->getManager();
+            $nbreParPage = $this->container->getParameter('max_car_per_page');
+            $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->listByPage($page,$nbreParPage);
+            if($listeCar !== null){
+                $serializer = $this->get('jms_serializer');
+                $listeCarJson =$serializer->serialize($listeCar,'json');
+                return new Response($listeCarJson,200);
+            }
+            return new Response("Aucune voiture",200);
         }
-        $em = $this->getDoctrine()->getManager();
-
-        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->find(1);
-
-        $serializer = $this->get('jms_serializer');
-
-        $listeCarJson = $serializer->serialize($listeCar,'json');
-        return new Response($listeCarJson,200);
+        return new Response("Error",200);
 
     }
 
