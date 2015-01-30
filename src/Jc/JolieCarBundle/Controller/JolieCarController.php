@@ -42,11 +42,12 @@ class JolieCarController extends Controller
      */
     public function listCarAction($page=1){
         $request = $this->get('request');
-        if(!$request->isXmlHttpRequest()){
+        if($request->isXmlHttpRequest()){
             $page = $request->query->get('page');
             $em = $this->getDoctrine()->getManager();
             $nbreParPage = $this->container->getParameter('max_car_per_page');
             $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->listByPage($page,$nbreParPage);
+            $listeCar = $listeCar->getIterator()->getArrayCopy();
             if($listeCar !== null){
                 $serializer = $this->get('jms_serializer');
                 $listeCarJson =$serializer->serialize($listeCar,'json');

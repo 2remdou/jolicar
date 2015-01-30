@@ -5,6 +5,8 @@ namespace Jc\JolieCarBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Marque
@@ -12,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="marque")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\MarqueRepository")
  * @UniqueEntity("nom",message="Cette marque existe déja")
+ * @ExclusionPolicy("all")
  *
  */
 class Marque
@@ -22,6 +25,7 @@ class Marque
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -30,6 +34,7 @@ class Marque
      *
      * @ORM\Column(name="nom", type="string", length=255)
      * @Assert\NotBlank(message="Veuillez fournir le nom de la marque")
+     * @Expose
      */
     private $nom;
     /**

@@ -6,12 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Image
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ImageRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  */
 class Image
 {
@@ -21,6 +24,7 @@ class Image
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -33,11 +37,12 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $nom;
     /**
      * @ORM\Column(type="string", length=255)
-     *
+     * @Expose
      */
     private  $path;
     /**

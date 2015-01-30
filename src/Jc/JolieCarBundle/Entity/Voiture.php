@@ -3,16 +3,19 @@
 namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\Validator\Constraints as Assert;
 use Jc\JolieCarBundle\Validator\Constraints as AssertJc;
 use Jc\UserBundle\Entity\User;
 use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * Voiture
  *
  * @ORM\Table(name="voiture")
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\VoitureRepository")
+ * @ExclusionPolicy("all")
  */
 class Voiture
 {
@@ -22,6 +25,7 @@ class Voiture
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -31,6 +35,7 @@ class Voiture
      * @ORM\Column(name="prix", type="bigint")
      * @Assert\NotBlank(message="Veuillez fournir un prix de vente")
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un prix Valide")
+     * @Expose
      */
     private $prix;
 
@@ -39,6 +44,7 @@ class Voiture
      *
      * @ORM\Column(name="kmParcouru", type="integer",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de Kilometre valide")
+     * @Expose
      */
     private $kmParcouru;
 
@@ -47,6 +53,7 @@ class Voiture
      *
      * @ORM\Column(name="dateAcquisition", type="date",nullable=true)
      * @Assert\Date(message="Veuillez fournir une date valide")
+     * @Expose
      */
     private $dateAcquisition;
 
@@ -55,6 +62,7 @@ class Voiture
      *
      * @ORM\Column(name="nombreRoueMotrice", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de roues valide")
+     * @Expose
      */
     private $nombreRoueMotrice;
 
@@ -63,6 +71,7 @@ class Voiture
      *
      * @ORM\Column(name="nombrePorte", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de portes valide")
+     * @Expose
      */
     private $nombrePorte;
 
@@ -71,6 +80,7 @@ class Voiture
      *
      * @ORM\Column(name="nombreSiege", type="smallint",nullable=true)
      * @Assert\GreaterThan(value=0,message="Veuillez fournir un nombre de sieges valide")
+     * @Expose
      */
     private $nombreSiege;
     
@@ -79,6 +89,7 @@ class Voiture
      * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
      * @Assert\Valid()
      * @MaxDepth(1)
+     * @Expose
      */
     private $modele;
     
@@ -110,6 +121,7 @@ class Voiture
      * @ORM\OneToOne(targetEntity="Image",cascade={"persist","remove"})
      * @Assert\Valid()
      * @ORM\JoinColumn(nullable=true)
+     * @Expose
      */
     private $mainImage;
     /**

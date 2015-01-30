@@ -4,25 +4,23 @@
  * and open the template in the editor.
  */
 function infiniteScroll(){
-    var offset = 20;
 
     // on initialise ajaxready à true au premier chargement de la fonction
     $(window).data('ajaxready', true);
-
+    var page=1;
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
-
+    var isLoad = true;
     $(window).scroll(function() {
         // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
+       // if ($(window).data('ajaxready') == false) return;
+        if(!isLoad) return;
         var url = Routing.generate('list_car',null,true);
-        var page=1;
-        if ($(window).data('ajaxready') == false) return;
-
         if(($(window).scrollTop() + $(window).height()) == $(document).height()
             || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()) {
             // lorsqu'on commence un traitement, on met ajaxready à false
-            $(window).data('ajaxready', false);
-
+            //$(window).data('ajaxready', false);
+            isLoad=false;
             $('#loader').fadeIn(600);
             $.ajax({
                 url: url,
@@ -34,8 +32,11 @@ function infiniteScroll(){
                     var listeCar = $.parseJSON(data);
                     console.log(listeCar);
                     page +=1;
-                    $('#loader').fadeIn(600);
-                    $(window).data('ajaxready', true);
+                    $('#loader').fadeOut(600);
+                    console.log("page="+page);
+                    //Twig.render(templateListeCar,{'listeCar': listeCar})
+                    //$(window).data('ajaxready', true);
+                    isLoad=true;
                 })
                 .fail(function(jqXHR,data){
                     displayMessage($('#message'),"Ouups! quelque chose c'est mal passé",'danger')
@@ -54,19 +55,12 @@ function infiniteScroll(){
 
                 $('#loader').fadeOut(400);
             });*/
-            console.log("chargement");
 
         }
     });
 };
  $(document).ready(function() {
      infiniteScroll();
-     function doneListCarsAjax(data,jqXHR){
-         var listCar = $.parseJSON(data);
-     }
-     function failListCarsAjax(jqXHR,data){
-         displayMessage($('#message'),"Ouups! quelque chose c'est mal passé",'danger')
-     }
      function configSelect2() {
          $("#jc_joliecarbundle_searchvoiture_modele_marque").select2({
              //placeholder: 'Selectionner une marque',

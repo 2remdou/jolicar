@@ -17,3 +17,6 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+    router.request_context.host: localhost
+    router.request_context.scheme: http
+    router.request_context.base_url: /jolicar/web/app_dev.php/

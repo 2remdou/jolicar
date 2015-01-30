@@ -108,10 +108,16 @@ class VoitureRepository extends EntityRepository
 
     public function listByPage($page=1,$nombreCar){
         $qb = $this->getApercuInformation();
-
-        $qb->setFirstResult(($page-1)*$nombreCar)
+        $q = $qb->getQuery();
+        $q->setFirstResult(($page-1)*$nombreCar)
             ->setMaxResults($nombreCar);
-        return new Paginator($qb);
+        $paginator = new Paginator($q,true);
+        try{
+            return $paginator;
+        }catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+
     }
    
 }
