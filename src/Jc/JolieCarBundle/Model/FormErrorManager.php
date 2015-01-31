@@ -24,7 +24,7 @@ class FormErrorManager {
         }
         $mesErreur = array();
         foreach($this->errorForm as $error){
-            $mesErreur[] = $error->getMessage();
+            $mesErreur[] = 'Nature :'.$error->getCause().' : '.$error->getMessage();
         }
         $mesMessage = "<h5>".implode("<br/>",$mesErreur)."</h5>";
         return $mesMessage;

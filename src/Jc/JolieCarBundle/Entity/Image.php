@@ -60,8 +60,8 @@ class Image
     private $mainImage=false;
 
 
-    protected  function getAbsolutePath(){
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+    public  function getAbsolutePath(){
+        return null === $this->path ? null : $this->getUploadRootDir().$this->path;
     }
 
     /**
@@ -78,7 +78,8 @@ class Image
     protected function getUploadDir(){
         return 'images/cars/';
     }
-    protected  function getUploadRootDir(){
+
+    public   function getUploadRootDir(){
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
     public function __construct() {

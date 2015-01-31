@@ -5,14 +5,14 @@
  */
 function addCar(car){
     var urlDetail = Routing.generate('joliecar_detail',{marque:car.modele.marque.id,modele:car.modele.id,id:car.id});
-    var zone = $('#zoneApercu');
+    var $container = $('#zoneApercu');
     var contenu = '<div class="apercuCar">'+
         '<a href='+urlDetail+' class="thumbnail">';
                 if(typeof car.main_image != "undefinded"){
-                    contenu += '<img src='+car.main_image.webPath+car.main_image.path+' alt='+car.main_image.path+' class="img-rounded apercuCarImage"/>'
+                    contenu += '<img src=/jolicar/web/'+car.main_image.webPath+car.main_image.path+' alt='+car.main_image.path+' class="img-rounded apercuCarImage"/>'
                 }
                 else{
-                    contenu +='<img src='+car.webPath+car.path+' alt="logo_joliecar" />'
+                    contenu +='<img src='+car.main_image.absolutePath+' alt="logo_joliecar" />'
                 }
             contenu +='<div class="apercuCarInfo">'+
                 '<div><h5 class="glyphicon glyphicon-wrench">'+ car.modele.marque.nom+'-'+car.modele.nom+'</h5></div>'+
@@ -20,9 +20,12 @@ function addCar(car){
             '</div>'+
         '</a>'+
     '</div>';
-
-    $(contenu).insertBefore($(zone).children('br'));
-    $('#zoneApercu').masonry('appended', $(contenu));
+    $container.children('br').remove();
+    $container.masonry()
+        .append($(contenu))
+        .masonry('appended',$(contenu));
+    $container.masonry('reloadItems')
+    $container.append('<br clear="both">');
 
 }
 function infiniteScroll(){
@@ -52,16 +55,13 @@ function infiniteScroll(){
             })
                 .done(function(data,jqXHR){
                     var listeCar = $.parseJSON(data);
-                    console.log(listeCar);
-                    for(var i=0;i<listeCar.length;i++){
-                        addCar(listeCar[i]);
+                    if(listeCar.length!=0){
+                        for(var i=0;i<listeCar.length;i++){
+                            addCar(listeCar[i]);
+                        }
+                        page +=1;
                     }
-
-                    page +=1;
                     $('#loader').fadeOut(600);
-                    console.log("page="+page);
-                    //Twig.render(templateListeCar,{'listeCar': listeCar})
-                    //$(window).data('ajaxready', true);
                     isLoad=true;
                 })
                 .fail(function(jqXHR,data){

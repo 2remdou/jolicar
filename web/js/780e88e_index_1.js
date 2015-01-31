@@ -1,7 +1,7 @@
 /**
  * @fileoverview Compiled template for file
  *
- * 
+ * js/index.js
  *
  * @suppress {checkTypes|fileoverviewTags}
  */
