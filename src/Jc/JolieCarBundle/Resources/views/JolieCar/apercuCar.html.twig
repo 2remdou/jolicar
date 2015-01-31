@@ -1,6 +1,6 @@
 {# src/Jc/JolieCarBundle/resources/views/JolieCar/apercuCar.html.twig #}
 {#<div class="apercuCar center-block">#}
-{% twig_js name="templateApercuCar" %}
+{#{% twig_js name="templateApercuCar" %}#}
 <div class="apercuCar">
     {% if car %}
         <a href="{{path('joliecar_detail', {'marque': car.modele.marque.nom,'modele': car.modele.nom, 'id' : car.id})}}" class="thumbnail">

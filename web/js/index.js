@@ -3,6 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function addCar(car){
+    var urlDetail = Routing.generate('joliecar_detail',{marque:car.modele.marque.id,modele:car.modele.id,id:car.id});
+    var zone = $('#zoneApercu');
+    var contenu = '<div class="apercuCar">'+
+        '<a href='+urlDetail+' class="thumbnail">';
+                if(typeof car.main_image != "undefinded"){
+                    contenu += '<img src='+car.main_image.webPath+car.main_image.path+' alt='+car.main_image.path+' class="img-rounded apercuCarImage"/>'
+                }
+                else{
+                    contenu +='<img src='+car.webPath+car.path+' alt="logo_joliecar" />'
+                }
+            contenu +='<div class="apercuCarInfo">'+
+                '<div><h5 class="glyphicon glyphicon-wrench">'+ car.modele.marque.nom+'-'+car.modele.nom+'</h5></div>'+
+                '<div><span class="glyphicon glyphicon-shopping-cart">'+ car.prix+'</span></div>'+
+            '</div>'+
+        '</a>'+
+    '</div>';
+
+    $(contenu).insertBefore($(zone).children('br'));
+    $('#zoneApercu').masonry('appended', $(contenu));
+
+}
 function infiniteScroll(){
 
     // on initialise ajaxready à true au premier chargement de la fonction
@@ -31,6 +53,10 @@ function infiniteScroll(){
                 .done(function(data,jqXHR){
                     var listeCar = $.parseJSON(data);
                     console.log(listeCar);
+                    for(var i=0;i<listeCar.length;i++){
+                        addCar(listeCar[i]);
+                    }
+
                     page +=1;
                     $('#loader').fadeOut(600);
                     console.log("page="+page);

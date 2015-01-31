@@ -1,5 +1,5 @@
 {# src/Jc/JolieCarBundle/resources/views/index.html.twig #}
-{% twig_js name="templateIndex" %}
+{#{% twig_js name="templateIndex" %}#}
 {% extends "JcJolieCarBundle::layout.html.twig"%}
 
 
@@ -22,7 +22,7 @@
  {%block otherScript%}
      {% javascripts
         'js/index.js'
-     filter="twig_js" %}
+     %}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {%endjavascripts%}
  {%endblock otherScript%}

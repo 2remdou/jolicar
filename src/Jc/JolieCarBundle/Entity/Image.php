@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\AccessType;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Image
@@ -15,6 +18,7 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Entity(repositoryClass="Jc\JolieCarBundle\Entity\ImageRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
+ * @AccessType("public_method")
  */
 class Image
 {
@@ -55,13 +59,21 @@ class Image
      */
     private $mainImage=false;
 
+
     protected  function getAbsolutePath(){
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
+    /**
+     * @VirtualProperty
+     * @SerializedName("webPath")
+     *
+     */
+
     public   function getWebPath(){
         return null === $this->path ? null : $this->getUploadDir();
     }
+
 
     protected function getUploadDir(){
         return 'images/cars/';
@@ -117,6 +129,9 @@ class Image
     public function getId()
     {
         return $this->id;
+    }
+    public function setId($id){
+        $this->id = $id;
     }
 
 
