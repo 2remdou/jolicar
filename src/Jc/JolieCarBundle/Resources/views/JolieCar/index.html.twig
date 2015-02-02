@@ -17,12 +17,13 @@
 
 {%block zoneLibre%}
     {% include 'JcJolieCarBundle:JolieCar:listeCar.html.twig' with {'listeCar':listeCar} %}
-
 {%endblock zoneLibre%}
+
  {%block otherScript%}
      {% javascripts
         'js/index.js'
-     %}
+        'js/onlyIndex.js'
+     output='compiled/main.js' %}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {%endjavascripts%}
  {%endblock otherScript%}

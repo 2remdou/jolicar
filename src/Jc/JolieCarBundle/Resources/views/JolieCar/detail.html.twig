@@ -53,7 +53,7 @@
             <div>
                 <table class="table">
                     {% if car.user %}
-                        <tr><td>Nom</td><td>{{car.user.nom}}</td></tr>
+                        <tr><td>Nom</td><td><a href="{{ path('list_car_by_user',{'id': car.user.id,'user':car.user.nom,'page':1}) }}">{{car.user.nom}}</a></td></tr>
                         {% if car.user.adresse %}
                             <tr><td>Telephone</td><td>{{car.user.adresse.telephone|number_format(0,' ',' ')}}</td></tr>
                             <tr><td>Site web</td><td>{{car.user.adresse.site}}</td></tr>

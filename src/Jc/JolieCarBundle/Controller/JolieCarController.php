@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Jc\JolieCarBundle\Model\FormErrorManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ use Jc\JolieCarBundle\Entity\Voiture;
 use Jc\JolieCarBundle\Form\HeaderSearchType;
 use Jc\JolieCarBundle\Entity\Modele;
 use Jc\JolieCarBundle\Entity\Marque;
+use Jc\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class JolieCarController extends Controller
@@ -290,21 +292,49 @@ class JolieCarController extends Controller
         }
         
     }
+
     /**
-     *
-     * @Route("/mes-voitures",name="list_by_user", options={"expose"=true})
+     * @Route("/mes-voitures/{page}",name="owner_car", requirements={"page" = "\d+"}, defaults={"page" = 1},options={"expose"=true})
      * @Security("has_role('ROLE_USER')")
      */
-    public function listCarByUserAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+    public function ownerCarAction($page){
         $user = $this->getUser();
 
-        $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->findByUser($user->getId());
+        return $this->listCarByUserAction($user,$page);
+    }
+    /**
+     *
+     * @Route("/{user}-{id}{page}",name="list_car_by_user", requirements={"page" = "\d+","id" = "\d+"}, defaults={"page" = 1}, options={"expose"=true})
+     * @ParamConverter("user", class="JcUserBundle:User", options={"id"="id"})
+     */
+    public function listCarByUserAction(User $user,$page)
+    {
+        if($user === null){
+            return $this->createNotFoundException("Utilisateur inconnu");
+        }
 
-        return $this->render("JcJolieCarBundle:JolieCar:listeByUser.html.twig",array(
-                'listeCar' => $listeCar,
-            ));
+        $em = $this->getDoctrine()->getManager();
+        $nbreParPage = $this->container->getParameter('max_car_per_page');
+
+        $request = $this->get('request');
+        if($request->isXmlHttpRequest()){
+            $page = $request->query->get('page');
+            $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->listeByUserByPage($user->getId(),$page,$nbreParPage);
+            $listeCar = $listeCar->getIterator()->getArrayCopy();
+            if($listeCar !== null){
+                $serializer = $this->get('jms_serializer');
+                $listeCarJson =$serializer->serialize($listeCar,'json');
+                return new Response($listeCarJson,200);
+            }
+            return new Response("Aucune voiture",200);
+        }
+        else{
+            $listeCar = $em->getRepository("JcJolieCarBundle:Voiture")->listeByUserByPage($user->getId(),$page,$nbreParPage);
+
+            return $this->render("JcJolieCarBundle:JolieCar:listeByUser.html.twig",array(
+                    'listeCar' => $listeCar,
+                ));
+        }
     }
 }
 

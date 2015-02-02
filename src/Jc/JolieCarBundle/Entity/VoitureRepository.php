@@ -119,5 +119,23 @@ class VoitureRepository extends EntityRepository
         }
 
     }
+
+    public function listeByUserByPage($userId,$page=1,$nombreCar){
+        $qb = $this->getApercuInformation();
+
+        $q = $qb->where('v.user = :id')
+            ->setParameter('id',$userId)
+            ->getQuery();
+
+        $q->setFirstResult(($page-1)*$nombreCar)
+            ->setMaxResults($nombreCar);
+        $paginator = new Paginator($q,true);
+
+        try{
+            return $paginator;
+        }catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
    
 }

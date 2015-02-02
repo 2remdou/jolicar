@@ -23,7 +23,7 @@ class SearchController extends Controller
 
         $request = $this->get('request');
 
-        if($request->isXmlHttpRequest()){
+/*        if($request->isXmlHttpRequest()){
             $key = $request->request->get('query');
 
             $indexJc = $this->get('fos_elastica.index.jc');
@@ -36,7 +36,7 @@ class SearchController extends Controller
 
             return new Response($resultatJson);
 
-        }
+        }*/
         return $this->render("JcJolieCarBundle:JolieCar:search.html.twig",array(
             'form' => $form->createView(),
             //'marque' => json_encode($marque),

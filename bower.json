@@ -20,6 +20,7 @@
     "select2": "~3.5.2",
     "masonry": "~3.2.2",
     "jquery-ui": "~1.11.2",
-    "fotorama": "~4.6.3"
+    "fotorama": "~4.6.3",
+    "numeral": "~1.5.3"
   }
 }
