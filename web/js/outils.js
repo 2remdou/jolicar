@@ -12,7 +12,10 @@ function formaterPrix(value){
 function addCar(car){
     var urlDetail = Routing.generate('joliecar_detail',{marque:car.modele.marque.id,modele:car.modele.id,id:car.id});
     var $container = $('#zoneApercu');
-    var contenu = '<div class="apercuCar">'+
+    //calcule de la position
+    var nbreCar = $('#zoneApercu').children('.apercuCar').length;
+    var widthCar = parseInt($('.apercuCar:first-child').width())+2*parseInt($('.apercuCar:first-child').css('margin-left'));
+    var contenu = '<div class="apercuCar" style="position: absolute;left:'+widthCar+'">'+
         '<a href='+urlDetail+' class="thumbnail">';
     if(typeof car.main_image != "undefinded"){
         contenu += '<img src=/jolicar/web/'+car.main_image.webPath+car.main_image.path+' alt='+car.main_image.path+' class="img-rounded apercuCarImage"/>'
@@ -29,8 +32,9 @@ function addCar(car){
     $container.children('br').remove();
     $container.masonry()
         .append($(contenu))
-        .masonry('appended',$(contenu));
-    $container.masonry('reloadItems')
+        .masonry('addItems',$(contenu));
+    $container.masonry('reloadItems');
+    //$container.masonry('reloadItems')
     $container.append('<br clear="both">');
 
 }

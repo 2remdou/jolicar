@@ -52,8 +52,7 @@
 */
      $('#zoneApercu').masonry({
          itemSelector: '.apercuCar',
-         isFitWidth: false,
-         "gutter": 10
+         isFitWidth: false
      });
  });
 
