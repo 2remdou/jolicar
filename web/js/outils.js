@@ -9,13 +9,29 @@ function displayCar($car){
 function formaterPrix(value){
     return numeral(value).format().replace(/,/g,'.')+' GNF';
 }
+
+function getPostionLastItemMasonry($container,nameClass){
+    var nbreItem = $container.children(nameClass).length;
+    var $lastItem = $container.children(nameClass).last();
+    var widthContainer = parseInt($container.css('width').replace(/[a-zA-Z]/g,''));
+    var lastItemX= nbreItem*parseInt($lastItem.css('width').replace(/[a-zA-Z]/g,''));
+    var lastItemY = $lastItem.offset().top;
+    if(widthContainer<lastItemX){
+        lastItemX = 0;
+        lastItemY+=$lastItem.css('height').replace(/[a-zA-Z]/g,'');
+    }
+    var position = {
+        left:lastItemX+"px",
+        top:lastItemY+"px"
+    };
+    return position;
+}
 function addCar(car){
     var urlDetail = Routing.generate('joliecar_detail',{marque:car.modele.marque.id,modele:car.modele.id,id:car.id});
     var $container = $('#zoneApercu');
-    //calcule de la position
-    var nbreCar = $('#zoneApercu').children('.apercuCar').length;
-    var widthCar = parseInt($('.apercuCar:first-child').width())+2*parseInt($('.apercuCar:first-child').css('margin-left'));
-    var contenu = '<div class="apercuCar" style="position: absolute;left:'+widthCar+'">'+
+    var nameClass = '.apercuCar';
+    var positionItem = getPostionLastItemMasonry($container,nameClass);
+    var contenu = '<div class="apercuCar" style="position: absolute;left:'+positionItem.left+'">'+
         '<a href='+urlDetail+' class="thumbnail">';
     if(typeof car.main_image != "undefinded"){
         contenu += '<img src=/jolicar/web/'+car.main_image.webPath+car.main_image.path+' alt='+car.main_image.path+' class="img-rounded apercuCarImage"/>'
