@@ -148,3 +148,12 @@ a:hover
 .overbtnUpload{
     cursor: pointer;
 }
+#loaderListe>img{
+    margin-left: 50%;
+    margin-top: 20px;
+}
+.message{
+    margin: 0 auto;
+    text-align: center;
+    font-size: large;
+}

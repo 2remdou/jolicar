@@ -11,6 +11,7 @@
 $(document).ready(function(){
     initMarque();
     initModele();
+    console.log(mesMarques);
     $('#jc_joliecarbundle_voiture_dateAcquisition').datepicker({
         changeMonth: true,
         changeYear : true,

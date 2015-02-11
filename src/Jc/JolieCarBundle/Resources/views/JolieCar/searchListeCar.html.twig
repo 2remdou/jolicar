@@ -1,0 +1,29 @@
+{# src/Jc/JolieCarBundle/resources/views/searchListeCar.html.twig #}
+{#{% twig_js name="templateIndex" %}#}
+{% extends "JcJolieCarBundle::layout.html.twig"%}
+
+
+
+{#{%block tabAccessRapide%}
+    {{parent()}}
+{% endblock%}#}
+ 
+
+{%block search%}
+    <div id="search" class="hideSearch contour">
+        {{render(controller('JcJolieCarBundle:Search:shortSearch'))}}
+    </div>
+{%endblock search%}
+
+{%block zoneLibre%}
+    {% include 'JcJolieCarBundle:JolieCar:listeCar.html.twig' with {'listeCar':listeCar} %}
+{%endblock zoneLibre%}
+
+ {%block otherScript%}
+     {% javascripts
+        'js/index.js'
+        'js/onlyIndex.js'
+     output='compiled/main.js' %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {%endjavascripts%}
+ {%endblock otherScript%}

@@ -62,10 +62,44 @@ class JolieCarController extends Controller
     }
 
 
-
+    /**
+     * @Route("/shortSearch",name="jc_short_search", options={"expose"=true})
+     */
     public function headerSearchAction()
     {
-        $formHeader = $this->createForm(new HeaderSearchType()); 
+        $formHeader = $this->createForm(new HeaderSearchType());
+        $request = $this->get('request');
+        /*if($request->isMethod("POST")){
+            $formHeader->handleRequest($request);
+            if($formHeader->isValid()){
+                $repostoryManager = $this->get('fos_elastica.manager.orm');
+                $repository = $repostoryManager->getRepository("JcJolieCarBundle:Voiture");
+                $listeCar = $repository->find($formHeader->get('rechercher'));
+                //recherche dans modele et marque (tokenizer)
+                if($listeCar == null){
+                    $carType = $this->get('fos_elastica.index');
+                    $listeCar = $carType->search($repository->search($formHeader->get('rechercher')));
+                }
+
+                return $this->render("JcJolieCarBundle:JolieCar:index.html.twig",array(
+                        'listeCar' => $listeCar,
+                    ));
+            }
+        }*/
+        if($request->isXmlHttpRequest()){
+            $key = $request->request->get('query');
+
+            $repostoryManager = $this->get('fos_elastica.manager.orm');
+            $repository = $repostoryManager->getRepository("JcJolieCarBundle:Voiture");
+            $carType = $this->get('fos_elastica.index');
+            $cars = $carType->search($repository->search($key));
+            $serializer = $this->get('jms_serializer');
+
+            $resultatJson = $serializer->serialize($cars,'json');
+
+            return new Response($resultatJson);
+
+        }
         return $this->render("JcJolieCarBundle::headerSearch.html.twig",array(
             'formHeader' => $formHeader->createView(),            
         ));

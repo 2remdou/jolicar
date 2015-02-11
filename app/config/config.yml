@@ -92,6 +92,11 @@ fos_user:
             type: jc_user_registration
 fos_js_routing:
     routes_to_expose: ['jc_search']
+
+jms_serializer:
+    metadata:
+        directories:
+            - { path: %kernel.root_dir%/Resources/FOSUserBundle/serializer, namespace_prefix: 'FOS\UserBundle' }
 fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
@@ -106,38 +111,34 @@ fos_elastica:
                         analyzer:
                             custom_french_analyzer:
                                 type: custom
-                                tokenizer: letter
+                                tokenizer: "my_ngram_token"
                                 filter: ["asciifolding", "lowercase", "french_stem", "stop_fr"]
+                        tokenizer:
+                            my_ngram_token:
+                                type: "edgeNGram"
+                                min_gram: 2
+                                max_gram: 5
+                                token_chars: [letter,digit]
+
                         filter:
                             stop_fr:
                                 type: "stop"
                                 stopwords: ["l","m","n","j","qu","n","s","d"]
             client: default
             types:
-                Marque:
-                    mappings: ~
-                    persistence:
-                        driver: orm
-                        model:  Jc\JolieCarBundle\Entity\Marque
-                        provider: ~
-                        finder: ~
-                Modele:
-                    mappings: ~
-                    persistence:
-                        driver: orm
-                        model:  Jc\JolieCarBundle\Entity\Modele
-                        provider: ~
-                        finder: ~
                 Voiture:
                     mappings:
-                        prix: ~
-                        kmParcouru: ~
-                        dateAcquisition: ~
+                        modele.nom : { analyzer: custom_french_analyzer }
+                        modele.marque.nom : { analyzer: custom_french_analyzer }
+                        user.nom : { analyzer: custom_french_analyzer }
+                        user.adresse.ville : { analyzer: custom_french_analyzer }
+                        user.adresse.quartier : { analyzer: custom_french_analyzer }
                     persistence:
                         driver: orm
                         model:  Jc\JolieCarBundle\Entity\Voiture
                         provider: ~
                         finder: ~
+                        repository: Jc\JolieCarBundle\SearchRepository\VoitureElasticaRepository
 
 
 

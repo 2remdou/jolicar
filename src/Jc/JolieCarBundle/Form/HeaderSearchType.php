@@ -15,7 +15,7 @@ class HeaderSearchType extends AbstractType
     {
         $builder
             ->add('rechercher','text',array( 
-                'required' => true,
+                'required' => false,
                 'label' => false,
                 'attr' => array(
                     'placeholder' => 'Rechercher',

@@ -5,6 +5,7 @@
  */
 
  $(document).ready(function() {
+     loadIsActive = true;
      function configSelect2() {
          $("#jc_joliecarbundle_searchvoiture_modele_marque").select2({
              //placeholder: 'Selectionner une marque',
@@ -54,6 +55,8 @@
          itemSelector: '.apercuCar',
          isFitWidth: false
      });
+
+
  });
 
 

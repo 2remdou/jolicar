@@ -7,6 +7,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * User
@@ -27,6 +28,7 @@ class User extends BaseUser
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
@@ -35,7 +37,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="nom", type="string", length=255,options={"default"="unknown"})
      * @Assert\NotBlank(message="Veuillez fournir le nom du Proprietaire")
-     * @Expose()
+     * @Expose
      */
     private $nom;
 
@@ -43,13 +45,14 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="autreNom", type="string", length=255,nullable=true)
-     * @Expose()
+     * @Expose
      */
     private $autreNom;
 
     /**
      * @ORM\OneToMany(targetEntity="Jc\JolieCarBundle\Entity\Voiture", mappedBy="user")
      * @ORM\JoinColumn(nullable=true)
+     * @Exclude
      */
     private $voitures;
 
@@ -57,6 +60,7 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="Jc\JolieCarBundle\Entity\Adresse",inversedBy="users",cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      * @Assert\Valid()
+     * @Expose
      */
     private $adresse;
 

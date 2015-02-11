@@ -50,15 +50,18 @@
                      {% endfor %}
                  {% endfor %}
             </div>
-            {% block main%}
-                
-            {% endblock main%}
+            <div id="main">
+                {% block main%}
+
+                {% endblock main%}
+            </div>
+
             <footer>
                 {%block footer%}
-                
+
                 {%endblock footer%}
-            </footer>    
-        </div>        
+            </footer>
+        </div>
 
         {% block javascripts%}
             {% javascripts filter='?yui_js'

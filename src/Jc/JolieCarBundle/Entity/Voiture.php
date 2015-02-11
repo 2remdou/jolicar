@@ -88,7 +88,6 @@ class Voiture
      * @ORM\ManyToOne(targetEntity="Modele", inversedBy="voitures")
      * @ORM\JoinColumn(nullable=false,referencedColumnName="id")
      * @Assert\Valid()
-     * @MaxDepth(1)
      * @Expose
      */
     private $modele;
@@ -101,7 +100,7 @@ class Voiture
     
     /**
      * @ORM\ManyToOne(targetEntity="Jc\UserBundle\Entity\User", inversedBy="voitures")
-     * @MaxDepth(2)
+     * @Expose
      */
     private $user;
     
@@ -115,6 +114,7 @@ class Voiture
      * @ORM\OneToMany(targetEntity="Image", mappedBy="voiture",cascade={"persist","remove"})
      * @Assert\Valid()
      * @ORM\JoinColumn(nullable=true)
+     * @Expose
      */
     private $images;
     /**

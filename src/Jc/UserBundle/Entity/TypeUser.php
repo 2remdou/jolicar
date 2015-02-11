@@ -3,12 +3,15 @@
 namespace Jc\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * TypeUser
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Jc\UserBundle\Entity\TypeUserRepository")
+ * @ExclusionPolicy("all")
  */
 class TypeUser
 {
@@ -18,6 +21,7 @@ class TypeUser
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +29,7 @@ class TypeUser
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Expose
      */
     private $nom;
 

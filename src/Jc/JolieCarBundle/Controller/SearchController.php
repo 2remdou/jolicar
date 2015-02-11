@@ -18,25 +18,28 @@ class SearchController extends Controller
     {
         $form = $this->createForm(new SearchVoitureType());
         $em = $this->getDoctrine()->getManager();
-        
-        //$marque = $em->getRepository("JcJolieCarBundle:Marque")->getModele();
 
         $request = $this->get('request');
 
-/*        if($request->isXmlHttpRequest()){
+        /*if($request->isXmlHttpRequest()){
             $key = $request->request->get('query');
 
-            $indexJc = $this->get('fos_elastica.index.jc');
-
-            $resultat = $indexJc->search($key)->getResults();
-
+            $repostoryManager = $this->get('fos_elastica.manager.orm');
+            $repository = $repostoryManager->getRepository("JcJolieCarBundle:Voiture");
+            $cars = $repository->find($key);
+            if($cars == null){
+                $carType = $this->get('fos_elastica.index');
+//                $repository = $this->get('jc_joliecarbundle.elastica.voiture.repository');
+                $cars = $carType->search($repository->search($key));
+            }
             $serializer = $this->get('jms_serializer');
 
-            $resultatJson = $serializer->serialize($resultat,'json');
+            $resultatJson = $serializer->serialize($cars,'json');
 
             return new Response($resultatJson);
 
         }*/
+
         return $this->render("JcJolieCarBundle:JolieCar:search.html.twig",array(
             'form' => $form->createView(),
             //'marque' => json_encode($marque),

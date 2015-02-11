@@ -13,6 +13,12 @@ function formaterPrix(value){
 function getPostionLastItemMasonry($container,nameClass){
     var nbreItem = $container.children(nameClass).length;
     var $lastItem = $container.children(nameClass).last();
+    if($lastItem.length==0){
+        return position = {
+            left:"0px",
+            top:"0px"
+        };
+    }
     var widthContainer = parseInt($container.css('width').replace(/[a-zA-Z]/g,''));
     var lastItemX= nbreItem*parseInt($lastItem.css('width').replace(/[a-zA-Z]/g,''));
     var lastItemY = $lastItem.offset().top;
@@ -61,16 +67,16 @@ function infiniteScroll(url){
     var page=1;
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
-    var isLoad = true;
+    //var isLoad = true;
     $(window).scroll(function() {
         // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
         // if ($(window).data('ajaxready') == false) return;
-        if(!isLoad) return;
+        if(!loadIsActive) return;
         if(($(window).scrollTop() + $(window).height()) == $(document).height()
             || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()) {
             // lorsqu'on commence un traitement, on met ajaxready à false
             //$(window).data('ajaxready', false);
-            isLoad=false;
+            loadIsActive=false;
             $('#loader').fadeIn(600);
             $.ajax({
                 url: url,
@@ -87,7 +93,7 @@ function infiniteScroll(url){
                         page +=1;
                     }
                     $('#loader').fadeOut(600);
-                    isLoad=true;
+                    loadIsActive=true;
                 })
                 .fail(function(jqXHR,data){
                     displayMessage($('#message'),"Ouups! quelque chose c'est mal passé",'danger')
@@ -314,7 +320,7 @@ function configSelect2(){
 function displayMessage(element,message,type) {   //****** Suppression des messages anterieurs *********
     $(element).children().fadeOut('fast');
     var button='<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>'
-    $('<div class="alert alert-'+type+'" role="alert">'+button+'<strong>'+message+'</strong></div>').appendTo(element);
+    $('<div class="message alert alert-'+type+'" role="alert">'+button+'<strong>'+message+'</strong></div>').appendTo(element);
 }
 function showModele(){
     $('#ajoutModele').children("span").attr('class','glyphicon glyphicon-minus');

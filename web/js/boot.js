@@ -196,3 +196,4 @@ var mesMarques = Object.create(listeMarque);
 var mesModeles = Object.create(listeModele);
 var mesImages = Object.create(listeImage);
 var mesPages = Object.create(listePage);
+var loadIsActive = true;
