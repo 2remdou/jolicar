@@ -1,0 +1,8 @@
+<div class="list-group">
+    {% for marque in statistiquesMarque %}
+            <a href="#" class="list-group-item linkMarque">
+                <span class="badge">{{ marque.nombre }}</span>
+                <strong class="nomMarque">{{ marque.nom }}</strong>
+            </a>
+    {% endfor %}
+</div>
