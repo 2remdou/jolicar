@@ -157,3 +157,42 @@ a:hover
     text-align: center;
     font-size: large;
 }
+#statistique
+{
+    margin-left: 15px;
+    margin-top: 30px;
+    width: 15%;
+    display: none;
+}
+#global
+{
+    width: 80%;
+}
+#statistique a
+{
+    color: #000000;
+}
+#statistique a:hover
+{
+    background-color: transparent;
+}
+#statistique,#global
+{
+    float: left;
+}
+.glyphicon-chevron-down
+{
+    float: right;
+    cursor: pointer;
+}
+.cacher
+{
+    display: none;
+}
+@media screen and (min-width:700px){
+    #statistique
+    {
+        display: block;
+    }
+
+}

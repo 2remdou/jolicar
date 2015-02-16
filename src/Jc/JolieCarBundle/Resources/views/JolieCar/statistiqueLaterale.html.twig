@@ -1,8 +1,18 @@
-<div class="list-group">
+<ul class="list-group">
     {% for marque in statistiquesMarque %}
-            <a href="#" class="list-group-item linkMarque">
+            <li class="list-group-item">
+                <a href="#" class="nomMarque">{{ marque.nom }}</a>
+                <span class="glyphicon glyphicon-chevron-down"></span>
                 <span class="badge">{{ marque.nombre }}</span>
-                <strong class="nomMarque">{{ marque.nom }}</strong>
-            </a>
+            </li>
+            <ul class="list-group cacher modeles">
+                {% for modele in statistiquesModele if modele.nomMarque == marque.nom %}
+                    <li class="list-group-item">
+                        <a href="#" class="nomModele">{{ modele.nom }}</a>
+                        <span class="badge">{{ marque.nombre }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+
     {% endfor %}
-</div>
+</ul>

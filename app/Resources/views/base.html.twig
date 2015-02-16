@@ -31,10 +31,14 @@
         {% block body %}
         <header>
                 {%block header%}
+                    <a href="{{ path('statistique_laterale') }}">statis</a>
                     {% include 'JcJolieCarBundle::header.html.twig'%}
                 {% endblock header%}
             <br clear="both">
         </header>
+        <div id="statistique">
+            {{render(controller('JcJolieCarBundle:JolieCar:statistiqueLaterale'))}}
+        </div>
         <div class="container" id="global">
             <div id="message" class="row">
                  {#{% for message in app.session.flashbag.get('message') %}#}

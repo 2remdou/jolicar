@@ -11,7 +11,6 @@
 $(document).ready(function(){
     initMarque();
     initModele();
-    console.log(mesMarques);
     $('#jc_joliecarbundle_voiture_dateAcquisition').datepicker({
         changeMonth: true,
         changeYear : true,
@@ -67,9 +66,8 @@ $(document).ready(function(){
 
     $('#images').on('change','input[type="file"]', function (){
         var $this = $(this);
-        console.log($this);
         var numeroClick = $this.data('numero');
-        if(numeroClick==0){
+        if(numeroClick==-1){
             var parent = $('#uploadMiniature_mainImage');
             var idFile = 'jc_joliecarbundle_voiture_mainImage_file';
             var isRemove = false;
@@ -88,7 +86,7 @@ $(document).ready(function(){
 
     $('#images').on('click','[id*="remove"]',function(){
         var numero = getNumero($(this).attr('id'),12);   //(remove_)= 6 caracteres
-        if(numero==0){
+        if(numero==-1){
             var element = $('#uploadMiniature_mainImage');
         }
         else{

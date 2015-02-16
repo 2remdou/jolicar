@@ -152,27 +152,26 @@ class JolieCarController extends Controller
         {
             return  $this->createNotFoundException("Aucune voiture à cette adresse");
         }
-        $originalImages = new ArrayCollection();
-        $originalMainImage = $car->getMainImage();
+//        $beforeImages = new ArrayCollection();
+        $beforeImages = $car->getImages();
+        $beforeMainImage = $car->getMainImage();
 
-        foreach($car->getImages() as $image){
-            if(!$image->isMainImage()){
-                $originalImages->add($image);
-            }
-
-         }
+        /*foreach($car->getImages() as $image){
+                $beforeImages->add($image);
+         }*/
         if($request->isMethod("POST")) {
 
             $form->handleRequest($request);
             $errors = $form->getErrors(true);
+            $afterMainImage = $car->getMainImage();
             if (count($errors)<=0) {
-                if($originalMainImage !== $car->getMainImage() && $originalMainImage !== null){
-                    $originalMainImage->setMainImage(false);
-                }
-                foreach($originalImages as $image){
-                    if(!$car->getImages()->contains($image) && !$image->isMainImage()){
+                foreach($beforeImages as $image){
+                    if(!$car->getImages()->contains($image)){
                         $em->remove($image);
                     }
+                }
+                if($beforeMainImage !== $afterMainImage && $beforeMainImage !== null){
+                    $beforeMainImage->setMainImage(false);
                 }
                 $em->flush();
                 $session->getFlashBag()->add('message', 'Votre annonce a bien été modifié');
@@ -369,6 +368,21 @@ class JolieCarController extends Controller
                     'listeCar' => $listeCar,
                 ));
         }
+    }
+    /**
+     *
+     * @Route("/statistique",name="statistique_laterale", options={"expose"=true})
+     */
+    public function statistiqueLateraleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $statatisqueMarque = $em->getRepository("JcJolieCarBundle:Voiture")->statistiqueByMarque();
+        $statatisqueModele = $em->getRepository("JcJolieCarBundle:Voiture")->statistiqueByModele();
+
+        return $this->render("JcJolieCarBundle:JolieCar:statistiqueLaterale.html.twig",array(
+                'statistiquesMarque' => $statatisqueMarque,
+                'statistiquesModele' => $statatisqueModele,
+            ));
     }
 }
 

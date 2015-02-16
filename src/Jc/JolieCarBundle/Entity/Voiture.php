@@ -2,6 +2,7 @@
 
 namespace Jc\JolieCarBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -376,7 +377,12 @@ class Voiture
      */
     public function getImages()
     {
-        return $this->images;
+        $images = new ArrayCollection();
+        foreach($this->images as $image){
+            if(!$image->isMainImage())
+                $images[] = $image;
+        }
+        return $images;
     }
 
     /**
@@ -481,7 +487,7 @@ class Voiture
      */
     public function addImage(Image $images)
     {
-        if($images->getFile() !== null){
+        if($images->getFile() !== null && !$images->isMainImage()){
             $images->setVoiture($this);
             $images->setMainImage(false);
             $this->images[] = $images;

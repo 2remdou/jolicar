@@ -88,7 +88,7 @@
 
     <div class="conteneurBtnUpload">
         {% set type = type|default('file') -%}
-        <input data-numero="0" class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <input data-numero="-1" class="btnUpload" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 
         <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Ajoutez image </div>
     </div>
@@ -99,7 +99,6 @@
     <input data-numero="0" class="btnUpload"
            type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %} {% endif %}/>
 {%- endblock _jc_joliecarbundle_voiture_mainImage_widget %}#}
-
 {% block collection_widget -%}
     {% if prototype is defined %}
         {%- set attr = attr|merge({'data-prototype': block('file_row') }) -%}
@@ -107,20 +106,19 @@
     <div {{ block('widget_attributes') }}>
         {% for element in form %}
             {% set image = element.vars.value %}
-            {% if image.mainImage==false %}
-
-                <div id='uploadMiniature_{{ loop.index }}'>
-                    <div id="jc_joliecarbundle_voiture_images_{{ loop.index }}">
-                        <div class='text-center libelle'><span id="removeImage_{{ loop.index }}" class='glyphicon glyphicon-remove'></span><em>Image</em></div>
+            {% set index = loop.index - 1  %}
+            {#{% if image.mainImage==false %}#}
+                <div id='uploadMiniature_{{ index }}'>
+                    <div id="jc_joliecarbundle_voiture_images_{{ index }}">
+                        <div class='text-center libelle'><span id="removeImage_{{ index }}" class='glyphicon glyphicon-remove'></span><em>Image</em></div>
                         <img src='{{asset(image.webPath~image.path)}}' alt='{{asset(image.webPath~image.nom)}}'/>
                         <div class="conteneurBtnUpload">
-                            <input data-numero="{{ loop.index }}" class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images_{{ loop.index }}_file" name="jc_joliecarbundle_voiture[images][{{ loop.index }}][file]" />
+                            <input data-numero="{{ index }}" class="btnUpload" type="file" id="jc_joliecarbundle_voiture_images_{{ index }}_file" name="jc_joliecarbundle_voiture[images][{{ index }}][file]" />
                             <div class='btn-success'> <i class='glyphicon glyphicon-upload'></i>Modifiez image </div>
                         </div>
                     </div>
                 </div>
-
-            {% endif %}
+            {#{% endif %}#}
         {% endfor %}
     </div>
 {%- endblock collection_widget %}

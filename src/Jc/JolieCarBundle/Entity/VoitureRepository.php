@@ -137,5 +137,25 @@ class VoitureRepository extends EntityRepository
             return null;
         }
     }
-   
+   public function statistiqueByMarque(){
+
+       $dql = 'SELECT  marque.id,marque.nom,count(marque.id) As nombre '.
+           'FROM JcJolieCarBundle:Voiture v JOIN v.modele modele LEFT JOIN modele.marque marque '.
+//           'FROM JcJolieCarBundle:Marque marque LEFT JOIN JcJolieCarBundle:Modele modele JOIN JcJolieCarBundle:Voiture v '.
+           'GROUP BY marque.id '.
+           'ORDER BY marque.nom ASC';
+       $q = $this->getEntityManager()->createQuery($dql);
+
+       return $q->getScalarResult();
+   }
+
+    public function statistiqueByModele(){
+        $dql = 'SELECT modele.id,modele.nom,count(modele.id) As nombre,marque.nom as nomMarque '.
+            'FROM JcJolieCarBundle:Voiture v JOIN v.modele modele LEFT JOIN modele.marque marque '.
+            'GROUP BY modele.id,modele.nom '.
+            'ORDER BY modele.nom ASC';
+        $q = $this->getEntityManager()->createQuery($dql);
+
+        return $q->getScalarResult();
+    }
 }

@@ -25,14 +25,14 @@
     <div id="detail">
         <div id="imagesCar" class="contour fotorama" data-nav="thumbs" data-arrows="true" data-click="true" data-swipe="false">
                 {%if car.mainImage %}
-                    <img ssrc="{{asset(car.mainImage.webPath~car.mainImage.path)}}" alt="{{car.mainImage.path}}" class="miniature"/>
+                    <img src="{{asset(car.mainImage.webPath~car.mainImage.path)}}" alt="{{car.mainImage.path}}" class="miniature"/>
                 {%else%}
                     <img src="{{asset('images/logo_joliecar.jpg')}}" alt="logo_joliecar" class="miniature"/>
                 {%endif%}
                 {%for image in car.images %}
                     <img  src="{{asset(image.webPath~image.path)}}" alt="{{image.path}}" class="miniature"/></a>
-                {%else%}
-                    <h3>Aucun aperçu disponible pour cette voiture</h3>
+{#                {%else%}
+                    <h3>Aucun aperçu disponible pour cette voiture</h3>#}
                 {% endfor%}
         </div>
         <div id="accordion">

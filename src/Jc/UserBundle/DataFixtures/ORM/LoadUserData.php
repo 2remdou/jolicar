@@ -36,8 +36,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface{
        foreach ($listeUser as $i => $user) {
            $users[$i] = new User();
            $users[$i]->setNom($user['nom']);
-           $users[$i]->setUsername($user['username']);
-           $users[$i]->setPassword($user['username']);
+           $users[$i]->setUsername($user['username'].'@joliecar.com');
+           $users[$i]->setPlainPassword($user['username']);
            $users[$i]->setEmail($user['username'].'@joliecar.com');
            $users[$i]->setEnabled(true);
            $idAdresse = rand(0, count($manager->getRepository("JcJolieCarBundle:Adresse")->findAll())-1);

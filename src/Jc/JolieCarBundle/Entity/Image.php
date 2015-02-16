@@ -4,6 +4,7 @@ namespace Jc\JolieCarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -93,7 +94,8 @@ class Image
     {
         if(null !== $this->file){
             $this->path = sha1(uniqid(mt_rand(),true)).'.'.$this->file->guessExtension();
-            $this->nom = $this->file->getClientOriginalName();
+            $this->nom = $this->file->getBasename();
+//            $this->nom = $this->file->getClientOriginalName();
         }
     }
 
@@ -209,7 +211,7 @@ class Image
     public  function getFile(){
         return $this->file;
     }
-    public function setFile(UploadedFile $file){
+    public function setFile(File $file){
         $this->file = $file;
     }
 
