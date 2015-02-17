@@ -5,11 +5,11 @@
                 <span class="glyphicon glyphicon-chevron-down"></span>
                 <span class="badge">{{ marque.nombre }}</span>
             </li>
-            <ul class="list-group cacher modeles">
+            <ul class="list-group cacher modeles" data-modele="{{ marque.nom }}">
                 {% for modele in statistiquesModele if modele.nomMarque == marque.nom %}
                     <li class="list-group-item">
                         <a href="#" class="nomModele">{{ modele.nom }}</a>
-                        <span class="badge">{{ marque.nombre }}</span>
+                        <span class="badge">{{ modele.nombre }}</span>
                     </li>
                 {% endfor %}
             </ul>

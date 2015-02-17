@@ -15,6 +15,8 @@ $(document).ready(function(){
     attachInfobulle($('[class*="glyphicon"]'));
     $('.glyphicon-chevron-down').click(function(e){
         $this = $(this);
-        $this.parent().parent().find('.modeles').toggleClass('cacher');
+        var marque = $this.parent().children('a').text();
+        $('[data-modele='+marque+']').toggleClass('cacher');
+        //$this.parent().parent().children('<a>').toggleClass('cacher');
     });
 });
